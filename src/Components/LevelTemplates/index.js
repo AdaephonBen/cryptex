@@ -32,7 +32,7 @@ export default class Level extends React.Component {
   render() {
     return (
       <div>
-        <Layout className="layout">
+        <Layout className="layout" theme="dark">
           <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
             <div className="logo"></div>
             <Menu
@@ -46,9 +46,7 @@ export default class Level extends React.Component {
               <Menu.Item key="4">Sign Out</Menu.Item>
             </Menu>
           </Header>
-          <Content
-            style={{ color: "white", padding: "10vh 0", minHeight: "100vh" }}
-          >
+          <Content style={{ padding: "10vh 0", minHeight: "100vh" }}>
             <div>Content</div>
             <div>
               <div>
