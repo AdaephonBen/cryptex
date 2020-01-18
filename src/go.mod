@@ -17,5 +17,6 @@ require (
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/lib/pq v1.2.0
+	github.com/robfig/cron/v3 v3.0.1
 	gopkg.in/go-playground/validator.v9 v9.31.0
 )

@@ -14,6 +14,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/mux"
 	"github.com/lib/pq"
+	"github.com/robfig/cron/v3"
     "github.com/jmoiron/sqlx"
 	"github.com/gorilla/schema"
 	"gopkg.in/go-playground/validator.v9"
@@ -65,13 +66,13 @@ type UserDetails struct {
 }
 
 type Question struct {
-	QuestionText string `json:"question"`
-	Level        int    `json:"level"`
+	QuestionText string `db:"question"`
+	Level        int    `db:"level"`
 }
 
 type Answer struct {
-	AnswerHash string
-	Level      int
+	AnswerHash string `db:"answer"`
+	Level      int `db:"level"`
 }
 
 type DatabaseUserObject struct {
@@ -88,13 +89,27 @@ type AddUserResponse struct {
 	ErrorCode string `json:"errorCode"`
 }
 
+type QuestionRequest struct {
+	Level int `schema:"level"`
+	IDToken string `schema:"idToken"`
+}
+
+type QuestionResponse struct {
+	Level int `json:"level"`
+	ErrorCode string `json:"errorCode"`
+	Question string `json:"question"`
+}
+
 var questions []Question
 var answers []Answer
 
 func main() {
-	
+	c := cron.New()
+	c.AddFunc("@every 5s", updateQuestionsAndAnswers)	
+	c.Start()
 	v := validator.New()
-	conn, err := sqlx.Connect("postgres", "postgresql://doadmin:mzyqulbu70zvahdp@db-postgresql-blr1-23394-do-user-6380924-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require")
+	var err error
+	conn, err = sqlx.Connect("postgres", "postgresql://doadmin:mzyqulbu70zvahdp@db-postgresql-blr1-23394-do-user-6380924-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require")
 	if err != nil {
 		fmt.Println("Error connecting to database. ")
 	  }
@@ -148,63 +163,91 @@ func main() {
 	// router.HandleFunc("/rules", RulesHandler)
 	// router.HandleFunc("/whichlevel/{clientid}", LevelQueryHandler)
 	// router.HandleFunc("/doesUsernameExist/{username}", DoesUsernameExistHandler)
-	router.Handle("/api/adduser", negroni.New(
+	router.Handle("/api/question", negroni.New(
 		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
 		negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// Stuff that is being stored in the DB: name, username, contact number, email ID, level, last attempted timestamp
 			// fmt.Println("pinged")
-			var userDetailStruct UserDetails
-			err := decoder.Decode(&userDetailStruct, r.URL.Query())
+			var questionRequest QuestionRequest
+			err := decoder.Decode(&questionRequest, r.URL.Query())
 			if err != nil {
-				fmt.Println("Error decoding r.URL.Query() into UserDetails struct")
+				fmt.Println("Error decoding r.URL.Query() into QuestionRequest struct")
 				fmt.Println(r.URL.Query())
 			}
-			emailID := getEmail(userDetailStruct.IDToken)
-			usernameValidator := regexp.MustCompile("^[a-zA-Z0-9]([._@-]|[a-zA-Z0-9]){6,62}[a-zA-Z0-9]$")
-			isValid := usernameValidator.MatchString(userDetailStruct.Username)
-			addUserResponse := AddUserResponse{Username: userDetailStruct.Username}
-			if (isValid) {
-				toBeInserted := DatabaseUserObject{
-					Name: userDetailStruct.Name,
-					Username: userDetailStruct.Username,
-					PhoneNumber: userDetailStruct.PhoneNumber,
-					Email: emailID,
-					Level: -1,
-					Lastmodified: time.Now(),
-				}
-				validationError := v.Struct(toBeInserted)
-				
-				if (validationError != nil) {
-					addUserResponse.ErrorCode = "Validation error"
+			emailID := getEmail(questionRequest.IDToken)
+			questionResponse := QuestionResponse{Level: questionRequest.Level}
+			var maxLevel int
+			err = conn.Get(&maxLevel, "SELECT level FROM users WHERE email=$1", emailID)
+			if (questionResponse.Level <= maxLevel && err == nil) {
+				var currentQuestion string
+				err = conn.Get(&currentQuestion, "SELECT question FROM questions WHERE level=$1", questionResponse.Level)
+				if (err != nil) {
+					questionResponse.ErrorCode = "Unexpected error"
 				} else {
-					_, err = conn.NamedExec(`INSERT INTO users (name, username, phone, email, level, lastmodified) VALUES (:name, :username, :phone, :email, :level, :last)`, 
-						map[string]interface{}{
-							"name": toBeInserted.Name,
-							"username": toBeInserted.Username,
-							"phone": toBeInserted.PhoneNumber,
-							"email": toBeInserted.Email,
-							"level": toBeInserted.Level,
-							"last": toBeInserted.Lastmodified,
-	
-					})
-					if pgerr, ok := err.(*pq.Error); ok {
-						if pgerr.Code == "23505" {
-							addUserResponse.ErrorCode = "Duplicate username"
-						} else {
-							addUserResponse.ErrorCode = "Unknown error"
-						}
-					} else {
-						addUserResponse.ErrorCode = "Success"
-					}
+					questionResponse.Question = currentQuestion
+					questionResponse.ErrorCode = "Success"
 				}
 			} else {
-				addUserResponse.ErrorCode = "Invalid username"
+				questionResponse.ErrorCode = "Invalid permissions"
 			}
-			serveJSON(w, addUserResponse)
+			serveJSON(w, questionResponse)
 		}))))
+	
+		router.Handle("/api/adduser", negroni.New(
+			negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
+			negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				var userDetailStruct UserDetails
+				err := decoder.Decode(&userDetailStruct, r.URL.Query())
+				if err != nil {
+					fmt.Println("Error decoding r.URL.Query() into UserDetails struct")
+					fmt.Println(r.URL.Query())
+				}
+				emailID := getEmail(userDetailStruct.IDToken)
+				usernameValidator := regexp.MustCompile("^[a-zA-Z0-9]([._@-]|[a-zA-Z0-9]){6,62}[a-zA-Z0-9]$")
+				isValid := usernameValidator.MatchString(userDetailStruct.Username)
+				addUserResponse := AddUserResponse{Username: userDetailStruct.Username}
+				if (isValid) {
+					toBeInserted := DatabaseUserObject{
+						Name: userDetailStruct.Name,
+						Username: userDetailStruct.Username,
+						PhoneNumber: userDetailStruct.PhoneNumber,
+						Email: emailID,
+						Level: -1,
+						Lastmodified: time.Now(),
+					}
+					validationError := v.Struct(toBeInserted)
+					
+					if (validationError != nil) {
+						addUserResponse.ErrorCode = "Validation error"
+					} else {
+						_, err = conn.NamedExec(`INSERT INTO users (name, username, phone, email, level, lastmodified) VALUES (:name, :username, :phone, :email, :level, :last)`, 
+							map[string]interface{}{
+								"name": toBeInserted.Name,
+								"username": toBeInserted.Username,
+								"phone": toBeInserted.PhoneNumber,
+								"email": toBeInserted.Email,
+								"level": toBeInserted.Level,
+								"last": toBeInserted.Lastmodified,
+		
+						})
+						if pgerr, ok := err.(*pq.Error); ok {
+							if pgerr.Code == "23505" {
+								addUserResponse.ErrorCode = "Duplicate username"
+							} else {
+								addUserResponse.ErrorCode = "Unknown error"
+							}
+						} else {
+							addUserResponse.ErrorCode = "Success"
+						}
+					}
+				} else {
+					addUserResponse.ErrorCode = "Invalid username"
+				}
+				serveJSON(w, addUserResponse)
+			}))))
 
 	// router.PathPrefix("/").Handler(http.FileServer(http.Dir("../dist/"))) // Replace serving with nginx
-
+	
 	http.ListenAndServe(":8080", router)
 
 }
@@ -236,59 +279,58 @@ func serveJSON(w http.ResponseWriter, class interface{}) {
 //     }
 //     return nil
 // }
-// func updateQuestionsAndAnswers() {
-// 	fmt.Println("Updating questions & answers")
-// 	lol := 90
-// 	err := conn.Get(&lol, "select count(*) from users")
-// 	if err != nil {
-// 		fmt.Fprintf(os.Stderr, "QueryRow failed: %v\n", err)
-// 		// if length >= int64(len(questions)) {
-// 		// 	questions = nil
-// 		// 	answers = nil
-// 		// 	rows, err := conn.Query(context.Background(), "select * from questions")
-// 		// 	if err != nil {
-// 		// 		fmt.Println("Error reading Questions database")
-// 		// 		fmt.Println(err)
-// 		// 	}
-// 		// 	defer rows.Close()
-// 		// 	// Iterate through the result set
-// 		// 	for rows.Next() {
-// 		// 		var question Question
-// 		// 		err = rows.Scan(&question)
-// 		// 		if err != nil {
-// 		// 			fmt.Println("Error reading question from Questions database")
-// 		// 		}
-// 		// 		questions = append(questions, question)
-// 		// 	}
-// 		// 	// Any errors encountered by rows.Next or rows.Scan will be returned here
-// 		// 	if rows.Err() != nil {
-// 		// 		fmt.Println("Error reading Questions database")
-// 		// 		fmt.Println(err)
-// 		// 	}
-// 		// 	rows, err = conn.Query(context.Background(), "select * from answers")
-// 		// 	if err != nil {
-// 		// 		fmt.Println("Error reading Answers database")
-// 		// 		fmt.Println(err)
-// 		// 	}
-// 		// 	defer rows.Close()
-// 		// 	// Iterate through the result set
-// 		// 	for rows.Next() {
-// 		// 		var answer Answer
-// 		// 		err = rows.Scan(&answer)
-// 		// 		if err != nil {
-// 		// 			fmt.Println("Error reading answer from Answers database")
-// 		// 		}
-// 		// 		answers = append(answers, answer)
-// 		// 	}
-// 		// 	// Any errors encountered by rows.Next or rows.Scan will be returned here
-// 		// 	if rows.Err() != nil {
-// 		// 		fmt.Println("Error reading Answers database")
-// 		// 		fmt.Println(err)
-// 		// 	}
-// 		// }
-// 		fmt.Println("Completed updating")
-// 	}
-// }
+func updateQuestionsAndAnswers() {
+	fmt.Println("Updating questions & answers")
+	var length int
+	err := conn.Get(&length, "SELECT count(*) FROM questions")
+	if err == nil {
+		if length >= (len(questions)) {
+			questions = nil
+			answers = nil
+			rows, err := conn.Queryx("SELECT * FROM questions")
+			if err != nil {
+				fmt.Println("Error reading Questions database")
+				fmt.Println(err)
+			}
+			defer rows.Close()
+			// Iterate through the result set
+			for rows.Next() {
+				var question Question
+				err = rows.StructScan(&question)
+				if err != nil {
+					fmt.Println("Error reading question from Questions database")
+					fmt.Println(err)
+				}
+				questions = append(questions, question)
+			}
+			// Any errors encountered by rows.Next or rows.Scan will be returned here
+			if rows.Err() != nil {
+				fmt.Println("Error reading Questions database")
+				fmt.Println(err)
+			}
+			rows, err = conn.Queryx("select * from answers")
+			if err != nil {
+				fmt.Println("Error reading Answers database")
+				fmt.Println(err)
+			}
+			defer rows.Close()
+			// Iterate through the result set
+			for rows.Next() {
+				var answer Answer
+				err = rows.StructScan(&answer)
+				if err != nil {
+					fmt.Println("Error reading answer from Answers database")
+				}
+				answers = append(answers, answer)
+			}
+			// Any errors encountered by rows.Next or rows.Scan will be returned here
+			if rows.Err() != nil {
+				fmt.Println("Error reading Answers database")
+				fmt.Println(err)
+			}
+		}
+	}
+}
 
 func getPemCert(token *jwt.Token) (string, error) {
 	cert := ""
