@@ -110,6 +110,7 @@ func main() {
 	v := validator.New()
 	var err error
 	conn, err = sqlx.Connect("postgres", "postgresql://doadmin:mzyqulbu70zvahdp@db-postgresql-blr1-23394-do-user-6380924-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require")
+	conn.SetMaxOpenConns(11)
 	if err != nil {
 		fmt.Println("Error connecting to database. ")
 	  }
