@@ -1,3 +1,36 @@
-.sample {
-  color: red;
+.countdown {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
+ 
+.countdown__item {
+  color: #fff;
+  font-size: 1.1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  line-height: 30px;
+  margin-right: .01vw;
+  margin-left: .01vw;
+  position: relative;
+  width: 50px;
+  height: 100px;
+}
+ 
+.countdown__item span {
+  color: #fff;
+  font-size: .5vw;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+#link_one, #link_two, #link_three{
+  color: #0faf9f;
+}
+#link_one:hover, #link_two:hover, #link_three:hover{
+  color: white;
+}
+
