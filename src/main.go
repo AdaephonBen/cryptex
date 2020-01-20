@@ -1,14 +1,14 @@
 package main
 
 import (
+	"strconv"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
-	// "os"
+	"os"
 	"regexp"
 	"time"
-
 	jwtmiddleware "github.com/auth0/go-jwt-middleware"
 	"github.com/codegangsta/negroni"
 	"github.com/dgrijalva/jwt-go"
@@ -18,18 +18,11 @@ import (
     "github.com/jmoiron/sqlx"
 	"github.com/gorilla/schema"
 	"gopkg.in/go-playground/validator.v9"
-
 )
 
 var decoder = schema.NewDecoder() // Initialize gorilla schema decoder
 
 var conn *sqlx.DB
-
-type Response struct {
-	Message string `json:"message"`
-}
-
-
 
 type Jwks struct {
 	Keys []JSONWebKeys `json:"keys"`
@@ -42,18 +35,6 @@ type JSONWebKeys struct {
 	N   string   `json:"n"`
 	E   string   `json:"e"`
 	X5c []string `json:"x5c"`
-}
-
-// type user struct {
-// 	Username string `json:"username"`
-// 	Level    int    `json:"level"`
-// }
-
-
-
-type LevelResponse struct {
-	Level int
-	URL   string
 }
 
 // New stuff
@@ -109,19 +90,39 @@ type AnswerResponse struct {
 	IsCorrect bool `json:"isCorrect"`
 }
 
+var Files []*os.File
+var correctFile *os.File
+
+var leaderboard interface{}
+
 var questions []Question
 var answers []Answer
 
 var jwks Jwks
 
 func main() {
+	numberQuestions := 28
+	var err error
+	for i := 0; i < numberQuestions; i++ {
+		var theLevelFile *os.File
+		theLevelFile, err = os.OpenFile(strconv.Itoa(i)+".csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		if (err != nil) {
+			fmt.Println("Error creating/appending to log files")
+			fmt.Println(err)
+		}
+		Files = append(Files, theLevelFile)
+	}
+	correctFile, err = os.OpenFile("correct.csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if (err != nil) {
+		fmt.Println("Error creating/appending to correct log files")
+	}
 	downloadJWKS()
 	c := cron.New()
 	c.AddFunc("@every 5s", updateQuestionsAndAnswers)	
-	c.AddFunc("@every 10s", downloadJWKS)
+	c.AddFunc("@every 5h", downloadJWKS)
+	c.AddFunc("@every 2s", sortLeaderboard)
 	c.Start()
 	v := validator.New()
-	var err error
 	conn, err = sqlx.Open("postgres", "postgresql://doadmin:mzyqulbu70zvahdp@db-postgresql-blr1-23394-do-user-6380924-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require")
 	conn.SetMaxOpenConns(11)
 	if err != nil {
@@ -156,7 +157,6 @@ func main() {
 	})
 
 	fmt.Println("Successfully connected to PostgreSQL DB. ")
-
 	router := mux.NewRouter()
 
 	/* API Routes :
@@ -164,21 +164,12 @@ func main() {
 		            adduser(username, id_token): Adds a user to the DB. Stuff to add: username, level: -1, email: from id_token, dateModified: for sorting, also return
 		                error message if username exists.
 		            answer(id_token, answer): User's current level is checked, answer is matched against answer[level]. level and dateModified are updated, as required.
-	                question(id_token): User's level and question are returned.
+	                question(id_token, level): User's level and question are returned.
 	            Public Routes
 	                Leaderboard: return the leaderboard with levels from 0 onwards.
 	*/
 
-	// router.HandleFunc("/adduser/{ID}/{username}/{secret}", AddUser)
-	// router.HandleFunc("/acceptedrules/{secret}", AcceptedRules)
-	// router.HandleFunc("/answer/{secret}/{level}/{answer}", AnswerQuestion)
-	// router.HandleFunc("/level/{secret}", LevelHandler)
-	// router.HandleFunc("/leaderboard", LeaderboardHandler)
-	// router.HandleFunc("/leaderboardtable", LeaderboardTableHandler)
-	// router.HandleFunc("/css", CSSHandler)
-	// router.HandleFunc("/rules", RulesHandler)
-	// router.HandleFunc("/whichlevel/{clientid}", LevelQueryHandler)
-	// router.HandleFunc("/doesUsernameExist/{username}", DoesUsernameExistHandler)
+	router.HandleFunc("/leaderboardjson", LeaderboardHandler)
 	router.Handle("/api/question", negroni.New(
 		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
 		negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -222,15 +213,21 @@ func main() {
 				}
 				emailID := getEmail(answerRequest.IDToken)
 				answerResponse := AnswerResponse{}
+				var username string
+				err = conn.Get(&username, "SELECT username FROM users WHERE email=$1", emailID)
 				var currentLevel int
 				err = conn.Get(&currentLevel, "SELECT level FROM users WHERE email=$1", emailID)
 				var currentAnswer string
 				err = conn.Get(&currentAnswer, "SELECT answer FROM answers WHERE level=$1", currentLevel)
 				answerResponse.IsCorrect = currentAnswer == answerRequest.Answer
-				if (answerResponse.IsCorrect) {
+				if (answerResponse.IsCorrect || (answerRequest.Answer == "" && currentLevel == -1)) {
 					conn.NamedExec(`UPDATE users SET level=level+1 where email=:emailID`, map[string]interface{}{
 						"emailID": emailID,
-				})
+					})
+					answerResponse.IsCorrect = true
+				}
+				if (currentLevel >= 0) {
+					go writeToFile(currentLevel, username, answerRequest.Answer, answerResponse.IsCorrect, time.Now())
 				}
 				serveJSON(w, answerResponse)
 			}))))
@@ -304,22 +301,40 @@ func getEmail(token string) string {
 	return claims["email"].(string)
 }
 
+func sortLeaderboard() {
+	var list []map[string]interface{}
+	rows, err := conn.Queryx(`SELECT * FROM users WHERE level >= 0 ORDER BY level DESC, lastmodified ASC`)
+	if (err != nil) {
+		fmt.Println("Error sorting database")
+		fmt.Println(err)
+	}
+	for rows.Next() {
+		row := make(map[string]interface{})
+		err = rows.MapScan(row)
+		if err != nil {
+		  fmt.Println("Error Scanning row")
+		  break
+		}
+		list = append(list, row)
+	}
+	var err1 error
+	leaderboard, err1 = json.MarshalIndent(list, "", "\t")
+	if (err1 != nil) {
+		fmt.Println("Error Marshalling sorted database")
+	}
+}
+
+func LeaderboardHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(leaderboard.([]byte))
+} 
+
 func serveJSON(w http.ResponseWriter, class interface{}) {
 	jsonToServe, _ := json.Marshal(class)
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(jsonToServe)
 }
-// func createSchema(db *pg.DB) error {
-//     for _, model := range []interface{}{(*DatabaseUserObject)(nil)} {
-//         err := db.CreateTable(model, &orm.CreateTableOptions{
-//             Temp: true,
-//         })
-//         if err != nil {
-//             return err
-//         }
-//     }
-//     return nil
-// }
+
 func updateQuestionsAndAnswers() {
 	fmt.Println("Updating questions & answers")
 	var length int
@@ -389,6 +404,31 @@ func getPemCert(token *jwt.Token) (string, error) {
 	return cert, nil
 }
 
+func logToDatabase(username string, correctTimestamp time.Time, level int) {
+	_, err := conn.NamedExec(`INSERT INTO correctAttempts (username, correctAttempt, level) VALUES (:username, :correctAttempt, :level)`, 
+							map[string]interface{}{
+								"username": username,
+								"correctAttempt": correctTimestamp,
+								"level": level,
+		
+						})
+	if (err != nil) {
+		fmt.Println("Error logging correct answers to database")
+	}
+}
+
+func writeToFile(level int, username string, answer string, isCorrect bool, attemptTimestamp time.Time) {
+	if _, err := Files[level].WriteString(strconv.Itoa(level) + ", " + string(username) + ", " + string(answer) + ", " + strconv.FormatBool(isCorrect) + ", " + String(int32(attemptTimestamp.Unix())) + "\n"); err != nil {
+		fmt.Println("Error appending to file ", level)
+	}
+	if (isCorrect) {
+		go logToDatabase(username, attemptTimestamp, level)
+		if _, err := correctFile.WriteString(strconv.Itoa(level) + ", " + string(username) + ", " + String(int32(attemptTimestamp.Unix())) + "\n"); err != nil {
+			fmt.Println("Error appending to correct file")
+		}
+	}
+}
+
 func downloadJWKS() {
 	resp, err := http.Get("https://cryptex.auth0.com/.well-known/jwks.json")
 	if err != nil {
@@ -401,160 +441,24 @@ func downloadJWKS() {
 		fmt.Println("Error talking to Auth0")
 	}
 }
-// func AcceptedRules(w http.ResponseWriter, request *http.Request) {
-// 	vars := mux.Vars(request)
-// 	fmt.Println(vars["secret"][0:378])
-// 	filter := bson.D{{"secret", vars["secret"][0:378]}}
-// 	update := bson.D{
-// 		{"$set", bson.D{
-// 			{"level", 0},
-// 		}},
-// 	}
-// 	_, err := collection.UpdateOne(context.TODO(), filter, update)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// }
-// func AnswerQuestion(w http.ResponseWriter, request *http.Request) {
-// 	vars := mux.Vars(request)
-// 	find, _ := collection.Find(context.TODO(), bson.M{"secret": vars["secret"][0:378]})
-// 	JSOND, _ := json.Marshal(find.Next(context.TODO()))
-// 	if strings.Compare(string(JSOND), "true") == 0 {
-// 		if val, ok := answers[vars["level"]]; ok {
-// 			var current DatabaseUserObject
-// 			err := find.Decode(&current)
-// 			if err != nil {
-// 				fmt.Println("Error decoding database object ", err)
-// 			}
-// 			fmt.Println(current.Username, " ", current.Level, " ", vars["answer"])
-// 			if strings.Compare(strconv.Itoa(current.Level), vars["level"]) == 0 {
-// 				if strbigint	{"$inc", bson.D{
-// 							{"level", 1},
-// 						}},
-// 					}
-// 					_, err := collection.UpdateOne(context.TODO(), filter, update)
-// 					update = bson.D{
-// 						{"$set", bson.D{
-// 							{"lastModified", time.Now().UTC()},
-// 						}},
-// 					}
-// 					_, err = collection.UpdateOne(context.TODO(), filter, update)
-// 					if err != nil {
-// 						fmt.Println("Error updating ", err)
-// 						responseJSON("DatabaseError", w, http.StatusInternalServerError)
-// 					} else {
-// 						responseJSON("Correct", w, http.StatusOK)
-// 					}
-// 				} else {
-// 					responseJSON("Wrong", w, http.StatusOK)
-// 				}
-// 			} else {
-// 				responseJSON("LevelNoMatch", w, http.StatusOK)
-// 			}
-// 		} else {
-// 			responseJSON("InvalidLevel", w, http.StatusOK)
-// 		}
-// 	} else {
-// 		responseJSON("InvalidToken", w, http.StatusOK)
-// 	}
-// }
-// func LeaderboardHandler(w http.ResponseWriter, request *http.Request) {
-// 	options := options.Find()
-// 	options.SetSort(bson.D{{"level", -1}, {"lastModified", 1}})
-// 	find, _ := collection.Find(context.TODO(), bson.M{}, options)
-// 	var results []user
-// 	for find.Next(context.TODO()) {
-// 		// create a value into which the single document can be decoded
-// 		var elem user
-// 		err := find.Decode(&elem)
-// 		fmt.Println(elem)
-// 		if err != nil {
-// 			fmt.Println("Error decoding leaderboard item")
-// 		}
-// 		results = append(results, elem)
-// 	}
-// 	w.Header().Set("Content-Type", "application/json")
-// 	w.WriteHeader(http.StatusOK)
-// 	jData, _ := json.Marshal(results)
-// 	w.Write(jData)
-// }
-// func LevelHandler(w http.ResponseWriter, request *http.Request) {
-// 	vars := mux.Vars(request)
-// 	find, _ := collection.Find(context.TODO(), bson.M{"secret": vars["secret"][0:378]})
-// 	JSOND, _ := json.Marshal(find.Next(context.TODO()))
-// 	if strings.Compare(string(JSOND), "true") == 0 {
-// 		var current DatabaseUserObject
-// 		err := find.Decode(&current)
-// 		if err != nil {
-// 			fmt.Println("Not able to read database object")
-// 			responseJSON("DatabaseError", w, http.StatusInternalServerError)
-// 		} else {
-// 			var resp LevelResponse
-// 			if current.Level == 0 {
-// 				resp = LevelResponse{0, "https://res.cloudinary.com/drgddftct/image/upload/v1547292346/QPADBgJd8EkeBut6.png"}
-// 			} else if current.Level == 1 {
-// 				resp = LevelResponse{1, "https://res.cloudinary.com/dmridruee/image/upload/v1547295044/qsQK5bRhRvgXjh378d5J/7yXw9wkWaTMXafsC7USs.png"}
-// 			} else if current.Level == 2 {
-// 				resp = LevelResponse{2, "169B62169B62169B62FFFFFFFFFFFFFFFFFFFF883EFF883EFF883E169B62169B62169B62FFFFFFFFFFFFFFFFFFFF883EFF883EFF883E169B62169B62169B62FFFFFFFFFFFFFFFFFFFF883EFF883EFF883E169B62169B62169B62FFFFFFFFFFFFFFFFFFFF883EFF883EFF883E169B62169B62169B62FFFFFFFFFFFFFFFFFFFF883EFF883EFF883E169B62169B62169B62FFFFFFFFFFFFFFFFFFFF883EFF883EFF883E169B62169B62169B62FFFFFFFFFFFFFFFFFFFF883EFF883EFF883E169B62169B62169B62FFFFFFFFFFFFFFFFFFFF883EFF883EFF883E169B62169B62169B62FFFFFFFFFFFFFFFFFFFF883EFF883EFF883E169B62169B62169B62FFFFFFFFFFFFFFFFFFFF883EFF883EFF883E169B62169B62169B62FFFFFFFFFFFFFFFFFFFF883EFF883EFF883E169B62169B62169B62FFFFFFFFFFFFFFFFFFFF883EFF883EFF883E169B62169B62169B62FFFFFFFFFFFFFFFFFFFF883EFF883EFF883E"}
-// 			} else if current.Level == 3 {
-// 				resp = LevelResponse{3, "/midi.mid"}
-// 			} else if current.Level == 4 {
-// 				resp = LevelResponse{4, "https://res.cloudinary.com/do3uy82tk/image/upload/v1564096693/asdfasdf.jpg"}
-// 			} else if current.Level == 5 {
-// 				resp = LevelResponse{5, "https://res.cloudinary.com/dmridruee/image/upload/v1547211291/0PNQNGAOck2NQwyb6hQV.png"}
-// 			} else if current.Level == 6 {
-// 				resp = LevelResponse{6, "https://res.cloudinary.com/dmridruee/image/upload/v1547192728/fpF6juWJPP7D2S9BJWcc/LQtD12ldlFRZ4OT90cDj.png"}
-// 			} else if current.Level == 7 {
-// 				resp = LevelResponse{7, "https://res.cloudinary.com/drgddftct/image/upload/v1547371349/5g92e2eRNxtjrDLg/XbWkuXbv8tCpRwwK.gif"}
-// 			} else {
-// 				resp = LevelResponse{8, "Won"}
-// 			}
-// 			w.Header().Set("Content-Type", "application/json")
-// 			w.WriteHeader(http.StatusOK)
-// 			jData, _ := json.Marshal(resp)
-// 			w.Write(jData)
-// 		}
-// 	}
-// }
 
-// func LevelQueryHandler(w http.ResponseWriter, request *http.Request) {
-// 	vars := mux.Vars(request)
-// 	find, _ := collection.Find(context.TODO(), bson.M{"clientID": vars["clientid"]})
-// 	JSOND, _ := json.Marshal(find.Next(context.TODO()))
-// 	// Returning the level of the queried user
-// 	if strings.Compare(string(JSOND), "true") == 0 {
-// 		var current DatabaseUserObject
-// 		_ = find.Decode(&current)
-// 		responseJSON(strconv.Itoa(current.Level), w, http.StatusOK)
-// 	} else {
-// 		responseJSON("-2", w, http.StatusOK)
-// 	}
-// }
-
-// func DoesUsernameExistHandler(w http.ResponseWriter, request *http.Request) {
-// 	vars := mux.Vars(request)
-// 	find, _ := collection.Find(context.TODO(), bson.M{"username": vars["username"]})
-// 	JSOND, _ := json.Marshal(find.Next(context.TODO()))
-// 	// Returning the level of the queried user
-// 	if strings.Compare(string(JSOND), "true") == 0 {
-// 		responseJSON("true", w, http.StatusOK)
-// 	} else {
-// 		responseJSON("false", w, http.StatusOK)
-// 	}
-// }
-
-// func LeaderboardTableHandler(w http.ResponseWriter, r *http.Request) {
-// 	http.ServeFile(w, r, "../leaderboard.html")
-// }
-
-// func CSSHandler(w http.ResponseWriter, r *http.Request) {
-// 	http.ServeFile(w, r, "../prerenderedviews/css/index.css")
-// }
-
-// func RulesHandler(w http.ResponseWriter, r *http.Request) {
-// 	http.ServeFile(w, r, "../rules.html")
-// }
-
-// func MIDIHandler(w http.ResponseWriter, r *http.Request) {
-// 	http.ServeFile(w, r, "cryptex.mid")
-// }
+func String(n int32) string {
+    buf := [11]byte{}
+    pos := len(buf)
+    i := int64(n)
+    signed := i < 0
+    if signed {
+        i = -i
+    }
+    for {
+        pos--
+        buf[pos], i = '0'+byte(i%10), i/10
+        if i == 0 {
+            if signed {
+                pos--
+                buf[pos] = '-'
+            }
+            return string(buf[pos:])
+        }
+    }
+}
