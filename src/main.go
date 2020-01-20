@@ -100,20 +100,35 @@ type QuestionResponse struct {
 	Question string `json:"question"`
 }
 
+type AnswerRequest struct {
+	IDToken string `schema:"idToken"`
+	Answer string `schema:"answer"`
+}
+
+type AnswerResponse struct {
+	IsCorrect bool `json:"isCorrect"`
+}
+
 var questions []Question
 var answers []Answer
 
+var jwks Jwks
+
 func main() {
+	downloadJWKS()
 	c := cron.New()
 	c.AddFunc("@every 5s", updateQuestionsAndAnswers)	
+	c.AddFunc("@every 10s", downloadJWKS)
 	c.Start()
 	v := validator.New()
 	var err error
-	conn, err = sqlx.Connect("postgres", "postgresql://doadmin:mzyqulbu70zvahdp@db-postgresql-blr1-23394-do-user-6380924-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require")
+	conn, err = sqlx.Open("postgres", "postgresql://doadmin:mzyqulbu70zvahdp@db-postgresql-blr1-23394-do-user-6380924-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require")
 	conn.SetMaxOpenConns(11)
 	if err != nil {
 		fmt.Println("Error connecting to database. ")
 	  }
+	fmt.Println("Switch to AWS")
+	fmt.Println("Run benchmarks with connection pooling")
 	jwtMiddleware := jwtmiddleware.New(jwtmiddleware.Options{
 		ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
 			// Verify 'aud' claim
@@ -194,6 +209,32 @@ func main() {
 			serveJSON(w, questionResponse)
 		}))))
 	
+		router.Handle("/api/answer", negroni.New(
+			negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
+			negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				// Stuff that is being stored in the DB: name, username, contact number, email ID, level, last attempted timestamp
+				// fmt.Println("pinged")
+				var answerRequest AnswerRequest
+				err := decoder.Decode(&answerRequest, r.URL.Query())
+				if err != nil {
+					fmt.Println("Error decoding r.URL.Query() into AnswerRequest struct")
+					fmt.Println(r.URL.Query())
+				}
+				emailID := getEmail(answerRequest.IDToken)
+				answerResponse := AnswerResponse{}
+				var currentLevel int
+				err = conn.Get(&currentLevel, "SELECT level FROM users WHERE email=$1", emailID)
+				var currentAnswer string
+				err = conn.Get(&currentAnswer, "SELECT answer FROM answers WHERE level=$1", currentLevel)
+				answerResponse.IsCorrect = currentAnswer == answerRequest.Answer
+				if (answerResponse.IsCorrect) {
+					conn.NamedExec(`UPDATE users SET level=level+1 where email=:emailID`, map[string]interface{}{
+						"emailID": emailID,
+				})
+				}
+				serveJSON(w, answerResponse)
+			}))))
+	
 		router.Handle("/api/adduser", negroni.New(
 			negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
 			negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -268,7 +309,6 @@ func serveJSON(w http.ResponseWriter, class interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(jsonToServe)
 }
-
 // func createSchema(db *pg.DB) error {
 //     for _, model := range []interface{}{(*DatabaseUserObject)(nil)} {
 //         err := db.CreateTable(model, &orm.CreateTableOptions{
@@ -335,20 +375,6 @@ func updateQuestionsAndAnswers() {
 
 func getPemCert(token *jwt.Token) (string, error) {
 	cert := ""
-	resp, err := http.Get("https://cryptex.auth0.com/.well-known/jwks.json")
-
-	if err != nil {
-		return cert, err
-	}
-	defer resp.Body.Close()
-
-	var jwks = Jwks{}
-	err = json.NewDecoder(resp.Body).Decode(&jwks)
-
-	if err != nil {
-		return cert, err
-	}
-
 	for k, _ := range jwks.Keys {
 		if token.Header["kid"] == jwks.Keys[k].Kid {
 			cert = "-----BEGIN CERTIFICATE-----\n" + jwks.Keys[k].X5c[0] + "\n-----END CERTIFICATE-----"
@@ -363,6 +389,18 @@ func getPemCert(token *jwt.Token) (string, error) {
 	return cert, nil
 }
 
+func downloadJWKS() {
+	resp, err := http.Get("https://cryptex.auth0.com/.well-known/jwks.json")
+	if err != nil {
+		fmt.Println("Error talking to Auth0")
+	}
+	defer resp.Body.Close()
+	err = json.NewDecoder(resp.Body).Decode(&jwks)
+
+	if err != nil {
+		fmt.Println("Error talking to Auth0")
+	}
+}
 // func AcceptedRules(w http.ResponseWriter, request *http.Request) {
 // 	vars := mux.Vars(request)
 // 	fmt.Println(vars["secret"][0:378])
