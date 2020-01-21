@@ -1,36 +1,12 @@
-/* .countdown {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
- 
-.countdown__item {
-  color:  #cff8fa;
-  font-size: 1.2vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  line-height: 30px;
-  margin-left: 0vw;
-  position: relative;
-  width: 55px;
-  height: 100px;
-}
- 
-.countdown__item span {
-  color:  #cff8fa;
-  font-size: .5vw;
-  font-weight: 600;
-  text-transform: uppercase;
-} */
 
-#link_one, #link_two, #link_three{
-  color: #21b4ba;
-}
-#link_one:hover, #link_two:hover, #link_three:hover{
-  color: #21b4ba;
+.navb{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 3vh;
+  padding-left: 3vw;
+  padding-right: 3vw;
 }
 
 Table{
@@ -49,4 +25,12 @@ Table{
 
 .lists{
   color: #cff8fa;
+}
+
+.borders{
+  border: .075vw  #19999e solid;
+}
+
+.hints{
+  padding: 1vw;
 }
