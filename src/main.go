@@ -242,8 +242,60 @@ func main() {
 		}))))
 	
 	router.Handle("/api/adduser", negroni.New(
-	// Serve React code with nginx
+		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
+		negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			var userDetailStruct UserDetails
+			err := decoder.Decode(&userDetailStruct, r.URL.Query())
+			if err != nil {
+				fmt.Println("Error decoding r.URL.Query() into UserDetails struct")
+				fmt.Println(r.URL.Query())
+			}
+			emailID := getEmail(userDetailStruct.IDToken)
+			usernameValidator := regexp.MustCompile("^[a-zA-Z0-9]([._@-]|[a-zA-Z0-9]){6,62}[a-zA-Z0-9]$")
+			isValid := usernameValidator.MatchString(userDetailStruct.Username)
+			addUserResponse := AddUserResponse{Username: userDetailStruct.Username}
+			if (isValid) {
+				toBeInserted := DatabaseUserObject{
+					Name: userDetailStruct.Name,
+					Username: userDetailStruct.Username,
+					PhoneNumber: userDetailStruct.PhoneNumber,
+					Email: emailID,
+					Level: -1,
+					Lastmodified: time.Now(),
+				}
+				validationError := v.Struct(toBeInserted)
+				
+				if (validationError != nil) {
+					addUserResponse.ErrorCode = "Validation error"
+				} else {
+					_, err = conn.NamedExec(`INSERT INTO users (name, username, phone, email, level, lastmodified) VALUES (:name, :username, :phone, :email, :level, :last)`, 
+						map[string]interface{}{
+							"name": toBeInserted.Name,
+							"username": toBeInserted.Username,
+							"phone": toBeInserted.PhoneNumber,
+							"email": toBeInserted.Email,
+							"level": toBeInserted.Level,
+							"last": toBeInserted.Lastmodified,
+	
+					})
+					if pgerr, ok := err.(*pq.Error); ok {
+						if pgerr.Code == "23505" {
+							addUserResponse.ErrorCode = "Duplicate username"
+						} else {
+							addUserResponse.ErrorCode = "Unknown error"
+						}
+					} else {
+						addUserResponse.ErrorCode = "Success"
+					}
+				}
+			} else {
+				addUserResponse.ErrorCode = "Invalid username"
+			}
+			serveJSON(w, addUserResponse)
+		}))))
+
 	http.ListenAndServe(":8080", router)
+
 }
 
 func getEmail(token string) string {
