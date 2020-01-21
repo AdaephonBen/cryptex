@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"strconv"
 	"errors"
 	"fmt"
@@ -341,10 +342,13 @@ func LevelHandler(w http.ResponseWriter, r *http.Request) {
 	email := getEmail(r.URL.Query()["idToken"][0])
 	var maxLevel int
 	err := conn.Get(&maxLevel, "SELECT level FROM users WHERE email=$1", email)
-	if (err != nil) {
+	if (err == sql.ErrNoRows) {
 		levelResponse.Level = -2
-	} else {
+	} else if (err == nil) {
 		levelResponse.Level = maxLevel
+	} else {
+		fmt.Println("Level serving failed")
+		fmt.Println(err)
 	}
 	serveJSON(w, levelResponse)
 }
