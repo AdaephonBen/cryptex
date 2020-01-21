@@ -2,7 +2,6 @@ package main
 
 import (
 	"strconv"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
@@ -12,6 +11,7 @@ import (
 	jwtmiddleware "github.com/auth0/go-jwt-middleware"
 	"github.com/codegangsta/negroni"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/json-iterator/go"
 	"github.com/gorilla/mux"
 	"github.com/lib/pq"
 	"github.com/robfig/cron/v3"
@@ -23,6 +23,8 @@ import (
 var decoder = schema.NewDecoder() // Initialize gorilla schema decoder
 
 var conn *sqlx.DB
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type Jwks struct {
 	Keys []JSONWebKeys `json:"keys"`
@@ -318,7 +320,7 @@ func sortLeaderboard() {
 		list = append(list, row)
 	}
 	var err1 error
-	leaderboard, err1 = json.MarshalIndent(list, "", "\t")
+	leaderboard, err1 = json.Marshal(list)
 	if (err1 != nil) {
 		fmt.Println("Error Marshalling sorted database")
 	}

@@ -17,6 +17,7 @@ require (
 	github.com/jackc/pgx v3.6.1+incompatible
 	github.com/jinzhu/gorm v1.9.12
 	github.com/jmoiron/sqlx v1.2.0
+	github.com/json-iterator/go v1.1.9
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/lib/pq v1.2.0
 	github.com/pquerna/ffjson v0.0.0-20190930134022-aa0246cd15f7 // indirect
