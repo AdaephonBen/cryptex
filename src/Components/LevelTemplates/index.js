@@ -1,6 +1,6 @@
 import React from "react";
-import Countdown from "react-houston";
-import "react-houston/dist/css/houston.css";
+// import Countdown from "react-houston";
+// import "react-houston/dist/css/houston.css";
 import "./index.css";
 import { Collapse, Table, Row, Col, Icon, List } from 'antd';
 import Header from "antd/lib/calendar/Header";
@@ -65,10 +65,19 @@ const new_data = [
   },
 ];
 
-const customPanelStyle = {
+const customPanelStyle1 = {
   overflow: 'hidden',
   color: '#cff8fa',
   background: '#13242b',
+  borderTop: "solid .05vw #cff8fa",
+  borderBottom: "solid .05vw #cff8fa",
+  marginBottom: '.2vw'
+};
+const customPanelStyle2 = {
+  overflow: 'hidden',
+  color: '#cff8fa',
+  background: '#13242b',
+  borderBottom: "solid .05vw #cff8fa",
 };
 
 function callback(key) {
@@ -89,7 +98,7 @@ export default class Level extends React.Component {
       <Row>
       <Col span={5}>
       <Collapse className= "acc" style={{ borderRadius: "0px"}} onChange={callback} expandIcon={({ isActive }) => <Icon type="caret-down" rotate={isActive ? 180 : 0} />} >
-      <Panel className=" acc one" header="LEADERBOARD" key="1" style={customPanelStyle}>
+      <Panel className=" acc one" header="LEADERBOARD" key="1" style={customPanelStyle1}>
       <a href="https://www.helpnetsecurity.com/2016/05/12/facebook-ctf-platform-open-source/" target="_blank">
       <Table  className="borders" dataSource={data} pagination={false} showHeader={false}>
       <Column className="colm" title="Rank" dataIndex="firstName" key="firstName" />
@@ -98,22 +107,37 @@ export default class Level extends React.Component {
       </Table>
       </a>
       </Panel>
-      <Panel className="acc two" header="COUNTDOWN" key="2" style={customPanelStyle}>
-      <p className="borders" style={{textAlign:"center", backgroundColor:"#13242b"}}><Countdown endDate={new Date('January 26, 2020 00:00:00')} /></p>
+      <Panel className="acc two" header="COUNTDOWN" key="2" style={customPanelStyle2}>
+      <p className="borders" style={{backgroundColor:"#13242b", textAlign:'center', color:'#cff8fa'}}>
+      <Row>
+      <Col span={8}>
+      <p style={{fontSize:'1.3vw'}}>48</p>
+      <p style={{fontSize:'.7vw'}}>HOURS</p>
+      </Col>
+      <Col span={8}>
+      <p style={{fontSize:'1.3vw'}}>24</p>
+      <p style={{fontSize:'.7vw'}}>MINUTES</p>
+      </Col>
+      <Col span={8}>
+      <p style={{fontSize:'1.3vw'}}>48</p>
+      <p style={{fontSize:'.7vw'}}>SECONDS</p>
+      </Col>
+      </Row>
+      </p>
       </Panel>
       </Collapse>
       </Col>
       <Col span={13}></Col>
       <Col span={6}>
       <Collapse className="acc" style={{ borderRadius: "0px"}} onChange={call} expandIcon={({ isActive }) => <Icon type="caret-down" rotate={isActive ? 180 : 0} />} >
-      <Panel className="acc three" header="HINTS" key="1" style={customPanelStyle}>
+      <Panel className="acc three" header="HINTS" key="1" style={customPanelStyle1}>
       <List
       itemLayout="horizontal"
       dataSource={new_data}
       renderItem={item => (
         <List.Item className="lists">
         <List.Item.Meta className="lists"
-        avatar={<Icon style={{color:'#cff8fa', fontSize:'2vw'}} type="sketch"/>}
+        avatar={<Icon style={{color:'#cff8fa', fontSize:'1.5vw'}} type="sketch"/>}
         title={item.title}
         description={item.description}
         />

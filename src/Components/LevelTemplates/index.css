@@ -1,4 +1,4 @@
-.countdown {
+/* .countdown {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -24,7 +24,7 @@
   font-size: .5vw;
   font-weight: 600;
   text-transform: uppercase;
-}
+} */
 
 #link_one, #link_two, #link_three{
   color: #21b4ba;
@@ -35,6 +35,11 @@
 
 Table{
   color: #cff8fa;
+  text-align: center;
+}
+
+.colm{
+  text-align: center;
 }
 
 
