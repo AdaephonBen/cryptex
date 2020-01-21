@@ -81,6 +81,7 @@ type QuestionResponse struct {
 	Level int `json:"level"`
 	ErrorCode string `json:"errorCode"`
 	Question string `json:"question"`
+	MaxLevel int `json:"maxLevel"`
 }
 
 type AnswerRequest struct {
@@ -170,7 +171,6 @@ func main() {
 	            Public Routes
 	                Leaderboard: return the leaderboard with levels from 0 onwards.
 	*/
-
 	router.HandleFunc("/api/leaderboard", LeaderboardHandler)
 	router.Handle("/api/question", negroni.New(
 		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
@@ -187,6 +187,7 @@ func main() {
 			questionResponse := QuestionResponse{Level: questionRequest.Level}
 			var maxLevel int
 			err = conn.Get(&maxLevel, "SELECT level FROM users WHERE email=$1", emailID)
+			questionResponse.MaxLevel = maxLevel
 			if (questionResponse.Level <= maxLevel && err == nil) {
 				var currentQuestion string
 				err = conn.Get(&currentQuestion, "SELECT question FROM questions WHERE level=$1", questionResponse.Level)
@@ -202,90 +203,90 @@ func main() {
 			serveJSON(w, questionResponse)
 		}))))
 	
-		router.Handle("/api/answer", negroni.New(
-			negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
-			negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				// Stuff that is being stored in the DB: name, username, contact number, email ID, level, last attempted timestamp
-				// fmt.Println("pinged")
-				var answerRequest AnswerRequest
-				err := decoder.Decode(&answerRequest, r.URL.Query())
-				if err != nil {
-					fmt.Println("Error decoding r.URL.Query() into AnswerRequest struct")
-					fmt.Println(r.URL.Query())
-				}
-				emailID := getEmail(answerRequest.IDToken)
-				answerResponse := AnswerResponse{}
-				var username string
-				err = conn.Get(&username, "SELECT username FROM users WHERE email=$1", emailID)
-				var currentLevel int
-				err = conn.Get(&currentLevel, "SELECT level FROM users WHERE email=$1", emailID)
-				var currentAnswer string
-				err = conn.Get(&currentAnswer, "SELECT answer FROM answers WHERE level=$1", currentLevel)
-				answerResponse.IsCorrect = currentAnswer == answerRequest.Answer
-				if (answerResponse.IsCorrect || (answerRequest.Answer == "" && currentLevel == -1)) {
-					conn.NamedExec(`UPDATE users SET level=level+1 where email=:emailID`, map[string]interface{}{
-						"emailID": emailID,
-					})
-					answerResponse.IsCorrect = true
-				}
-				if (currentLevel >= 0) {
-					go writeToFile(currentLevel, username, answerRequest.Answer, answerResponse.IsCorrect, time.Now())
-				}
-				serveJSON(w, answerResponse)
-			}))))
+	router.Handle("/api/answer", negroni.New(
+		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
+		negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			// Stuff that is being stored in the DB: name, username, contact number, email ID, level, last attempted timestamp
+			// fmt.Println("pinged")
+			var answerRequest AnswerRequest
+			err := decoder.Decode(&answerRequest, r.URL.Query())
+			if err != nil {
+				fmt.Println("Error decoding r.URL.Query() into AnswerRequest struct")
+				fmt.Println(r.URL.Query())
+			}
+			emailID := getEmail(answerRequest.IDToken)
+			answerResponse := AnswerResponse{}
+			var username string
+			err = conn.Get(&username, "SELECT username FROM users WHERE email=$1", emailID)
+			var currentLevel int
+			err = conn.Get(&currentLevel, "SELECT level FROM users WHERE email=$1", emailID)
+			var currentAnswer string
+			err = conn.Get(&currentAnswer, "SELECT answer FROM answers WHERE level=$1", currentLevel)
+			answerResponse.IsCorrect = currentAnswer == answerRequest.Answer
+			if (answerResponse.IsCorrect || (answerRequest.Answer == "" && currentLevel == -1)) {
+				conn.NamedExec(`UPDATE users SET level=level+1 where email=:emailID`, map[string]interface{}{
+					"emailID": emailID,
+				})
+				answerResponse.IsCorrect = true
+			}
+			if (currentLevel >= 0) {
+				go writeToFile(currentLevel, username, answerRequest.Answer, answerResponse.IsCorrect, time.Now())
+			}
+			serveJSON(w, answerResponse)
+		}))))
 	
-		router.Handle("/api/adduser", negroni.New(
-			negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
-			negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				var userDetailStruct UserDetails
-				err := decoder.Decode(&userDetailStruct, r.URL.Query())
-				if err != nil {
-					fmt.Println("Error decoding r.URL.Query() into UserDetails struct")
-					fmt.Println(r.URL.Query())
+	router.Handle("/api/adduser", negroni.New(
+		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
+		negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			var userDetailStruct UserDetails
+			err := decoder.Decode(&userDetailStruct, r.URL.Query())
+			if err != nil {
+				fmt.Println("Error decoding r.URL.Query() into UserDetails struct")
+				fmt.Println(r.URL.Query())
+			}
+			emailID := getEmail(userDetailStruct.IDToken)
+			usernameValidator := regexp.MustCompile("^[a-zA-Z0-9]([._@-]|[a-zA-Z0-9]){6,62}[a-zA-Z0-9]$")
+			isValid := usernameValidator.MatchString(userDetailStruct.Username)
+			addUserResponse := AddUserResponse{Username: userDetailStruct.Username}
+			if (isValid) {
+				toBeInserted := DatabaseUserObject{
+					Name: userDetailStruct.Name,
+					Username: userDetailStruct.Username,
+					PhoneNumber: userDetailStruct.PhoneNumber,
+					Email: emailID,
+					Level: -1,
+					Lastmodified: time.Now(),
 				}
-				emailID := getEmail(userDetailStruct.IDToken)
-				usernameValidator := regexp.MustCompile("^[a-zA-Z0-9]([._@-]|[a-zA-Z0-9]){6,62}[a-zA-Z0-9]$")
-				isValid := usernameValidator.MatchString(userDetailStruct.Username)
-				addUserResponse := AddUserResponse{Username: userDetailStruct.Username}
-				if (isValid) {
-					toBeInserted := DatabaseUserObject{
-						Name: userDetailStruct.Name,
-						Username: userDetailStruct.Username,
-						PhoneNumber: userDetailStruct.PhoneNumber,
-						Email: emailID,
-						Level: -1,
-						Lastmodified: time.Now(),
-					}
-					validationError := v.Struct(toBeInserted)
-					
-					if (validationError != nil) {
-						addUserResponse.ErrorCode = "Validation error"
-					} else {
-						_, err = conn.NamedExec(`INSERT INTO users (name, username, phone, email, level, lastmodified) VALUES (:name, :username, :phone, :email, :level, :last)`, 
-							map[string]interface{}{
-								"name": toBeInserted.Name,
-								"username": toBeInserted.Username,
-								"phone": toBeInserted.PhoneNumber,
-								"email": toBeInserted.Email,
-								"level": toBeInserted.Level,
-								"last": toBeInserted.Lastmodified,
-		
-						})
-						if pgerr, ok := err.(*pq.Error); ok {
-							if pgerr.Code == "23505" {
-								addUserResponse.ErrorCode = "Duplicate username"
-							} else {
-								addUserResponse.ErrorCode = "Unknown error"
-							}
-						} else {
-							addUserResponse.ErrorCode = "Success"
-						}
-					}
+				validationError := v.Struct(toBeInserted)
+				
+				if (validationError != nil) {
+					addUserResponse.ErrorCode = "Validation error"
 				} else {
-					addUserResponse.ErrorCode = "Invalid username"
+					_, err = conn.NamedExec(`INSERT INTO users (name, username, phone, email, level, lastmodified) VALUES (:name, :username, :phone, :email, :level, :last)`, 
+						map[string]interface{}{
+							"name": toBeInserted.Name,
+							"username": toBeInserted.Username,
+							"phone": toBeInserted.PhoneNumber,
+							"email": toBeInserted.Email,
+							"level": toBeInserted.Level,
+							"last": toBeInserted.Lastmodified,
+	
+					})
+					if pgerr, ok := err.(*pq.Error); ok {
+						if pgerr.Code == "23505" {
+							addUserResponse.ErrorCode = "Duplicate username"
+						} else {
+							addUserResponse.ErrorCode = "Unknown error"
+						}
+					} else {
+						addUserResponse.ErrorCode = "Success"
+					}
 				}
-				serveJSON(w, addUserResponse)
-			}))))
+			} else {
+				addUserResponse.ErrorCode = "Invalid username"
+			}
+			serveJSON(w, addUserResponse)
+		}))))
 
 	// router.PathPrefix("/").Handler(http.FileServer(http.Dir("../dist/"))) // Replace serving with nginx
 	
