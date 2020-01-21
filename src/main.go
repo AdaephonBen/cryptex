@@ -93,6 +93,10 @@ type AnswerResponse struct {
 	IsCorrect bool `json:"isCorrect"`
 }
 
+type LevelResponse struct {
+	Level int `json:"level"`
+}
+
 var Files []*os.File
 var correctFile *os.File
 
@@ -169,9 +173,11 @@ func main() {
 		            answer(id_token, answer): User's current level is checked, answer is matched against answer[level]. level and dateModified are updated, as required.
 	                question(id_token, level): User's level and question are returned.
 	            Public Routes
-	                Leaderboard: return the leaderboard with levels from 0 onwards.
+					Leaderboard: return the leaderboard with levels from 0 onwards.
+					Level: Fast route, returns maxLevel
 	*/
 	router.HandleFunc("/api/leaderboard", LeaderboardHandler)
+	router.HandleFunc("/api/level", LevelHandler)
 	router.Handle("/api/question", negroni.New(
 		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
 		negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -236,62 +242,8 @@ func main() {
 		}))))
 	
 	router.Handle("/api/adduser", negroni.New(
-		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
-		negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			var userDetailStruct UserDetails
-			err := decoder.Decode(&userDetailStruct, r.URL.Query())
-			if err != nil {
-				fmt.Println("Error decoding r.URL.Query() into UserDetails struct")
-				fmt.Println(r.URL.Query())
-			}
-			emailID := getEmail(userDetailStruct.IDToken)
-			usernameValidator := regexp.MustCompile("^[a-zA-Z0-9]([._@-]|[a-zA-Z0-9]){6,62}[a-zA-Z0-9]$")
-			isValid := usernameValidator.MatchString(userDetailStruct.Username)
-			addUserResponse := AddUserResponse{Username: userDetailStruct.Username}
-			if (isValid) {
-				toBeInserted := DatabaseUserObject{
-					Name: userDetailStruct.Name,
-					Username: userDetailStruct.Username,
-					PhoneNumber: userDetailStruct.PhoneNumber,
-					Email: emailID,
-					Level: -1,
-					Lastmodified: time.Now(),
-				}
-				validationError := v.Struct(toBeInserted)
-				
-				if (validationError != nil) {
-					addUserResponse.ErrorCode = "Validation error"
-				} else {
-					_, err = conn.NamedExec(`INSERT INTO users (name, username, phone, email, level, lastmodified) VALUES (:name, :username, :phone, :email, :level, :last)`, 
-						map[string]interface{}{
-							"name": toBeInserted.Name,
-							"username": toBeInserted.Username,
-							"phone": toBeInserted.PhoneNumber,
-							"email": toBeInserted.Email,
-							"level": toBeInserted.Level,
-							"last": toBeInserted.Lastmodified,
-	
-					})
-					if pgerr, ok := err.(*pq.Error); ok {
-						if pgerr.Code == "23505" {
-							addUserResponse.ErrorCode = "Duplicate username"
-						} else {
-							addUserResponse.ErrorCode = "Unknown error"
-						}
-					} else {
-						addUserResponse.ErrorCode = "Success"
-					}
-				}
-			} else {
-				addUserResponse.ErrorCode = "Invalid username"
-			}
-			serveJSON(w, addUserResponse)
-		}))))
-
-	// router.PathPrefix("/").Handler(http.FileServer(http.Dir("../dist/"))) // Replace serving with nginx
-	
+	// Serve React code with nginx
 	http.ListenAndServe(":8080", router)
-
 }
 
 func getEmail(token string) string {
@@ -331,6 +283,19 @@ func LeaderboardHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(leaderboard.([]byte))
 } 
+
+func LevelHandler(w http.ResponseWriter, r *http.Request) {
+	levelResponse := LevelResponse{}
+	email := getEmail(r.URL.Query()["idToken"][0])
+	var maxLevel int
+	err := conn.Get(&maxLevel, "SELECT level FROM users WHERE email=$1", email)
+	if (err != nil) {
+		levelResponse.Level = -2
+	} else {
+		levelResponse.Level = maxLevel
+	}
+	serveJSON(w, levelResponse)
+}
 
 func serveJSON(w http.ResponseWriter, class interface{}) {
 	jsonToServe, _ := json.Marshal(class)
