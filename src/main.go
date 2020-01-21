@@ -171,7 +171,7 @@ func main() {
 	                Leaderboard: return the leaderboard with levels from 0 onwards.
 	*/
 
-	router.HandleFunc("/leaderboardjson", LeaderboardHandler)
+	router.HandleFunc("/api/leaderboard", LeaderboardHandler)
 	router.Handle("/api/question", negroni.New(
 		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
 		negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
