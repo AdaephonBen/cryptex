@@ -52,7 +52,7 @@ export default class LevelForm extends React.Component {
           }, 1000);
         } else if (error === "Duplicate username") {
           message.error("Duplicate username");
-        } else if (error === "Invalid username") {
+        } else if (error === "Invalid username" || error === "") {
           message.error(
             "Invalid username. Make sure it's at least 8 characters long. "
           );
