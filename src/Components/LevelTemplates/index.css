@@ -1,5 +1,6 @@
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
 
-.navb{
+.navb {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -9,28 +10,32 @@
   padding-right: 3vw;
 }
 
-Table{
+table {
   color: #cff8fa;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.colm {
   text-align: center;
 }
 
-.colm{
-  text-align: center;
-}
-
-
-.acc{
+.acc {
   color: #cff8fa;
 }
 
-.lists{
+.lists {
   color: #cff8fa;
 }
 
-.borders{
-  border: .075vw  #19999e solid;
+.borders {
+  border: 0.075vw #19999e solid;
 }
 
-.hints{
+.hints {
   padding: 1vw;
+}
+
+* {
+  font-family: "Lato", sans-serif;
 }
