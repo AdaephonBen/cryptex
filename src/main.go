@@ -299,7 +299,7 @@ func main() {
 			}
 			serveJSON(w, addUserResponse)
 		}))))
-
+		router.PathPrefix("/").Handler(http.FileServer(http.Dir("./cryptex-2020-react-frontend/build")))
 	http.ListenAndServe(":8080", router)
 
 }
