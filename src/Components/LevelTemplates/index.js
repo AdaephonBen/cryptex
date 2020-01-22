@@ -170,6 +170,73 @@ export default class Level extends React.Component {
         });
     } else {
       this.setState({ level: x[2] });
+      axios.get(globalUrl + "/api/leaderboard").then(response => {
+        if (response.data != null) {
+          let lengthRecords = response.data.length;
+          for (let i = 0; i < lengthRecords; i++) {
+            var something = this.state.leaderboard;
+            something[i].lastName = response.data[i].username;
+            something[i].age = response.data[i].level;
+            this.setState({ leaderboard: something });
+          }
+          axios
+            .get(
+              globalUrl +
+                "/api/username?email=" +
+                JSON.parse(localStorage.getItem("email")).email
+            )
+            .then(response2 => {
+              if (response2.data.username) {
+                var Found = -1;
+                for (var i = 0; i < this.state.leaderboard.length; i++) {
+                  if (
+                    this.state.leaderboard[i].lastName ===
+                    response2.data.username
+                  )
+                    Found = i;
+                }
+                if (Found < 0) {
+                  var Found2 = -1;
+                  for (var i = 0; i < response.data.length; i++) {
+                    if (response.data[i].username === response2.data.username)
+                      Found2 = i;
+                  }
+                  var max = -1;
+                  for (var i = 0; i < response.data.length; i++) {
+                    if (
+                      response.data[Found2].level === response.data[i].level
+                    ) {
+                      max = i;
+                      break;
+                    }
+                  }
+                  var Found3 = -1;
+                  for (var i = 0; i < this.state.leaderboard.length; i++) {
+                    if (
+                      this.state.leaderboard[i].lastName ===
+                      response.data[max].username
+                    )
+                      Found3 = i;
+                  }
+                  if (Found3 < 0) {
+                    var something = this.state.leaderboard;
+                    something[4].lastName = response.data[max].username;
+                    something[4].age = response.data[max].level;
+                    this.setState({ leaderboard: something });
+                  }
+                  if (max == Found2) {
+                    this.state.leaderboard.push();
+                  } else {
+                    var something = this.state.leaderboard;
+                    something[5].lastName = response.data[max].username;
+                    something[5].age = response.data[max].level;
+                    this.setState({ leaderboard: something });
+                  }
+                }
+              }
+            });
+        }
+      });
       setInterval(() => {
         axios.get(globalUrl + "/api/leaderboard").then(response => {
           if (response.data != null) {
