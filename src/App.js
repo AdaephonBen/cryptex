@@ -7,21 +7,25 @@ import Level from "./Components/LevelTemplates/index";
 
 class App extends React.Component {
   render() {
-    return (
-      <Router>
-        <Switch>
-          <Route path="/handleAuth">
-            <Handle />
-          </Route>
-          <Route path="/level">
-            <Level />
-          </Route>
-          <Route path="/">
-            <Landing />
-          </Route>
-        </Switch>
-      </Router>
-    );
+    if (localStorage.getItem("id_token")) {
+      return <Level />;
+    } else {
+      return (
+        <Router>
+          <Switch>
+            <Route path="/handleAuth">
+              <Handle />
+            </Route>
+            <Route path="/level">
+              <Level />
+            </Route>
+            <Route path="/">
+              <Landing />
+            </Route>
+          </Switch>
+        </Router>
+      );
+    }
   }
 }
 

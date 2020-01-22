@@ -1,5 +1,15 @@
 const { override, fixBabelImports, addLessLoader } = require("customize-cra");
+const supportMjs = () => webpackConfig => {
+  webpackConfig.module.rules.push({
+    test: /\.mjs$/,
+    include: /node_modules/,
+    type: "javascript/auto"
+  });
+  return webpackConfig;
+};
+
 module.exports = override(
+  supportMjs(),
   fixBabelImports("import", {
     libraryName: "antd",
     libraryDirectory: "es",
@@ -37,8 +47,8 @@ module.exports = override(
       "@item-active-bg": "#272733",
       "@border-color-split": "#17171f",
       "@menu-dark-bg": "#001529",
-      "@body-background": "#13242b",
-      "@component-background": "#13242b",
+      "@body-background": "#1E2939",
+      "@component-background": "#1E2939",
       "@layout-body-background": "@body-background",
       "@tooltip-bg": "#191922",
       "@tooltip-arrow-color": "#191922",
