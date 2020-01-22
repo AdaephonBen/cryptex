@@ -98,6 +98,10 @@ type LevelResponse struct {
 	Level int `json:"level"`
 }
 
+type UsernameResponse struct {
+	Username string `json:"username"`
+}
+
 var Files []*os.File
 var correctFile *os.File
 
@@ -141,13 +145,13 @@ func main() {
 	jwtMiddleware := jwtmiddleware.New(jwtmiddleware.Options{
 		ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
 			// Verify 'aud' claim
-			aud := "https://cryptex.auth0.com/api/v2/"
+			aud := "https://cryptex20.auth0.com/api/v2/"
 			checkAud := token.Claims.(jwt.MapClaims).VerifyAudience(aud, false)
 			if !checkAud {
 				return token, errors.New("Invalid audience.")
 			}
 			// Verify 'iss' claim
-			iss := "https://cryptex.auth0.com/"
+			iss := "https://cryptex20.auth0.com/"
 			checkIss := token.Claims.(jwt.MapClaims).VerifyIssuer(iss, false)
 			if !checkIss {
 				return token, errors.New("Invalid issuer.")
@@ -179,6 +183,7 @@ func main() {
 	*/
 	router.HandleFunc("/api/leaderboard", LeaderboardHandler)
 	router.HandleFunc("/api/level", LevelHandler)
+	router.HandleFunc("/api/username", UsernameHandler)
 	router.Handle("/api/question", negroni.New(
 		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
 		negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -311,7 +316,7 @@ func getEmail(token string) string {
 
 func sortLeaderboard() {
 	var list []map[string]interface{}
-	rows, err := conn.Queryx(`SELECT * FROM users WHERE level >= 0 ORDER BY level DESC, lastmodified ASC`)
+	rows, err := conn.Queryx(`SELECT username, level FROM users WHERE level >= 0 ORDER BY level DESC, lastmodified ASC`)
 	if (err != nil) {
 		fmt.Println("Error sorting database")
 		fmt.Println(err)
@@ -330,6 +335,17 @@ func sortLeaderboard() {
 	if (err1 != nil) {
 		fmt.Println("Error Marshalling sorted database")
 	}
+}
+
+func UsernameHandler(w http.ResponseWriter, r *http.Request) {
+	email := r.URL.Query()["email"][0]
+	var username string
+	err := conn.Get(&username, "SELECT username FROM users WHERE email=$1", email)
+	if (err == sql.ErrNoRows) {
+		fmt.Println("UsernameHandler failed")
+	} 
+	usernameResponse := UsernameResponse{Username: username}
+	serveJSON(w, usernameResponse)
 }
 
 func LeaderboardHandler(w http.ResponseWriter, r *http.Request) {
@@ -454,7 +470,7 @@ func writeToFile(level int, username string, answer string, isCorrect bool, atte
 }
 
 func downloadJWKS() {
-	resp, err := http.Get("https://cryptex.auth0.com/.well-known/jwks.json")
+	resp, err := http.Get("https://cryptex20.auth0.com/.well-known/jwks.json")
 	if err != nil {
 		fmt.Println("Error talking to Auth0")
 	}
