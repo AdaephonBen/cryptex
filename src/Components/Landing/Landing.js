@@ -8,7 +8,7 @@ import auth0 from "auth0-js";
 const AUTH0_CLIENT_ID = "2EC1moa4JGUvzXxP2ee0alTLusa074eM";
 const AUTH0_DOMAIN = "cryptex.auth0.com";
 const AUTH0_API_AUDIENCE = "https://cryptex.auth0.com/api/v2/";
-let globalRootURL = "http://" + window.location.host;
+let globalRootURL = "http://159.65.148.82";
 const AUTH0_CALLBACK_URL = globalRootURL;
 
 class Landing extends React.Component {

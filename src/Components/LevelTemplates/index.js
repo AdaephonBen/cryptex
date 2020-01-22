@@ -14,7 +14,7 @@ import LevelNews from "./LevelNews/LevelNews";
 
 const { Panel } = Collapse;
 const { Column } = Table;
-const globalUrl = "http://localhost:8080/";
+const globalUrl = "http://159.65.148.82/";
 const new_data = [
   {
     title: "Hint 1",
