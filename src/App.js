@@ -13,9 +13,6 @@ class App extends React.Component {
       return (
         <Router>
           <Switch>
-            <Route path="/handleAuth">
-              <Handle />
-            </Route>
             <Route path="/level">
               <Level />
             </Route>

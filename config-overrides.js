@@ -1,15 +1,6 @@
 const { override, fixBabelImports, addLessLoader } = require("customize-cra");
-const supportMjs = () => webpackConfig => {
-  webpackConfig.module.rules.push({
-    test: /\.mjs$/,
-    include: /node_modules/,
-    type: "javascript/auto"
-  });
-  return webpackConfig;
-};
 
 module.exports = override(
-  supportMjs(),
   fixBabelImports("import", {
     libraryName: "antd",
     libraryDirectory: "es",
@@ -24,8 +15,8 @@ module.exports = override(
       "@text-color": "#fff",
       "@text-color-secondary": "#fff",
       "@disabled-color": "fade(@light, 25)",
-      "@primary-5": "#40a9ff",
-      "@primary-color": "#1890ff",
+      "@primary-5": "#24C4A3",
+      "@primary-color": "#24C4A3",
       "@outline-color": "@primary-color",
       "@icon-color": "fade(@light, 65)",
       "@icon-color-hover": "fade(@light, 85)",
