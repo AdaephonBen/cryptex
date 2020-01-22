@@ -181,10 +181,10 @@ func main() {
 					Leaderboard: return the leaderboard with levels from 0 onwards.
 					Level: Fast route, returns maxLevel
 	*/
-	router.HandleFunc("/leaderboard", LeaderboardHandler)
-	router.HandleFunc("/level", LevelHandler)
-	router.HandleFunc("/username", UsernameHandler)
-	router.Handle("/question", negroni.New(
+	router.HandleFunc("/api/leaderboard", LeaderboardHandler)
+	router.HandleFunc("/api/level", LevelHandler)
+	router.HandleFunc("/api/username", UsernameHandler)
+	router.Handle("/api/question", negroni.New(
 		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
 		negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// Stuff that is being stored in the DB: name, username, contact number, email ID, level, last attempted timestamp
@@ -215,7 +215,7 @@ func main() {
 			serveJSON(w, questionResponse)
 		}))))
 	
-	router.Handle("/answer", negroni.New(
+	router.Handle("/api/answer", negroni.New(
 		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
 		negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// Stuff that is being stored in the DB: name, username, contact number, email ID, level, last attempted timestamp
@@ -247,7 +247,7 @@ func main() {
 			serveJSON(w, answerResponse)
 		}))))
 	
-	router.Handle("/adduser", negroni.New(
+	router.Handle("/api/adduser", negroni.New(
 		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
 		negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			var userDetailStruct UserDetails
