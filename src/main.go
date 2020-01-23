@@ -106,6 +106,7 @@ var Files []*os.File
 var correctFile *os.File
 
 var leaderboard interface{}
+var hints interface{}
 
 var questions []Question
 var answers []Answer
@@ -331,11 +332,11 @@ func HintsHandler(w http.ResponseWriter, r *http.Request) {
 		list = append(list, row)
 	}
 	var err1 error
-	hints, err1 := json.Marshal(list)
+	hints, err1 = json.Marshal(list)
 	if (err1 != nil) {
 		fmt.Println("Error Marshalling hints")
 	}
-	serveJSON(w, hints)
+	serveJSON(w, hints.([]byte))
 }
 
 func sortLeaderboard() {
