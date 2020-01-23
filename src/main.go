@@ -336,7 +336,8 @@ func HintsHandler(w http.ResponseWriter, r *http.Request) {
 	if (err1 != nil) {
 		fmt.Println("Error Marshalling hints")
 	}
-	serveJSON(w, hints.([]byte))
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(hints.([]byte))
 }
 
 func sortLeaderboard() {
