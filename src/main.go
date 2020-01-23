@@ -184,6 +184,7 @@ func main() {
 	router.HandleFunc("/api/leaderboard", LeaderboardHandler)
 	router.HandleFunc("/api/level", LevelHandler)
 	router.HandleFunc("/api/username", UsernameHandler)
+	router.HandleFunc("/api/hints", HintsHandler)
 	router.Handle("/api/question", negroni.New(
 		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
 		negroni.Wrap(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -311,6 +312,30 @@ func getEmail(token string) string {
 		return []byte(x), err
 	})
 	return claims["email"].(string)
+}
+
+func HintsHandler(w http.ResponseWriter, r *http.Request) {
+	var list []map[string]interface{}
+	rows, err := conn.Queryx(`SELECT * FROM hints ORDER BY index`)
+	if (err != nil) {
+		fmt.Println("Error selecting hints")
+		fmt.Println(err)
+	}
+	for rows.Next() {
+		row := make(map[string]interface{})
+		err = rows.MapScan(row)
+		if err != nil {
+		  fmt.Println("Error Scanning row")
+		  break
+		}
+		list = append(list, row)
+	}
+	var err1 error
+	hints, err1 := json.Marshal(list)
+	if (err1 != nil) {
+		fmt.Println("Error Marshalling hints")
+	}
+	serveJSON(w, hints)
 }
 
 func sortLeaderboard() {
