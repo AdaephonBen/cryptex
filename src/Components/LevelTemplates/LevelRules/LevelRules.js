@@ -29,7 +29,6 @@ export default class LevelForm extends React.Component {
           "&answer="
       )
       .then(response => {
-        alert(response);
         var isCorrect = response.data.isCorrect;
         if (isCorrect) {
           message.success("Correct Answer");
