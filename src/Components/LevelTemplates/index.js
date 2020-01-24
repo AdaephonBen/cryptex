@@ -83,7 +83,7 @@ class Question extends React.Component {
         return <LevelImage />;
         break;
       default:
-        return <p>Whatever</p>;
+        return <LevelImage />;
         break;
     }
   }
