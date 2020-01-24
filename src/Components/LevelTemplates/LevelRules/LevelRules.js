@@ -40,7 +40,6 @@ export default class LevelForm extends React.Component {
         }
       })
       .catch(error => {
-        console.log(error);
         localStorage.clear();
         window.location.replace("/");
       });
