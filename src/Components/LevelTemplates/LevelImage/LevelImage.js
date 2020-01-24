@@ -102,12 +102,13 @@ export default class LevelForm extends React.Component {
         <Form style={{ textAlign: "center" }}>
           <FormGroup>
             <Input
-              type="text"
+              type="password"
               name="password"
               value={this.state.password}
               placeholder="Answer"
               onChange={this.handleInputChange}
               className="fromCenter"
+	    onPressEnter={this.submitForm}
             />
           </FormGroup>
           <FormGroup>

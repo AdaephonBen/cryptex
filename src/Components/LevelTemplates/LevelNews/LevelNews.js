@@ -73,12 +73,13 @@ class Login extends React.Component {
         </FormGroup>
         <FormGroup>
           <Input
-            type="text"
+            type="password"
             name="password"
             value={this.state.password}
             placeholder="Password"
             onChange={this.handleInputChange}
             className="fromCenter"
+	    onPressEnter={this.submitForm}
           />
         </FormGroup>
         <FormGroup>
