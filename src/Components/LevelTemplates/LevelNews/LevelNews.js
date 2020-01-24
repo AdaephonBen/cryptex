@@ -79,7 +79,6 @@ class Login extends React.Component {
             placeholder="Password"
             onChange={this.handleInputChange}
             className="fromCenter"
-	    onPressEnter={this.submitForm}
           />
         </FormGroup>
         <FormGroup>

@@ -108,7 +108,6 @@ export default class LevelForm extends React.Component {
               placeholder="Answer"
               onChange={this.handleInputChange}
               className="fromCenter"
-              onPressEnter={this.submitForm}
             />
           </FormGroup>
           <FormGroup>
