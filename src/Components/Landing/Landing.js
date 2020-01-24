@@ -9,7 +9,7 @@ const AUTH0_CLIENT_ID = "nl87FH8EoPD4EFqJMYBIJQBr107BDlMZ";
 const AUTH0_DOMAIN = "cryptex20.auth0.com";
 const AUTH0_API_AUDIENCE = "https://cryptex20.auth0.com/api/v2/";
 let globalRootURL = "https://cryptex.elan.org.in";
-const AUTH0_CALLBACK_URL = "https://cryptex.elan.org.in";
+const AUTH0_CALLBACK_URL = "http://localhost:3000";
 
 class Landing extends React.Component {
   constructor(props) {
