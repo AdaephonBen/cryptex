@@ -136,7 +136,6 @@ export default class LevelForm extends React.Component {
           window.location.pathname.split("/")[2]
       )
       .then(response => {
-        console.log(response.data.errorCode);
         this.setState({ question: response.data.question });
       })
       .catch(error => {

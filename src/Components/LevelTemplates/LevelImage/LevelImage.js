@@ -68,7 +68,6 @@ export default class LevelForm extends React.Component {
           window.location.pathname.split("/")[2]
       )
       .then(response => {
-        console.log(response.data.errorCode);
         this.setState({ question: response.data.question });
       })
       .catch(error => {
@@ -99,7 +98,13 @@ export default class LevelForm extends React.Component {
             src={this.state.question}
           />
         </div>
-        <Form style={{ textAlign: "center" }}>
+        <Form
+          style={{ textAlign: "center" }}
+          onSubmit={e => {
+            e.preventDefault();
+            this.submitForm();
+          }}
+        >
           <FormGroup>
             <Input
               type="text"
@@ -115,6 +120,7 @@ export default class LevelForm extends React.Component {
               type="primary"
               size="large"
               onClick={this.submitForm}
+              onSubmit={this.submitForm}
               style={{
                 marginTop: "20px",
                 backgroundColor: "#24C4A3",

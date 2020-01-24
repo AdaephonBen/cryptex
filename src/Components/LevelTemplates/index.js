@@ -53,7 +53,6 @@ class Question extends React.Component {
   }
   render() {
     const level = this.props.level;
-    console.log("lol" + level);
     switch (parseInt(level, 10)) {
       case -2:
         return <LevelForm />;
@@ -266,7 +265,6 @@ export default class Level extends React.Component {
       setInterval(() => {
         var hintsTemp = [];
         axios.get(globalUrl + "/api/hints").then(response => {
-          console.log(response);
           if (response.data) {
             response.data.forEach(element => {
               if (element.level === parseInt(x[2], 10)) {
@@ -360,7 +358,6 @@ export default class Level extends React.Component {
   }
   render() {
     const menuObjects = [];
-    console.log(menuObjects);
     for (var i = 0; i <= this.state.maxLevel; i++) {
       menuObjects.push(
         <Menu.Item>
