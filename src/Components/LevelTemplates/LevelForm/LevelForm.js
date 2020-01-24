@@ -6,7 +6,7 @@ import axios from "axios";
 
 axios.defaults.headers.common["Authorization"] =
   "Bearer " + localStorage.getItem("access_token");
-const globalUrl = "http://159.65.148.82/";
+const globalUrl = "https://cryptex.elan.org.in/";
 
 // message.config({
 //     top: 500,

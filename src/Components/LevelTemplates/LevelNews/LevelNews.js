@@ -8,7 +8,7 @@ const { Text } = Typography;
 
 axios.defaults.headers.common["Authorization"] =
   "Bearer " + localStorage.getItem("access_token");
-const globalUrl = "http://159.65.148.82/";
+const globalUrl = "https://cryptex.elan.org.in/";
 
 // message.config({
 //     top: 500,
@@ -146,7 +146,6 @@ export default class LevelForm extends React.Component {
   }
 
   render() {
-    console.log(this.state.question.split(","));
     if (this.state.clicked) {
       return <Login changeState={this.changeState} />;
     } else {
