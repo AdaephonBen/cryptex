@@ -1,15 +1,15 @@
 import React from "react";
-import "./styles";
 import { Button } from "antd";
-import "antd/dist/antd.css";
 import $ from "jquery";
 import auth0 from "auth0-js";
+import Logo from "./../../128x128.png";
+import DaVinci from "./../../128x128.png";
 
 const AUTH0_CLIENT_ID = "nl87FH8EoPD4EFqJMYBIJQBr107BDlMZ";
 const AUTH0_DOMAIN = "cryptex20.auth0.com";
 const AUTH0_API_AUDIENCE = "https://cryptex20.auth0.com/api/v2/";
-let globalRootURL = "http://159.65.148.82";
-const AUTH0_CALLBACK_URL = globalRootURL;
+let globalRootURL = "https://cryptex.elan.org.in";
+const AUTH0_CALLBACK_URL = "https://cryptex.elan.org.in";
 
 class Landing extends React.Component {
   constructor(props) {
@@ -83,15 +83,13 @@ class Landing extends React.Component {
     this.parseHash();
     this.setState();
   }
+
+  componentDidMount() {
+    this.authenticate();
+  }
+
   render() {
-    return (
-      <div>
-        <p>Main Landing Page. Angad and Rachit are working on it. </p>
-        <Button type="primary" onClick={this.authenticate}>
-          Play
-        </Button>
-      </div>
-    );
+    return <div></div>;
   }
 }
 

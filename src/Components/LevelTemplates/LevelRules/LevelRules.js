@@ -7,7 +7,7 @@ const { Text } = Typography;
 
 axios.defaults.headers.common["Authorization"] =
   "Bearer " + localStorage.getItem("access_token");
-const globalUrl = "http://159.65.148.82/";
+const globalUrl = "https://cryptex.elan.org.in/";
 
 // message.config({
 //     top: 500,
@@ -29,6 +29,7 @@ export default class LevelForm extends React.Component {
           "&answer="
       )
       .then(response => {
+        alert(response);
         var isCorrect = response.data.isCorrect;
         if (isCorrect) {
           message.success("Correct Answer");
@@ -40,6 +41,7 @@ export default class LevelForm extends React.Component {
         }
       })
       .catch(error => {
+        console.log(error);
         localStorage.clear();
         window.location.replace("/");
       });

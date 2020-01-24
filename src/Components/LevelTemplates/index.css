@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
-@import url("https://fonts.googleapis.com/css?family=PT+Mono&display=swap");
 
 .navb {
   display: flex;
@@ -14,7 +13,8 @@
 table {
   color: #cff8fa;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  margin-top: 5px;
 }
 
 .colm {
@@ -42,11 +42,12 @@ table {
   padding: 1vw;
 }
 
-* {
-  font-family: "Lato", sans-serif;
+@media screen and (max-width: 480px) {
+  .hiddenOnMobile {
+    display: none;
+  }
 }
 
-.crypt {
-  font-family: "PT Mono", monospace;
-  /* font-family: "Iosevka", sans-serif !important; */
+* {
+  font-family: "Lato", sans-serif;
 }
