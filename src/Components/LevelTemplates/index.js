@@ -93,6 +93,9 @@ class Question extends React.Component {
       case 15:
         return <LevelJigsaw />;
         break;
+      case 17:
+        return <LevelLink />;
+        break;
       default:
         return <LevelImage />;
         break;
