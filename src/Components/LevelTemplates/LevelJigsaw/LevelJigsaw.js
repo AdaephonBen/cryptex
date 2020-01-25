@@ -107,6 +107,10 @@ export default class Jigsaw extends Component {
   render() {
     return (
       <div className="jigsaw">
+        <Text>
+          Please attempt this level using a computer for the best possible
+          experience.{" "}
+        </Text>
         <ul className="jigsaw__shuffled-board">
           {this.state.shuffled.map((piece, i) =>
             this.renderPieceContainer(piece, i, "shuffled")
