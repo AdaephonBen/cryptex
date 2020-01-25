@@ -15,6 +15,7 @@ class Landing extends React.Component {
   constructor(props) {
     super(props);
     this.authenticate = this.authenticate.bind(this);
+    this.parseHash();
   }
   parseHash() {
     this.auth0 = new auth0.WebAuth({
