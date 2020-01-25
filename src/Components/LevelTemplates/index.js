@@ -14,6 +14,7 @@ import LevelNews from "./LevelNews/LevelNews";
 import LevelImage from "./LevelImage/LevelImage";
 import LevelCode from "./LevelCode/LevelCode";
 import LevelLink from "./LevelLink/LevelLink";
+import LevelJigsaw from "./LevelJigsaw/LevelJigsaw";
 import Navbar from "./../Navbar/index";
 
 const { Panel } = Collapse;
@@ -88,6 +89,9 @@ class Question extends React.Component {
         break;
       case 12:
         return <LevelLink />;
+        break;
+      case 15:
+        return <LevelJigsaw />;
         break;
       default:
         return <LevelImage />;

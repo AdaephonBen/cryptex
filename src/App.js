@@ -18,7 +18,7 @@ class Redirect extends React.Component {
 
 class App extends React.Component {
   render() {
-    if (window.location.href.length < 100) {
+    if (document.URL.length < 100) {
       if (localStorage.getItem("id_token")) {
         return (
           <Router>
