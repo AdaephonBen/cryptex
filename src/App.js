@@ -5,7 +5,7 @@ import Landing from "./Components/Landing/Landing";
 import Level from "./Components/LevelTemplates/index";
 import Leaderboard from "./Components/Leaderboard/Leaderboard";
 
-let globalRootURL = "http://localhost:3000/";
+let globalRootURL = "https://cryptex.elan.org.in/";
 
 class Redirect extends React.Component {
   componentDidMount() {
