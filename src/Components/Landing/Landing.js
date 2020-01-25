@@ -25,7 +25,7 @@ class Landing extends React.Component {
       domain: AUTH0_DOMAIN,
       clientID: AUTH0_CLIENT_ID
     });
-    this.auth0.parseHash((err, authResult) => {
+    this.auth0.parseHash({ hash: window.location.hash }, (err, authResult) => {
       if (err) {
         return console.log(err);
       }
