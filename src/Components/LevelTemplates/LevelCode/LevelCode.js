@@ -121,7 +121,13 @@ export default class LevelCode extends React.Component {
             }}
           ></a>
         </div>
-        <Form style={{ textAlign: "center" }}>
+        <Form
+          style={{ textAlign: "center" }}
+          onSubmit={e => {
+            e.preventDefault();
+            this.submitForm();
+          }}
+        >
           <FormGroup>
             <Input
               type="text"

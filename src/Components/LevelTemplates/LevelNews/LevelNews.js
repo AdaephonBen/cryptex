@@ -59,7 +59,13 @@ class Login extends React.Component {
   }
   render() {
     return (
-      <Form style={{ textAlign: "center", marginTop: "20vh" }}>
+      <Form
+        style={{ textAlign: "center", marginTop: "20vh" }}
+        onSubmit={e => {
+          e.preventDefault();
+          this.submitForm();
+        }}
+      >
         <FormGroup>
           <Input
             type="text"
