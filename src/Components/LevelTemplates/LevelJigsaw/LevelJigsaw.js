@@ -106,7 +106,7 @@ export default class Jigsaw extends Component {
 
   render() {
     return (
-      <div className="jigsaw">
+      <div className="jigsaw" style={{ marginTop: "10px" }}>
         <Text style={{ marginTop: "10px" }}>
           Please attempt this level using a computer for the best possible
           experience.{" "}
