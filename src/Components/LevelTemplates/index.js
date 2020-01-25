@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LevelRules from "./LevelRules/LevelRules";
 import LevelNews from "./LevelNews/LevelNews";
 import LevelImage from "./LevelImage/LevelImage";
+import LevelCode from "./LevelCode/LevelCode";
 import Navbar from "./../Navbar/index";
 
 const { Panel } = Collapse;
@@ -80,6 +81,9 @@ class Question extends React.Component {
         break;
       case 6:
         return <LevelImage />;
+        break;
+      case 11:
+        return <LevelCode />;
         break;
       default:
         return <LevelImage />;
