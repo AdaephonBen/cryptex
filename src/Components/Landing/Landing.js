@@ -20,6 +20,7 @@ class Landing extends React.Component {
     this.auth0 = new auth0.WebAuth({
       domain: AUTH0_DOMAIN,
       clientID: AUTH0_CLIENT_ID
+
       // overrides: {
       //   __tenant: config.auth0Tenant,
       //   __token_issuer: config.authorizationServer.issuer
