@@ -15,7 +15,9 @@ class Landing extends React.Component {
   constructor(props) {
     super(props);
     this.authenticate = this.authenticate.bind(this);
+    this.setup();
     this.parseHash();
+    this.setState();
   }
   parseHash() {
     this.auth0 = new auth0.WebAuth({
@@ -82,12 +84,6 @@ class Landing extends React.Component {
     } else {
       this.loggedIn = false;
     }
-  }
-
-  componentWillMount() {
-    this.setup();
-    this.parseHash();
-    this.setState();
   }
 
   componentDidMount() {
