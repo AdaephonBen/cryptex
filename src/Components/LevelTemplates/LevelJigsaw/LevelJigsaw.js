@@ -147,8 +147,9 @@ export default class Jigsaw extends Component {
             <Button
               type="primary"
               size="large"
-              onClick={this.submitForm}
-              onSubmit={this.submitForm}
+              onClick={() => {
+                this.submitForm();
+              }}
               style={{
                 marginTop: "20px",
                 backgroundColor: "#24C4A3",
