@@ -100,6 +100,9 @@ class Question extends React.Component {
       case 19:
         return <LevelVideo />;
         break;
+      case 20:
+        return <LevelLink />;
+        break;
       default:
         return <LevelImage />;
         break;
