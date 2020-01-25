@@ -23,25 +23,7 @@ class Landing extends React.Component {
   parseHash() {
     this.auth0 = new auth0.WebAuth({
       domain: AUTH0_DOMAIN,
-      clientID: AUTH0_CLIENT_ID,
-
-      overrides: {
-        __tenant: {
-          optional: true,
-          type: "string",
-          message: "__tenant option is required"
-        },
-        __token_issuer: {
-          optional: true,
-          type: "string",
-          message: "__token_issuer option is required"
-        },
-        __jwks_uri: {
-          optional: true,
-          type: "string",
-          message: "__jwks_uri is required"
-        }
-      }
+      clientID: AUTH0_CLIENT_ID
     });
     this.auth0.parseHash((err, authResult) => {
       if (err) {
