@@ -27,7 +27,7 @@ class App extends React.Component {
                 <Leaderboard />
               </Route>
               <Route path="/">
-                <Level />
+                <Redirect />
               </Route>
             </Switch>
           </Router>
@@ -40,10 +40,10 @@ class App extends React.Component {
                 <Leaderboard />
               </Route>
               <Route path="/level">
-                <Level />
+                <Redirect />
               </Route>
               <Route path="/portal">
-                <Landing />
+                <Redirect />
               </Route>
               <Route path="/">
                 <Redirect />
