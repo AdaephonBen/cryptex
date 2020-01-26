@@ -169,7 +169,7 @@ export default class Level extends React.Component {
   componentWillMount() {
     setInterval(() => {
       var rn = new Date();
-      var cryptexDate = new Date(1580063400000);
+      var cryptexDate = new Date(1580067000000);
       var difference = cryptexDate.getTime() - rn.getTime();
 
       var hoursDifference = Math.floor(difference / 1000 / 60 / 60);
