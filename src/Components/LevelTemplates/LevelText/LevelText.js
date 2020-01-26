@@ -92,7 +92,10 @@ export default class LevelForm extends React.Component {
             style={{
               maxWidth: "60%",
               maxHeight: "60%",
-              boxShadow: "4px 16px 16px 4px rgba(0,0,0,0.2)"
+              boxShadow: "4px 16px 16px 4px rgba(0,0,0,0.2)",
+              wordBreak: "break-all",
+              marginLeft: "auto",
+              marginRight: "auto"
               // position: "absolute"
             }}
           >
