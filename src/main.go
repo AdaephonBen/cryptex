@@ -238,8 +238,9 @@ func main() {
 			err = conn.Get(&currentAnswer, "SELECT answer FROM answers WHERE level=$1", currentLevel)
 			answerResponse.IsCorrect = currentAnswer == answerRequest.Answer
 			if (answerResponse.IsCorrect || (answerRequest.Answer == "" && currentLevel == -1)) {
-				conn.NamedExec(`UPDATE users SET level=level+1 where email=:emailID`, map[string]interface{}{
+				conn.NamedExec(`UPDATE users SET level=level+1, lastmodified=:time where email=:emailID`, map[string]interface{}{
 					"emailID": emailID,
+					"time": time.Now(),
 				})
 				answerResponse.IsCorrect = true
 			}
