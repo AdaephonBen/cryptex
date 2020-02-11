@@ -1,6 +1,6 @@
 # VSCode files
 *.vscode
-
+Dockerfile
 # Ignore CSVs
 *.csv
 
