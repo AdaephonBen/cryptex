@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Mono&display=swap");
+.crypt {
+  font-family: "PT Mono", monospace;
+  /* font-size: 18px !important; */
+  /* font-family: "Iosevka", sans-serif !important; */
+}
+@media screen and (max-width: 480px) {
+  .crypt {
+    margin: "20px";
+  }
+}
