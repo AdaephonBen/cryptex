@@ -8,7 +8,7 @@ require (
 	github.com/codegangsta/negroni v1.0.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-pg/pg v8.0.6+incompatible
-	github.com/go-pg/pg/v9 v9.1.1
+	github.com/go-pg/pg/v9 v9.1.6
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/gocarina/gocsv v0.0.0-20191214001331-e6697589f2e0
 	github.com/gorilla/mux v1.7.3
