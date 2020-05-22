@@ -114,19 +114,19 @@ var answers []Answer
 var jwks Jwks
 
 func main() {
-	numberQuestions := 28
-	var err error
-	for i := 0; i < numberQuestions; i++ {
-		var theLevelFile *os.File
-		theLevelFile, err = os.OpenFile(strconv.Itoa(i)+".csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-		if (err != nil) {
-			fmt.Println("Error creating/appending to log files")
-			fmt.Println(err)
-		}
-		Files = append(Files, theLevelFile)
-	}
-	correctFile, err = os.OpenFile("correct.csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if (err != nil) {
+	// numberQuestions := 28
+	// var err error
+	// for i := 0; i < numberQuestions; i++ {
+	// 	var theLevelFile *os.File
+	// 	theLevelFile, err = os.OpenFile(strconv.Itoa(i)+".csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	// 	if (err != nil) {
+	// 		fmt.Println("Error creating/appending to log files")
+	// 		fmt.Println(err)
+	// 	}
+	// 	Files = append(Files, theLevelFile)
+	// }
+	// correctFile, err = os.OpenFile("correct.csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	// if (err != nil) {
 		fmt.Println("Error creating/appending to correct log files")
 	}
 	downloadJWKS()
