@@ -15,7 +15,7 @@ func ValidateUser(user *schema.User) error {
 	)
 }
 
-func ValidateQuestionRequest (questionRequest *schema.QuestionRequest) error {
+func ValidateQuestionRequest(questionRequest *schema.QuestionRequest) error {
 	return validation.ValidateStruct(questionRequest,
 		validation.Field(&questionRequest.Email_id, validation.Required, is.Email),
 	)

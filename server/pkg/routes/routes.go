@@ -21,6 +21,6 @@ func Init() chi.Router {
 		r.Post("/add-user", AddUserHandler)
 		r.Post("/get-question", GetQuestionHandler)
 	})
-	
+
 	return r
 }
