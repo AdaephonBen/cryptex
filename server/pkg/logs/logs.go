@@ -42,10 +42,10 @@ func LogWarning(errorToLog error, message string) {
 	}).Warn(message)
 }
 
-func LogUserCreationError (username string, email_id string, errorToLog error) {
+func LogUserCreationError(username string, email_id string, errorToLog error) {
 	log.WithFields(log.Fields{
 		"username": username,
 		"email_id": email_id,
-		"error": errorToLog.Error(),
+		"error":    errorToLog.Error(),
 	}).Warn("Error while creating user")
 }
