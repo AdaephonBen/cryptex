@@ -41,7 +41,7 @@ func UpdateQuestionsAndAnswers() {
 	rows, err := DB.Query(context.Background(), `SELECT question, answer FROM "Level" ORDER BY level`)
 	if err != nil {
 		logs.LogWarning(err, "Error while updating questions and answers")
-		return 
+		return
 	}
 	Levels = nil
 	for rows.Next() {
@@ -63,7 +63,7 @@ func UpdateLeaderboard() {
 	rows, err := DB.Query(context.Background(), `SELECT username, level FROM "User" WHERE level >= 0 ORDER BY level DESC, last_modified ASC`)
 	if err != nil {
 		logs.LogWarning(err, "Error while sorting leaderboard")
-		return 
+		return
 	}
 	Leaderboard = nil
 	for rows.Next() {
@@ -71,7 +71,7 @@ func UpdateLeaderboard() {
 		err = rows.Scan(&leaderboardUser.Username, &leaderboardUser.Level)
 		if err != nil {
 			logs.LogWarning(err, "Error while scanning row in leaderboard")
-			return 
+			return
 		}
 		Leaderboard = append(Leaderboard, leaderboardUser)
 	}

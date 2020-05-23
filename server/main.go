@@ -4,10 +4,10 @@ import (
 	"net/http"
 
 	"github.com/npalladium/cryptex/server/pkg/config"
+	"github.com/npalladium/cryptex/server/pkg/cronjobs"
 	"github.com/npalladium/cryptex/server/pkg/db"
 	"github.com/npalladium/cryptex/server/pkg/logs"
 	"github.com/npalladium/cryptex/server/pkg/routes"
-	"github.com/npalladium/cryptex/server/pkg/cronjobs"
 )
 
 func Init() {

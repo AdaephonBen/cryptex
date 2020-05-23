@@ -10,7 +10,7 @@ type QuestionRequest struct {
 }
 
 type QuestionResponse struct {
-	Level int `json:"level"`
+	Level    int    `json:"level"`
 	Question string `json:"question"`
 }
 
