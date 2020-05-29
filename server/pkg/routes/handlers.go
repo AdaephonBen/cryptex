@@ -73,7 +73,7 @@ func GetQuestionHandler(w http.ResponseWriter, r *http.Request) {
 	serveJSON(w, http.StatusOK, response)
 }
 
-func ServeLeaderboardHandler(w http.ResponseWriter, r *http.Request){
+func ServeLeaderboardHandler(w http.ResponseWriter, r *http.Request) {
 
-	serveJSON(w,http.StatusOK, db.Leaderboard)
+	serveJSON(w, http.StatusOK, db.Leaderboard)
 }
