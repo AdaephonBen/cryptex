@@ -80,7 +80,10 @@ func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) err
 }
 
 func serveJSON(w http.ResponseWriter, status int, class interface{}) {
-	jsonToServe, _ := json.Marshal(class)
+	jsonToServe, err := json.Marshal(class)
+	if err != nil {
+		return
+	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	w.Write(jsonToServe)
