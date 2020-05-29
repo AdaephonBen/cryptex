@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"strings"
 
@@ -82,6 +83,7 @@ func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) err
 func serveJSON(w http.ResponseWriter, status int, class interface{}) {
 	jsonToServe, err := json.Marshal(class)
 	if err != nil {
+		log.Println(err)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
