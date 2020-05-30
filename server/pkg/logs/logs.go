@@ -36,7 +36,7 @@ func LogStatus(message string) {
 	log.Info(message)
 }
 
-func LogWarning(errorToLog error, message string) {
+func LogWarning(message string, errorToLog error) {
 	log.WithFields(log.Fields{
 		"error": errorToLog.Error(),
 	}).Warn(message)
