@@ -22,5 +22,7 @@ func Init() chi.Router {
 		r.Post("/get-question", GetQuestionHandler)
 	})
 
+	r.Get("/leaderboard", ServeLeaderboardHandler)
+
 	return r
 }
