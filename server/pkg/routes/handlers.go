@@ -2,10 +2,10 @@ package routes
 
 import (
 	"errors"
-	"log"
 	"net/http"
 
 	"github.com/npalladium/cryptex/server/pkg/db"
+	"github.com/npalladium/cryptex/server/pkg/logs"
 	"github.com/npalladium/cryptex/server/pkg/schema"
 	"github.com/npalladium/cryptex/server/pkg/validate"
 )
@@ -18,7 +18,7 @@ func AddUserHandler(w http.ResponseWriter, r *http.Request) {
 		if errors.As(err, &mr) {
 			http.Error(w, mr.msg, mr.status)
 		} else {
-			log.Println(err.Error())
+			logs.LogWarning("Error in adding user", err)
 			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		}
 		return
@@ -46,7 +46,7 @@ func GetQuestionHandler(w http.ResponseWriter, r *http.Request) {
 		if errors.As(err, &mr) {
 			http.Error(w, mr.msg, mr.status)
 		} else {
-			log.Println(err.Error())
+			logs.LogWarning("Error while retrieving question", err)
 			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		}
 		return
@@ -71,4 +71,9 @@ func GetQuestionHandler(w http.ResponseWriter, r *http.Request) {
 		response = schema.QuestionResponse{-3, ""} // Level -3 means you've won
 	}
 	serveJSON(w, http.StatusOK, response)
+}
+
+func ServeLeaderboardHandler(w http.ResponseWriter, r *http.Request) {
+
+	serveJSON(w, http.StatusOK, db.Leaderboard)
 }

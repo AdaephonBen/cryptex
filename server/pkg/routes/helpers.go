@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/golang/gddo/httputil/header"
+	"github.com/npalladium/cryptex/server/pkg/logs"
 )
 
 type malformedRequest struct {
@@ -80,7 +81,11 @@ func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) err
 }
 
 func serveJSON(w http.ResponseWriter, status int, class interface{}) {
-	jsonToServe, _ := json.Marshal(class)
+	jsonToServe, err := json.Marshal(class)
+	if err != nil {
+		logs.LogWarning("Error while serving JSON", err)
+		return
+	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	w.Write(jsonToServe)
