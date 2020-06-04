@@ -1,0 +1,10 @@
+.portal {
+  padding: 10px;
+  width: 100vw;
+}
+.sidebar-toggle > * {
+  margin-bottom: 10px;
+}
+.second-row {
+  margin-right: 10px;
+}
