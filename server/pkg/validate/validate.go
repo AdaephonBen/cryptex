@@ -20,3 +20,9 @@ func ValidateQuestionRequest(questionRequest *schema.QuestionRequest) error {
 		validation.Field(&questionRequest.Email_id, validation.Required, is.Email),
 	)
 }
+
+func ValidateAnswerRequest(answerRequest *schema.AnswerRequest) error {
+	return validation.ValidateStruct(answerRequest,
+		validation.Field(&answerRequest.Email_id, validation.Required, is.Email),
+	)
+}

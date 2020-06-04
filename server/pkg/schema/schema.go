@@ -21,3 +21,12 @@ type ResponseError struct {
 type ResponseSuccess struct {
 	Message string `json:"message"`
 }
+
+type AnswerRequest struct{
+	Email_id string `json:"email_id"`
+	Answer   string `json:"answer"`
+}
+
+type AnswerResponse struct{
+	Message  string `json:message`
+}
