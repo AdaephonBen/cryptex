@@ -8,6 +8,8 @@ import (
 	"github.com/npalladium/cryptex/server/pkg/logs"
 	"github.com/npalladium/cryptex/server/pkg/schema"
 	"github.com/npalladium/cryptex/server/pkg/validate"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 func AddUserHandler(w http.ResponseWriter, r *http.Request) {
@@ -71,6 +73,49 @@ func GetQuestionHandler(w http.ResponseWriter, r *http.Request) {
 		response = schema.QuestionResponse{-3, ""} // Level -3 means you've won
 	}
 	serveJSON(w, http.StatusOK, response)
+}
+
+func CheckAnswerHandler(w http.ResponseWriter, r *http.Request) {
+	var answerRequest = new(schema.AnswerRequest)
+	err := decodeJSONBody(w, r, &answerRequest)
+	if err != nil {
+		var mr *malformedRequest
+		if errors.As(err, &mr) {
+			http.Error(w, mr.msg, mr.status)
+		} else {
+			logs.LogWarning("Error while checking the answer", err)
+			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		}
+		return
+	}
+	validationErrors := validate.ValidateAnswerRequest(answerRequest)
+	if validationErrors != nil {
+		var response = schema.ResponseError{validationErrors.Error()}
+		serveJSON(w, http.StatusBadRequest, response)
+		return
+	}
+	var userLevel int
+	userLevel, err = db.GetLevel(answerRequest.Email_id)
+	if err != nil {
+		var response = schema.QuestionResponse{-2, ""}
+		serveJSON(w, http.StatusBadRequest, response)
+		return
+	}
+	err = CompareHashAndPassword(db.Levels[userLevel].Answer, answerRequest.Answer)
+	if err != nil {
+		var response = schema.AnswerResponse{"Incorrect"}
+		serveJSON(w, http.StatusOK, response)
+		return
+	}
+	err = UpdateUserProgress(answerRequest.Email_id)
+	if err != nil {
+		var response = schema.ResponseError{"Couldn't update score. "}
+		serveJSON(w, http.StatusBadRequest, response)
+		return
+	}
+	var response = schema.AnswerResponse{"Correct"}
+	serveJSON(w, http.StatusOK, response)
+	return
 }
 
 func ServeLeaderboardHandler(w http.ResponseWriter, r *http.Request) {
