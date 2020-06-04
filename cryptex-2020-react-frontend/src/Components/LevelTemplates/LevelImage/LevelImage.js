@@ -30,7 +30,7 @@ export default class LevelForm extends React.Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
   submitForm() {
@@ -42,7 +42,7 @@ export default class LevelForm extends React.Component {
           "&answer=" +
           this.state.password
       )
-      .then(response => {
+      .then((response) => {
         var isCorrect = response.data.isCorrect;
         if (isCorrect) {
           message.success("Correct Answer");
@@ -53,7 +53,7 @@ export default class LevelForm extends React.Component {
           message.error("Incorrect Answer");
         }
       })
-      .catch(error => {
+      .catch((error) => {
         localStorage.clear();
         window.location.replace("/");
       });
@@ -67,10 +67,10 @@ export default class LevelForm extends React.Component {
           "&level=" +
           window.location.pathname.split("/")[2]
       )
-      .then(response => {
+      .then((response) => {
         this.setState({ question: response.data.question });
       })
-      .catch(error => {
+      .catch((error) => {
         localStorage.clear();
         window.location.replace("/");
       });
@@ -84,7 +84,7 @@ export default class LevelForm extends React.Component {
           marginTop: "10vh",
           marginLeft: "auto",
           marginRight: "auto",
-          fontSize: "1rem"
+          fontSize: "1rem",
         }}
       >
         <div style={{ position: "relative" }}>
@@ -92,7 +92,7 @@ export default class LevelForm extends React.Component {
             style={{
               maxWidth: "60%",
               maxHeight: "60%",
-              boxShadow: "4px 16px 16px 4px rgba(0,0,0,0.2)"
+              boxShadow: "4px 16px 16px 4px rgba(0,0,0,0.2)",
               // position: "absolute"
             }}
             src={this.state.question}
@@ -100,7 +100,7 @@ export default class LevelForm extends React.Component {
         </div>
         <Form
           style={{ textAlign: "center" }}
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
             this.submitForm();
           }}
@@ -125,7 +125,7 @@ export default class LevelForm extends React.Component {
                 marginTop: "20px",
                 backgroundColor: "#24C4A3",
                 borderColor: "#24C4A3",
-                color: "#1e2a3a"
+                color: "#1e2a3a",
               }}
             >
               Submit

@@ -1,0 +1,46 @@
+.mini-leaderboard {
+  box-shadow: 10px 10px #1a202c;
+  padding: 5px;
+}
+.mini-leaderboard-table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 100%;
+}
+.mini-leaderboard-table th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 300;
+  text-align: left;
+  border-bottom: 2px solid #9ae6b4;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.mini-leaderboard-table td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 300;
+  text-align: left;
+  border-bottom: 2px solid #1a202c;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.leaderboard-title {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 400;
+}
+.icon-button {
+  color: rgba(255, 255, 255, 0.5);
+}
+.icon-button:hover {
+  color: rgba(255, 255, 255, 1);
+}
+.leaderboard-buttons > * {
+  margin-left: 20px;
+  padding-top: 5px;
+}
+
+tr:nth-child(odd) {
+  background-color: #1a202c;
+}
