@@ -49,6 +49,8 @@ else
     for file in $STAGED_GO_FILES; do
         echo $file
     done
+	cd server
+	gofmt -s -w .
 fi
 
 
