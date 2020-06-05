@@ -46,7 +46,9 @@ func UpdateQuestionsAndAnswers() {
 	Levels = nil
 	for rows.Next() {
 		var level Level
-		rows.Scan(&level.Question, &level.Answer)
+		var hashAns []byte
+		rows.Scan(&level.Question, &hashAns)
+		level.Answer = string(hashAns)
 		Levels = append(Levels, level)
 	}
 }

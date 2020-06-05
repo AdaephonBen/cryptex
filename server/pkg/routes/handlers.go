@@ -101,13 +101,13 @@ func CheckAnswerHandler(w http.ResponseWriter, r *http.Request) {
 		serveJSON(w, http.StatusBadRequest, response)
 		return
 	}
-	err = CompareHashAndPassword(db.Levels[userLevel].Answer, answerRequest.Answer)
+	err = bcrypt.CompareHashAndPassword([]byte(db.Levels[userLevel].Answer), []byte(answerRequest.Answer))
 	if err != nil {
 		var response = schema.AnswerResponse{"Incorrect"}
 		serveJSON(w, http.StatusOK, response)
 		return
 	}
-	err = UpdateUserProgress(answerRequest.Email_id)
+	err = db.UpdateUserProgress(answerRequest.Email_id)
 	if err != nil {
 		var response = schema.ResponseError{"Couldn't update score. "}
 		serveJSON(w, http.StatusBadRequest, response)
