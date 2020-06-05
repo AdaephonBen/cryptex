@@ -1,6 +1,6 @@
 .mini-leaderboard {
-  box-shadow: 10px 10px #1a202c;
-  padding: 5px;
+  padding: 20px;
+  padding-bottom: 0px !important;
 }
 .mini-leaderboard-table {
   margin-top: 20px;
@@ -21,7 +21,6 @@
   padding-bottom: 10px;
   font-weight: 300;
   text-align: left;
-  border-bottom: 2px solid #1a202c;
   padding-left: 30px;
   padding-right: 30px;
 }
@@ -41,6 +40,6 @@
   padding-top: 5px;
 }
 
-tr:nth-child(odd) {
+tr:nth-child(even) {
   background-color: #1a202c;
 }

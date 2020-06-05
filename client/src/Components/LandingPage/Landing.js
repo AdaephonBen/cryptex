@@ -20,7 +20,7 @@ export default class LandingPage extends React.Component {
           className="center-box"
           flexDirection="column"
         >
-          <Heading className="title">cryptex</Heading>
+          <Heading className="title">landing</Heading>
           <Flex className="form" flexDirection="column">
             <FormControl>
               <FormLabel htmlFor="email">Email address</FormLabel>
