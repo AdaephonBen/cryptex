@@ -51,6 +51,7 @@ else
     done
 	cd server
 	gofmt -s -w .
+	cd ..
 fi
 
 
