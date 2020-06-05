@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap");
 .hints {
-  margin-top: 10px;
   padding: 5px;
+  flex-grow: 1;
 }
 .hints-title {
   text-transform: uppercase;

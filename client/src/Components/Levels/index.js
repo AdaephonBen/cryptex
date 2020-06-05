@@ -12,16 +12,6 @@ export default class Level extends React.Component {
         <br /> Question
         <br /> Question
         <br /> Question
-        <br /> Question
-        <br /> Question
-        <br /> Question
-        <br /> Question
-        <br /> Question
-        <br /> Question
-        <br /> Question
-        <br /> Question
-        <br /> Question
-        <br /> Question
       </Flex>
     );
   }

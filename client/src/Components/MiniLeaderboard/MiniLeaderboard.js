@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Text, Link } from "@chakra-ui/core";
+import { Flex, Text, Link, Tooltip } from "@chakra-ui/core";
 import {
   FaSyncAlt,
   FaExternalLinkAlt,
@@ -57,6 +57,11 @@ class Table extends React.Component {
           <td>adaephonben</td>
           <td>20</td>
         </tr>
+        <tr>
+          <td>3</td>
+          <td>adaephonben</td>
+          <td>20</td>
+        </tr>
       </table>
     );
   }
@@ -67,19 +72,22 @@ export default class MiniLeaderboard extends React.Component {
     return (
       <Flex
         className="mini-leaderboard"
-        padding="20px"
         flexDirection="column"
         backgroundColor="#212837"
       >
         <Flex className="leaderboard-header" justifyContent="space-between">
           <Text className="leaderboard-title">Leaderboard</Text>
           <Flex className="leaderboard-buttons">
-            <Link href="http://google.com" className="icon-button">
-              <FaSyncAlt></FaSyncAlt>
-            </Link>
-            <Link href="http://google.com" className="icon-button">
-              <FaExternalLinkAlt></FaExternalLinkAlt>
-            </Link>
+            <Tooltip label="Refresh leaderboard">
+              <Link href="http://google.com" className="icon-button">
+                <FaSyncAlt></FaSyncAlt>
+              </Link>
+            </Tooltip>
+            <Tooltip label="View complete leaderboard">
+              <Link href="http://google.com" className="icon-button">
+                <FaExternalLinkAlt></FaExternalLinkAlt>
+              </Link>
+            </Tooltip>
           </Flex>
         </Flex>
         <Table />
