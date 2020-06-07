@@ -1,0 +1,49 @@
+.leaderboard {
+    max-width: 70%;
+    margin-top: 2rem;
+    margin: auto;
+}
+.table {
+    margin:1rem;
+    padding:2rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+.heading {
+    text-transform: uppercase;
+}
+.table th {
+    padding-top: 0rem;
+    padding-bottom: 0.75rem;
+	text-align:center;
+	font-weight: 600;
+	border-bottom: 2px solid #9ae6b4;
+} 
+
+.table td {
+    text-align: center;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+}
+tr:nth-child(even) {
+  background-color: #272d38;
+}
+
+tr:nth-child(odd) {
+  background-color: #1a202c;
+}
+.filters {
+    margin-top: 1rem;
+    align-self: flex-end;
+}
+.paginator {
+    align-self:flex-end;
+}
+
+
+@media screen and (max-width: 468px) {
+    .paginator{
+        align-self: auto;
+    }
+}
