@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, Heading, Flex, Text, Button, Link } from "@chakra-ui/core";
+import React, { ReactPropTypes } from "react";
+import { Box, Heading, Flex, Text, Link } from "@chakra-ui/core";
 import "./styles.css";
 
 const MenuItems = ({ children }) => (
@@ -8,20 +8,29 @@ const MenuItems = ({ children }) => (
   </Text>
 );
 
+MenuItems.propTypes = {
+  children: ReactPropTypes.string,
+};
+
+MenuItems.defaultProps = {
+  children: "Link",
+};
+
 export default class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      show: false,
+      showNavbar: false,
     };
   }
 
   handleToggle() {
-    this.setState({ show: !this.state.show });
+    const { showNavbar } = this.state;
+    this.setState({ showNavbar: !showNavbar });
   }
 
   render() {
-    console.log(this.state.show);
+    const { showNavbar } = this.state;
     return (
       <Flex
         as="nav"
@@ -31,7 +40,6 @@ export default class Navbar extends React.Component {
         padding="0.6rem 1.5rem"
         bg="#212837"
         color="white"
-        {...this.props}
       >
         <Flex align="center" mr={5}>
           <Heading as="h1" size="lg" className="title">
@@ -52,7 +60,7 @@ export default class Navbar extends React.Component {
         </Box>
 
         <Box
-          display={[this.state.show ? "block" : "none", "flex"]}
+          display={[showNavbar ? "block" : "none", "flex"]}
           width={["full", "auto"]}
           alignItems="center"
           flexGrow={1}

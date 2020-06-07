@@ -1,13 +1,12 @@
 import React from "react";
+import { Flex, IconButton, Tooltip } from "@chakra-ui/core";
+import { FaTable, FaStopwatch, FaInfo } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../Navbar/Navbar";
-import LandingPage from "../LandingPage/Landing";
 import Level from "../Levels/index";
 import MiniLeaderboard from "../MiniLeaderboard/MiniLeaderboard";
 import CountdownTimer from "../CountdownTimer/Countdown";
 import Hints from "../Hints/Hints";
-import { Flex, IconButton, Tooltip } from "@chakra-ui/core";
-import { FaTable, FaStopwatch, FaInfo } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
 import "./styles.css";
 
 const MotionFlex = motion.custom(Flex);
@@ -21,19 +20,24 @@ export default class Portal extends React.Component {
       isHintsOpen: true,
     };
   }
+
   toggleLeaderboard() {
-    this.setState({ isLeaderboardOpen: !this.state.isLeaderboardOpen });
+    const { isLeaderboardOpen } = this.state;
+    this.setState({ isLeaderboardOpen: !isLeaderboardOpen });
   }
 
   toggleTimer() {
-    this.setState({ isCountdownTimerOpen: !this.state.isCountdownTimerOpen });
+    const { isCountdownTimerOpen } = this.state;
+    this.setState({ isCountdownTimerOpen: !isCountdownTimerOpen });
   }
 
   toggleHints() {
-    this.setState({ isHintsOpen: !this.state.isHintsOpen });
+    const { isHintsOpen } = this.state;
+    this.setState({ isHintsOpen: !isHintsOpen });
   }
 
   render() {
+    const { isLeaderboardOpen, isCountdownTimerOpen, isHintsOpen } = this.state;
     return (
       <div className="portal-page">
         <Navbar />
@@ -45,13 +49,13 @@ export default class Portal extends React.Component {
           >
             <Tooltip
               label={
-                this.state.isLeaderboardOpen
+                isLeaderboardOpen
                   ? "Hide the Leaderboard"
                   : "Show the Leaderboard"
               }
             >
               <IconButton
-                variantColor={this.state.isLeaderboardOpen ? "blue" : "green"}
+                variantColor={isLeaderboardOpen ? "blue" : "green"}
                 size="md"
                 icon={FaTable}
                 onClick={() => this.toggleLeaderboard()}
@@ -59,25 +63,21 @@ export default class Portal extends React.Component {
             </Tooltip>
             <Tooltip
               label={
-                this.state.isCountdownTimerOpen
+                isCountdownTimerOpen
                   ? "Hide the Countdown Timer"
                   : "Show the Countdown Timer"
               }
             >
               <IconButton
-                variantColor={
-                  this.state.isCountdownTimerOpen ? "blue" : "green"
-                }
+                variantColor={isCountdownTimerOpen ? "blue" : "green"}
                 size="md"
                 icon={FaStopwatch}
                 onClick={() => this.toggleTimer()}
               />
             </Tooltip>
-            <Tooltip
-              label={this.state.isHintsOpen ? "Hide Hints" : "Show Hints"}
-            >
+            <Tooltip label={isHintsOpen ? "Hide Hints" : "Show Hints"}>
               <IconButton
-                variantColor={this.state.isHintsOpen ? "blue" : "green"}
+                variantColor={isHintsOpen ? "blue" : "green"}
                 size="md"
                 icon={FaInfo}
                 onClick={() => this.toggleHints()}
@@ -87,7 +87,7 @@ export default class Portal extends React.Component {
           <Flex flexDirection="column" flexGrow="1">
             <Flex className="first-row">
               <AnimatePresence>
-                {this.state.isLeaderboardOpen && (
+                {isLeaderboardOpen && (
                   <MotionFlex
                     exit={{ opacity: 0, height: 0, x: "-100vw" }}
                     initial={{ opacity: 0, height: 0, x: "-100vw" }}
@@ -102,7 +102,7 @@ export default class Portal extends React.Component {
             </Flex>
             <Flex className="second-row">
               <AnimatePresence>
-                {this.state.isCountdownTimerOpen && (
+                {isCountdownTimerOpen && (
                   <MotionFlex
                     exit={{ opacity: 0, height: 0, x: "-100vw" }}
                     initial={{ opacity: 0, height: 0, x: "-100vw" }}
@@ -114,7 +114,7 @@ export default class Portal extends React.Component {
                 )}
               </AnimatePresence>
               <AnimatePresence>
-                {this.state.isHintsOpen && (
+                {isHintsOpen && (
                   <MotionFlex
                     exit={{ opacity: 0, height: 0, x: "100vw" }}
                     initial={{ opacity: 0, height: 0, x: "100vw" }}
