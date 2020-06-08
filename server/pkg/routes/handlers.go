@@ -72,4 +72,3 @@ func GetQuestionHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	serveJSON(w, http.StatusOK, response)
 }
-
