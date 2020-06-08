@@ -1,4 +1,5 @@
-import React, { ReactPropTypes } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { Box, Heading, Flex, Text, Link } from "@chakra-ui/core";
 import "./styles.css";
 
@@ -9,7 +10,7 @@ const MenuItems = ({ children }) => (
 );
 
 MenuItems.propTypes = {
-  children: ReactPropTypes.string,
+  children: PropTypes.string,
 };
 
 MenuItems.defaultProps = {
