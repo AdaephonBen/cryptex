@@ -12,6 +12,7 @@
     "emotion-theming": "^10.0.27",
     "framer-motion": "^1.11.0",
     "netlify-cli": "^2.53.0",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
