@@ -79,7 +79,7 @@ export default class Leaderboard extends React.Component {
             <Navbar/>
             <Flex align="center" justify="space-between" flexDirection="column" className="leaderboard">
             <Heading marginTop="1.5rem" className="heading">
-                L E A D E R B O A R D
+                LEADERBOARD
                 <Divider />
             </Heading>
             <Flex className="filters">
@@ -88,7 +88,7 @@ export default class Leaderboard extends React.Component {
                 </FormControl>
                 <IconButton icon={FaSearch} size="sm"/>
             </Flex>
-             <Table />
+            <Table />
              <Box className="paginator">
                  
              <IconButton icon={FaAngleLeft} size="sm"/>
