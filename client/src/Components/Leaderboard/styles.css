@@ -3,7 +3,7 @@
     margin-top: 2rem;
     margin: auto;
 }
-.table {
+table.table {
     margin:1rem;
     padding:2rem;
     width: 100%;
@@ -12,6 +12,11 @@
 
 .heading {
     text-transform: uppercase;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    letter-spacing:10px;
+    
 }
 .table th {
     padding-top: 0rem;
@@ -45,5 +50,19 @@ tr:nth-child(odd) {
 @media screen and (max-width: 468px) {
     .paginator{
         align-self: auto;
+    }
+}
+
+@media screen and (max-width: 468px) {
+    .heading {
+        font-weight: 600;
+        letter-spacing:1.1vw;
+    }
+}
+
+@media screen and (max-width:376px) {
+    .heading {
+        font-weight: 600;
+        letter-spacing:0.75vw;
     }
 }

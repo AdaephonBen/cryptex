@@ -59,12 +59,12 @@ export default class Navbar extends React.Component {
           justifyContent="right"
         >
           <MenuItems>
-            <Link href="google.com" isExternal className="navbar-link">
+            <Link href="https://discord.gg" isExternal className="navbar-link">
               Forum
             </Link>
           </MenuItems>
           <MenuItems>
-            <Link href="google.com" className="navbar-link">
+            <Link href="/leaderboard" className="navbar-link">
               Leaderboard
             </Link>
           </MenuItems>
@@ -79,7 +79,7 @@ export default class Navbar extends React.Component {
             </Link>
           </MenuItems>
           <MenuItems>
-            <Link href="google.com" className="navbar-link">
+            <Link href="https://google.com" className="navbar-link">
               Sign Out
             </Link>
           </MenuItems>
