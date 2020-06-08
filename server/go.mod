@@ -3,10 +3,13 @@ module github.com/npalladium/cryptex/server
 go 1.14
 
 require (
+	github.com/auth0/go-jwt-middleware v0.0.0-20200507191422-d30d7b9ece63
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-chi/chi v4.1.1+incompatible
 	github.com/go-ozzo/ozzo-validation/v4 v4.2.1
 	github.com/go-playground/validator/v10 v10.3.0
 	github.com/golang/gddo v0.0.0-20200519224240-a4ebd2f7e574
+	github.com/gorilla/handlers v1.4.2
 	github.com/gorilla/schema v1.1.0
 	github.com/jackc/pgx/v4 v4.6.0
 	github.com/ory/kratos-client-go v0.3.0-alpha.1 // indirect

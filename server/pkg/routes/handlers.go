@@ -4,10 +4,12 @@ import (
 	"errors"
 	"log"
 	"net/http"
+	"fmt"
 
 	"github.com/npalladium/cryptex/server/pkg/db"
 	"github.com/npalladium/cryptex/server/pkg/schema"
 	"github.com/npalladium/cryptex/server/pkg/validate"
+	"github.com/npalladium/cryptex/server/pkg/auth"
 )
 
 func AddUserHandler(w http.ResponseWriter, r *http.Request) {
@@ -73,3 +75,9 @@ func GetQuestionHandler(w http.ResponseWriter, r *http.Request) {
 	serveJSON(w, http.StatusOK, response)
 }
 
+var GetUserDetailsHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("hello")
+	var emailRequest = new(schema.EmailRequest)
+	_ = decodeJSONBody(w, r, &emailRequest)
+	w.Write([]byte(auth.GetEmail(emailRequest.Token)))
+})

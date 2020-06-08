@@ -5,6 +5,7 @@ import Portal from "./Components/Portal/Portal";
 import Login from "./Components/LoginAndRegistration/Login";
 import Register from "./Components/LoginAndRegistration/Register";
 import LandingPage from "./Components/LandingPage/Landing";
+import Auth0 from "./Components/Auth0/auth0";
 import customTheme from "./theme";
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
             </Route>
             <Route path="/register">
               <Register />
+            </Route>
+            <Route path="/auth0">
+              <Auth0 />
             </Route>
             <Route path="/">
               <LandingPage />

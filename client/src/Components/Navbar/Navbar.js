@@ -7,15 +7,6 @@ const MenuItems = ({ children }) => (
     {children}
   </Text>
 );
-
-MenuItems.propTypes = {
-  children: ReactPropTypes.string,
-};
-
-MenuItems.defaultProps = {
-  children: "Link",
-};
-
 export default class Navbar extends React.Component {
   constructor() {
     super();
