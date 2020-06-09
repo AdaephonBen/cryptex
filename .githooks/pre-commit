@@ -1,55 +1,95 @@
 #!/usr/bin/env bash
 
+# set -o nounset
+
+# Prevent direct commits to master
+##################################
+
 branch="$(git rev-parse --abbrev-ref HEAD)"
 
 if [ "$branch" = "master" ]; then
-  echo "You can't commit directly to master branch"
-  exit 1
+	printf "You can't commit directly to master branch."
+	exit 1
 fi
 
-# FRONTEND ESLINT CHECK
-###########################
-JS_STAGED_FILES=($(git -C client diff --diff-filter=d --cached --name-only | grep -E '^.*\/.*\.(js|jsx|tsx|ts)$'))
-echo "$JS_STAGED_FILES"
+# ESLint and Prettier
+##################################
 
-STAGED_FILES=$FRONTEND_STAGED_FILES
+STAGED_JS_FILES=($(git diff --diff-filter=d --cached --name-only ./client | grep -E '^.*\.(js|jsx|tsx|ts)$'))
+#retrieve all js-like files that have been staged for the next commit
+
+STAGED_FILES=(${STAGED_JS_FILES[@]})
 for i in "${!STAGED_FILES[@]}"; do
-  DATA=${STAGED_FILES[$i]}
-  pattern="frontend/"
-  DATA=${DATA/$pattern/}
-  STAGED_FILES[$i]=$DATA
+	DATA=${STAGED_FILES[$i]}
+	pattern="client/"
+	DATA=${DATA/$pattern/}
+	STAGED_FILES[$i]=$DATA
 done
 
-cd client && pwd && yarn --cwd ../ run lint "${STAGED_FILES[@]}" --fix && cd ../
+list_js_files() {
+    printf "\nThe following JS files have been staged:\n"
+    for i in "${!STAGED_FILES[@]}"; do
+	    echo ${STAGED_FILES[$i]}
+    done
+}
 
-ESLINT_EXIT="$?"
+run_eslint() {
+	ESLINT="$(git rev-parse --show-toplevel)/client/node_modules/.bin/eslint"
+	if [[ ! -x "$ESLINT" ]]; then
+		printf "\n\033[41mPlease install ESlint\033[0m (npm install eslint --save-dev)\n"
+		exit 1
+	fi
+	(cd client && $ESLINT --fix --max-warnings 0 "${STAGED_FILES[@]}")
+	ESLINT_EXIT="$?"
+	if [[ "${ESLINT_EXIT}" == 0 ]]; then
+		printf "\n\033[42mESLINT SUCCEEDED\033[0m\n"
+	else
+		printf "\n\033[41mCOMMIT FAILED:\033[0m Fix eslint errors and try again.\n"
+		exit 1
+	fi
+}
 
-if [[ "${ESLINT_EXIT}" == 0 ]]; then
-  printf "\n\033[42mESLINT SUCCEEDED\033[0m\n"
+run_prettier() {
+	PRETTIER="$(git rev-parse --show-toplevel)/client/node_modules/.bin/prettier"
+	(cd client && $PRETTIER --write --parser typescript "${STAGED_FILES[@]}")
+	printf "\nFiles prettified."
+}
+
+# we can check to see if this is empty
+if [[ $STAGED_JS_FILES == "" ]]; then
+	printf "\n No js-like files to update."
+# otherwise we can do stuff with these changed go files
 else
-  printf "\n\033[41mCOMMIT FAILED:\033[0m Fix eslint errors and try again\n"
-  exit 1
+    list_js_files
+	run_eslint
+	run_prettier
+	git add "${STAGED_JS_FILES[@]}"
 fi
 
-git add "${JS_STAGED_FILES[@]}"
-
-exit $?
-
-# FRONTEND ESLINT CHECK
+# Go fmt
 ###########################
-# this will retrieve all of the .go files that have been 
-# changed since the last commit
-STAGED_GO_FILES=$(git diff --cached --name-only -- '*.go')
+
+STAGED_GO_FILES=$(git diff --diff-filter=d --cached --name-only -- '*.go')
+#retrieve all .go files that have been staged for the next commit
+
+list_go_files() {
+    printf "\nThe following Go files have been staged:\n"
+    for i in "${!STAGED_GO_FILES[@]}"; do
+	    echo ${STAGED_GO_FILES[$i]}
+    done
+}
+
+run_gofmt() {
+	gofmt -s -w "${STAGED_FILES[@]}"
+	printf "\n\033[42m GO FILES FORMATTED\033[0m\n"
+}
 
 # we can check to see if this is empty
 if [[ $STAGED_GO_FILES == "" ]]; then
-    echo "No Go Files to Update"
+	printf "\nNo Go Files to update."
 # otherwise we can do stuff with these changed go files
 else
-    for file in $STAGED_GO_FILES; do
-        echo $file
-    done
+    list_go_files
+	run_gofmt
+	git add "${STAGED_GO_FILES[@]}"
 fi
-
-
-gofiles=STAGED_GO_FILES
