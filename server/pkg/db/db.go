@@ -16,13 +16,13 @@ func Init() {
 	var err error
 	DB, err = pgxpool.Connect(context.Background(), postgresql_connection_string)
 	if err != nil {
-		logs.LogError("Unable to connect to DB", err)
+		logs.LogError(err, "Unable to connect to DB")
 	}
 	if viper.GetBool("create_tables") {
 		logs.LogStatus("Creating tables...")
 		_, errCreateDB := DB.Exec(context.Background(), Schema)
 		if errCreateDB != nil {
-			logs.LogError("Unable to create tables", errCreateDB)
+			logs.LogError(errCreateDB, "Unable to create tables")
 		}
 		logs.LogStatus("Created tables. ")
 	}

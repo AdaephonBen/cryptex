@@ -28,7 +28,7 @@ func LogCorrectAnswer(answer string, username string, level int) {
 	}).Info("New Correct Answer")
 }
 
-func LogError(message string, errorToLog error) {
+func LogError(errorToLog error, message string) {
 	log.WithError(errorToLog).Fatal(message)
 }
 

@@ -21,6 +21,10 @@ export default class Portal extends React.Component {
     };
   }
 
+  componentDidMount() {
+
+  }
+
   toggleLeaderboard() {
     const { isLeaderboardOpen } = this.state;
     this.setState({ isLeaderboardOpen: !isLeaderboardOpen });
