@@ -1,5 +1,5 @@
 server/server
-server/config/config.json
+config/config.json
 
 # Local Netlify folder
 .netlify
