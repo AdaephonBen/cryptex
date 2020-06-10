@@ -7,11 +7,10 @@ import {
   Input,
   FormHelperText,
   Button,
-  IconButton,
   Tooltip,
   Link,
 } from "@chakra-ui/core";
-import { FaGoogle, FaFacebookF, FaTwitter, FaGithub } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
 import "./styles.css";
 
 const Register = () => {
@@ -26,44 +25,25 @@ const Register = () => {
         <Heading className="title">cryptex</Heading>
         <Flex
           className="social-icons"
-          justifyContent="space-between"
+          justifyContent="space-around"
           width={["70vw", "40vw", "25vw", "25vw"]}
         >
-          <Tooltip label="Sign in with Google">
-            <IconButton
-              variantColor="green"
-              size="lg"
-              icon={FaGoogle}
-              className="social-icon-button"
-              isRound="true"
-            />
-          </Tooltip>
-          <Tooltip label="Sign in with Facebook">
-            <IconButton
-              variantColor="green"
-              size="lg"
-              icon={FaFacebookF}
-              className="social-icon-button"
-              isRound="true"
-            />
-          </Tooltip>
-          <Tooltip label="Sign in with Twitter">
-            <IconButton
-              variantColor="green"
-              size="lg"
-              icon={FaTwitter}
-              className="social-icon-button"
-              isRound="true"
-            />
-          </Tooltip>
-          <Tooltip label="Sign in with Github">
-            <IconButton
-              variantColor="green"
-              size="lg"
-              icon={FaGithub}
-              className="social-icon-button"
-              isRound="true"
-            />
+          <Tooltip label="Sign in with your Google Account">
+            <Link
+              href={
+                process.env.REACT_APP_BACKEND_URL + "\\auth\\oauth2\\google"
+              }
+            >
+              <Button
+                variantColor="green"
+                size="lg"
+                leftIcon={FaGoogle}
+                className="social-icon-button"
+                isRound="true"
+              >
+                Sign in
+              </Button>
+            </Link>
           </Tooltip>
         </Flex>
         <Flex className="password-authentication">
