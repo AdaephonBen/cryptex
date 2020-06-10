@@ -1,0 +1,8 @@
+{
+  "postgresql_connection_url": "db",
+  "create_tables": false,
+  "root_url": "http://localhost:8080",
+  "cookie_hash_key": "hello-world-key",
+  "session_cookie_name": "cryptex-session",
+  "session_hash_key": "hello-world-key"
+}
