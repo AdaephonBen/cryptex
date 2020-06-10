@@ -9,7 +9,7 @@ func Init() {
 	logs.LogStatus("Attempting to read config files...")
 	viper.SetConfigName("config")
 	viper.SetConfigType("json")
-	viper.AddConfigPath("config")
+	viper.AddConfigPath("../config")
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			logs.LogError("Config file not found", err)
