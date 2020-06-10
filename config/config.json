@@ -1,8 +1,0 @@
-{
-  "postgresql_connection_url": "postgresql://dbmasteruser:12345678@ls-e00cdbb567acd8d4fba162dd4260aa9b05688a77.cmp1cssaidim.ap-south-1.rds.amazonaws.com:5432/postgres",
-  "create_tables": false,
-  "root_url": "http://localhost:8080",
-  "cookie_hash_key": "hello-world-key",
-  "session_cookie_name": "cryptex-session",
-  "session_hash_key": "hello-world-key"
-}
