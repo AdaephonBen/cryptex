@@ -4,5 +4,7 @@
   "root_url": "http://localhost:8080",
   "cookie_hash_key": "hello-world-key",
   "session_cookie_name": "cryptex-session",
-  "session_hash_key": "hello-world-key"
+  "session_hash_key": "hello-world-key",
+  "google_client_id": "blah",
+  "google_client_secret": "blah"
 }

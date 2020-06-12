@@ -25,6 +25,7 @@ func Init() chi.Router {
 	r.Route("/api", func(r chi.Router) {
 		r.Post("/add-user", AddUserHandler)
 		r.Post("/get-question", GetQuestionHandler)
+		r.Get("/get-current-user", GetCurrentUserHandler)
 	})
 
 	return r

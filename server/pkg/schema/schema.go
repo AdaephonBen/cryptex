@@ -21,3 +21,7 @@ type ResponseError struct {
 type ResponseSuccess struct {
 	Message string `json:"message"`
 }
+
+type ResponseMessage struct {
+	Message string `json:"message"`
+}

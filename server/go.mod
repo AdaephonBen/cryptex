@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/go-chi/chi v4.1.1+incompatible
+	github.com/go-chi/cors v1.1.1
 	github.com/go-ozzo/ozzo-validation/v4 v4.2.1
 	github.com/golang/gddo v0.0.0-20200519224240-a4ebd2f7e574
 	github.com/gorilla/sessions v1.2.0

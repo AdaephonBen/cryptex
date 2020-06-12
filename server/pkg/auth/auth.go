@@ -18,6 +18,8 @@ import (
 
 var Ab *authboss.Authboss
 
+var ErrUserNotFound = authboss.ErrUserNotFound
+
 func Init() {
 	Ab = authboss.New()
 
@@ -42,6 +44,9 @@ func Init() {
 	defaults.SetCore(&Ab.Config, true, false)
 
 	Ab.Config.Modules.LogoutMethod = "POST"
+
+	Ab.Config.Paths.OAuth2LoginOK = viper.GetString("root_url")+"/portal"
+	Ab.Config.Paths.AuthLoginOK = viper.GetString("root_url")+"/portal"
 
 	redirector := defaults.NewRedirector(Ab.Config.Core.ViewRenderer, authboss.FormValueRedirect)
 	redirector.CorceRedirectTo200 = true // Since using in API mode, map redirects to API
@@ -85,6 +90,7 @@ func Init() {
 	// if err == nil && len(oauthcreds.ClientID) != 0 && len(oauthcreds.ClientSecret) != 0 {
 
 	// fmt.Println("oauth2.toml exists, configuring google oauth2")
+
 	Ab.Config.Modules.OAuth2Providers = map[string]authboss.OAuth2Provider{
 		"google": {
 			OAuth2Config: &oauth2.Config{
