@@ -6,6 +6,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/cors"
 	"github.com/npalladium/cryptex/server/pkg/auth"
 )
 
@@ -17,6 +18,14 @@ func Init() chi.Router {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 	r.Use(auth.Ab.LoadClientStateMiddleware)
+
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"lambda.fail"},
+		AllowedMethods: []string{"GET", "POST", "DELETE"},
+		AllowCredentials: true,
+	})
+
+	r.Use(c.Handler)
 
 	r.Use(middleware.Timeout(60 * time.Second))
 
