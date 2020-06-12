@@ -8,6 +8,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/cors"
 	"github.com/npalladium/cryptex/server/pkg/auth"
+	"github.com/spf13/viper"
 )
 
 func Init() chi.Router {
@@ -20,7 +21,7 @@ func Init() chi.Router {
 	r.Use(auth.Ab.LoadClientStateMiddleware)
 
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"lambda.fail"},
+		AllowedOrigins: []string{viper.GetString("root_url")},
 		AllowedMethods: []string{"GET", "POST", "DELETE"},
 		AllowCredentials: true,
 	})
