@@ -1,68 +1,82 @@
 .leaderboard {
-    max-width: 70%;
-    margin-top: 2rem;
-    margin: auto;
+  max-width: 70%;
+  margin-top: 2rem;
+  margin: auto;
 }
 table.table {
-    margin:1rem;
-    padding:2rem;
-    width: 100%;
-    max-width: 100%;
+  margin: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 100%;
+  border-width: 5px;
+  border-color: #1a202c;
+}
+
+table.table > tr {
+  border-color: #212837;
+  border-left: 2px;
+  border-right: 2px;
 }
 
 .heading {
-    text-transform: uppercase;
-    max-width: 100%;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-    letter-spacing:10px;
-    
+  text-transform: uppercase;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  letter-spacing: 8px;
+  margin-right: -8px;
 }
 .table th {
-    padding-top: 0rem;
-    padding-bottom: 0.75rem;
-	text-align:center;
-	font-weight: 600;
-	border-bottom: 2px solid #9ae6b4;
-} 
+  padding-top: 0rem;
+  padding-bottom: 0.75rem;
+  text-align: center;
+  font-weight: 580;
+  border-bottom: 2px solid #9ae6b4;
+}
 
 .table td {
-    text-align: center;
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
+  text-align: center;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
 }
 tr:nth-child(even) {
-  background-color: #272d38;
+  background-color: #212837;
 }
 
 tr:nth-child(odd) {
   background-color: #1a202c;
 }
 .filters {
-    margin-top: 1rem;
-    align-self: flex-end;
+  margin-top: 1rem;
+  align-self: flex-end;
 }
 .paginator {
-    align-self:flex-end;
+  align-self: flex-end;
 }
 
-
-@media screen and (max-width: 468px) {
-    .paginator{
-        align-self: auto;
-    }
+@media screen and (max-width: 480px) {
+  .filters {
+    align-self: auto;
+  }
+  .paginator {
+    align-self: auto;
+  }
 }
 
-@media screen and (max-width: 468px) {
-    .heading {
-        font-weight: 600;
-        letter-spacing:1.1vw;
-    }
+@media screen and (max-width: 480px) {
+  .heading-text {
+    font-weight: 600;
+    letter-spacing: 7px;
+  }
 }
 
-@media screen and (max-width:376px) {
-    .heading {
-        font-weight: 600;
-        letter-spacing:0.75vw;
-    }
+@media screen and (max-width: 360px) {
+  .heading {
+    font-weight: 550;
+    letter-spacing: 3px;
+  }
+}
+
+.search {
+  margin-left: 8px;
 }
