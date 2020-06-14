@@ -1,21 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Text, Collapse, Button } from '@chakra-ui/core';
-import './styles.css';
+import React from "react";
+import PropTypes from "prop-types";
+import { Text, Collapse, Button } from "@chakra-ui/core";
+import "./styles.css";
 
 function Record(props) {
   const [show, setShow] = React.useState(false);
-  const handleToggle = function () {
+  const handleToggle = () => {
     return setShow(!show);
   };
-  const members = props.users.map((user) => <Text>{user}</Text>);
+  const { users, rank, team } = props;
+  const members = users.map((user) => <Text>{user}</Text>);
   return (
     <tr className="record">
-      <td>{props.rank}</td>
+      <td>{rank}</td>
       <td>
         <Collapse isOpen={show} startingHeight={25}>
           <Button variant="link" onClick={handleToggle} marginBottom="8px">
-            {props.team}
+            {team}
           </Button>
           {members}
         </Collapse>
@@ -24,6 +25,12 @@ function Record(props) {
     </tr>
   );
 }
+
+Record.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.string).isRequired,
+  rank: PropTypes.number.isRequired,
+  team: PropTypes.string.isRequired,
+};
 
 function Table() {
   return (
@@ -37,52 +44,52 @@ function Table() {
         <Record
           rank="2"
           team="adaephonben"
-          users={['RonaldRoe', 'JaneDoe', 'RonaldRoe', 'JaneDoe']}
+          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
         />
         <Record
           rank="2"
           team="adaephonben"
-          users={['RonaldRoe', 'JaneDoe', 'RonaldRoe', 'JaneDoe']}
+          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
         />
         <Record
           rank="2"
           team="adaephonben"
-          users={['RonaldRoe', 'JaneDoe', 'RonaldRoe', 'JaneDoe']}
+          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
         />
         <Record
           rank="2"
           team="adaephonben"
-          users={['RonaldRoe', 'JaneDoe', 'RonaldRoe', 'JaneDoe']}
+          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
         />
         <Record
           rank="2"
           team="adaephonben"
-          users={['RonaldRoe', 'JaneDoe', 'RonaldRoe', 'JaneDoe']}
+          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
         />
         <Record
           rank="2"
           team="adaephonben"
-          users={['RonaldRoe', 'JaneDoe', 'RonaldRoe', 'JaneDoe']}
+          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
         />
         <Record
           rank="2"
           team="adaephonben"
-          users={['RonaldRoe', 'JaneDoe', 'RonaldRoe', 'JaneDoe']}
+          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
         />
         <Record
           rank="2"
           team="adaephonben"
-          users={['RonaldRoe', 'JaneDoe', 'RonaldRoe', 'JaneDoe']}
+          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
         />
         <Record
           rank="2"
           team="adaephonben"
-          users={['RonaldRoe', 'JaneDoe', 'RonaldRoe', 'JaneDoe']}
+          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
         />
         <Record
           rank="2"
           team="adaephonben"
-          users={['RonaldRoe', 'JaneDoe', 'RonaldRoe', 'JaneDoe']}
+          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
         />
       </tbody>
     </table>
