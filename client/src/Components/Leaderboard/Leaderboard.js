@@ -24,16 +24,18 @@ function Leaderboard() {
         flexDirection="column"
         className="leaderboard"
       >
-        <Heading
-          marginTop="1.5rem"
-          letterSpacing={[3, 7, 8]}
-          fontWeight={[520, 600, 600]}
-          marginRight={["-3", "-7", "-8"]}
-          className="heading"
-        >
-          LEADERBOARD
+        <Flex flexDir="column">
+          <Heading
+            marginTop="1.5rem"
+            letterSpacing={[3, 7, 8]}
+            fontWeight={[520, 600, 600]}
+            marginRight={["-3px", "-7px", "-8px"]}
+            className="heading"
+          >
+            LEADERBOARD
+          </Heading>
           <Divider />
-        </Heading>
+        </Flex>
         <Flex className="filters">
           <FormControl>
             <Input placeholder="Team/User Name" size="sm" />

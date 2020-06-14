@@ -22,7 +22,6 @@ table.table > tr {
   text-transform: uppercase;
   max-width: 100%;
   text-overflow: ellipsis;
-  word-wrap: break-word;
   letter-spacing: 8px;
   margin-right: -8px;
 }
@@ -52,29 +51,6 @@ tr:nth-child(odd) {
 }
 .paginator {
   align-self: flex-end;
-}
-
-@media screen and (max-width: 480px) {
-  .filters {
-    align-self: auto;
-  }
-  .paginator {
-    align-self: auto;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .heading-text {
-    font-weight: 600;
-    letter-spacing: 7px;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .heading {
-    font-weight: 550;
-    letter-spacing: 3px;
-  }
 }
 
 .search {
