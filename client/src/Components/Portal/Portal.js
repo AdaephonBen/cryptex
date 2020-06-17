@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, IconButton, Tooltip } from "@chakra-ui/core";
 import { FaTable, FaStopwatch, FaInfo } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+// import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../Navbar/Navbar";
 import Level from "../Levels/index";
 import MiniLeaderboard from "../MiniLeaderboard/MiniLeaderboard";
@@ -9,7 +9,7 @@ import CountdownTimer from "../CountdownTimer/Countdown";
 import Hints from "../Hints/Hints";
 import "./styles.css";
 
-const MotionFlex = motion.custom(Flex);
+// const MotionFlex = motion.custom(Flex);
 
 export default class Portal extends React.Component {
   constructor(props) {
@@ -39,13 +39,14 @@ export default class Portal extends React.Component {
   render() {
     const { isLeaderboardOpen, isCountdownTimerOpen, isHintsOpen } = this.state;
     return (
-      <div className="portal-page">
+      <Flex className="portal-page" height="100%" flexDir="column">
         <Navbar />
-        <Flex className="portal">
+        <Flex className="portal" flex="1 1 auto">
           <Flex
             className="sidebar-toggle"
             flexDirection="column"
             marginRight="10px"
+            justify="center"
           >
             <Tooltip
               label={
@@ -84,52 +85,102 @@ export default class Portal extends React.Component {
               />
             </Tooltip>
           </Flex>
-          <Flex flexDirection="column" flexGrow="1">
-            <Flex className="first-row">
-              <AnimatePresence>
-                {isLeaderboardOpen && (
-                  <MotionFlex
-                    exit={{ opacity: 0, height: 0, x: "-100vw" }}
-                    initial={{ opacity: 0, height: 0, x: "-100vw" }}
-                    animate={{ opacity: 1, height: "auto", x: 0 }}
-                    transition={{ ease: "easeIn", duration: 0.3 }}
-                  >
-                    <MiniLeaderboard />
-                  </MotionFlex>
-                )}
-              </AnimatePresence>
+          <Flex
+            flexDirection="column"
+            flexGrow="1"
+            style={{ minHeight: "100%" }}
+            justifyContent="space-between"
+          >
+            <Flex className="first-row" flexGrow="1">
+              {/* <AnimatePresence> */}
+              {isLeaderboardOpen && (
+                // <MotionFlex
+                //   exit={{
+                //     opacity: 0,
+                //     height: 0,
+                //     x: "-100vw",
+                //   }}
+                //   initial={{
+                //     opacity: 0,
+                //     height: 0,
+                //     x: "-100vw",
+                //   }}
+                //   animate={{
+                //     opacity: 1,
+                //     height: "auto",
+                //     x: 0,
+                //   }}
+                //   transition={{
+                //     ease: "easeIn",
+                //     duration: 0.3,
+                //   }}
+                // >
+                <MiniLeaderboard />
+                // </MotionFlex>
+              )}
+              {/* </AnimatePresence> */}
               <Level />
             </Flex>
             <Flex className="second-row">
-              <AnimatePresence>
-                {isCountdownTimerOpen && (
-                  <MotionFlex
-                    exit={{ opacity: 0, height: 0, x: "-100vw" }}
-                    initial={{ opacity: 0, height: 0, x: "-100vw" }}
-                    animate={{ opacity: 1, height: "auto", x: 0 }}
-                    transition={{ ease: "easeIn", duration: 0.3 }}
-                  >
-                    <CountdownTimer />
-                  </MotionFlex>
-                )}
-              </AnimatePresence>
-              <AnimatePresence>
-                {isHintsOpen && (
-                  <MotionFlex
-                    exit={{ opacity: 0, height: 0, x: "100vw" }}
-                    initial={{ opacity: 0, height: 0, x: "100vw" }}
-                    animate={{ opacity: 1, height: "auto", x: 0 }}
-                    transition={{ ease: "easeIn", duration: 0.3 }}
-                    flexGrow="1"
-                  >
-                    <Hints />
-                  </MotionFlex>
-                )}
-              </AnimatePresence>
+              {/* <AnimatePresence> */}
+              {isCountdownTimerOpen && (
+                // <MotionFlex
+                //   exit={{
+                //     opacity: 0,
+                //     height: 0,
+                //     x: "-100vw",
+                //   }}
+                //   initial={{
+                //     opacity: 0,
+                //     height: 0,
+                //     x: "-100vw",
+                //   }}
+                //   animate={{
+                //     opacity: 1,
+                //     height: "auto",
+                //     x: 0,
+                //   }}
+                //   transition={{
+                //     ease: "easeIn",
+                //     duration: 0.3,
+                //   }}
+                // >
+                <CountdownTimer />
+                // </MotionFlex>
+              )}
+              {/* </AnimatePresence> */}
+              {/* <AnimatePresence> */}
+              {isHintsOpen && (
+                // <MotionFlex
+                //   exit={{
+                //     opacity: 0,
+                //     height: 0,
+                //     x: "100vw",
+                //   }}
+                //   initial={{
+                //     opacity: 0,
+                //     height: 0,
+                //     x: "100vw",
+                //   }}
+                //   animate={{
+                //     opacity: 1,
+                //     height: "auto",
+                //     x: 0,
+                //   }}
+                //   transition={{
+                //     ease: "easeIn",
+                //     duration: 0.3,
+                //   }}
+                //   flexGrow="1"
+                // >
+                <Hints />
+                // </MotionFlex>
+              )}
+              {/* </AnimatePresence> */}
             </Flex>
           </Flex>
         </Flex>
-      </div>
+      </Flex>
     );
   }
 }

@@ -1,9 +1,17 @@
 .portal {
   padding: 10px;
   width: 100vw;
+  background-color: #212837;
+  min-height: 100%;
+}
+
+.portal-page {
+  background-color: #212837;
+  min-height: 100vh;
 }
 .portal-page {
   background-color: #212837;
+  height: 100%;
 }
 .sidebar-toggle > * {
   margin-bottom: 10px;
