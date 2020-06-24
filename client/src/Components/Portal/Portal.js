@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, IconButton, Tooltip, Box } from "@chakra-ui/core";
+import { Flex, IconButton, Tooltip } from "@chakra-ui/core";
 import { FaTable, FaStopwatch, FaInfo, FaHistory } from "react-icons/fa";
 // import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../Navbar/Navbar";
