@@ -15,6 +15,7 @@
     "netlify-cli": "^2.53.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-data-grid": "^6.1.0",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
     "react-router-dom": "^5.2.0",

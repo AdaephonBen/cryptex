@@ -1,49 +1,74 @@
-import React, { useState, useRef, useEffect } from "react";
-import uuid from "react-uuid";
+import React from "react";
+import Table from "./../Table/table";
 import "./styles.css";
 
-const TableRow = () => {
+const TableLeaderboard = () => {
   return (
-    <tr>
-      <td>3</td>
-      <td>adaephonben</td>
-      <td>20</td>
-    </tr>
+    <Table.Container
+      my={4}
+      overflowX="hidden"
+      overflowY="auto"
+      visibility="hidden"
+      className="container_table"
+    >
+      <Table.Table className="actual_table">
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>Rank</Table.Th>
+            <Table.Th>Username</Table.Th>
+            <Table.Th>Level</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
+          <Table.Tr>
+            <Table.Td>2</Table.Td>
+            <Table.Td>blahblahblahblah</Table.Td>
+            <Table.Td>2</Table.Td>
+          </Table.Tr>
+          <Table.Tr>
+            <Table.Td>2</Table.Td>
+            <Table.Td>blahblahblahblah</Table.Td>
+            <Table.Td>2</Table.Td>
+          </Table.Tr>
+          <Table.Tr>
+            <Table.Td>2</Table.Td>
+            <Table.Td>blahblahblahblah</Table.Td>
+            <Table.Td>2</Table.Td>
+          </Table.Tr>
+          <Table.Tr>
+            <Table.Td>2</Table.Td>
+            <Table.Td>blahblahblahblah</Table.Td>
+            <Table.Td>2</Table.Td>
+          </Table.Tr>
+          <Table.Tr>
+            <Table.Td>2</Table.Td>
+            <Table.Td>blahblahblahblah</Table.Td>
+            <Table.Td>2</Table.Td>
+          </Table.Tr>
+          <Table.Tr>
+            <Table.Td>2</Table.Td>
+            <Table.Td>blahblahblahblah</Table.Td>
+            <Table.Td>2</Table.Td>
+          </Table.Tr>
+          <Table.Tr>
+            <Table.Td>2</Table.Td>
+            <Table.Td>blahblahblahblah</Table.Td>
+            <Table.Td>2</Table.Td>
+          </Table.Tr>
+          <Table.Tr>
+            <Table.Td>2</Table.Td>
+            <Table.Td>blahblahblahblah</Table.Td>
+            <Table.Td>2</Table.Td>
+          </Table.Tr>
+          <Table.Tr>
+            <Table.Td>2</Table.Td>
+            <Table.Td>blahblahblahblah</Table.Td>
+            <Table.Td>2</Table.Td>
+          </Table.Tr>
+        </Table.Tbody>
+      </Table.Table>
+    </Table.Container>
   );
 };
 
-const Table = () => {
-  const table = useRef(null);
-  const [rowsToShow, setRowsToShow] = useState(20);
-  useEffect(() => {
-    const scrollHeight = Math.max(
-      document.body.scrollHeight,
-      document.documentElement.scrollHeight,
-      document.body.offsetHeight,
-      document.documentElement.offsetHeight,
-      document.body.clientHeight,
-      document.documentElement.clientHeight
-    );
-    const heightToReduce = scrollHeight - document.documentElement.clientHeight;
-    const rowHeight = table.current.clientHeight;
-    setRowsToShow((r) => r - Math.ceil(heightToReduce / rowHeight));
-  }, []);
-  return (
-    <table className="mini-leaderboard-table">
-      <thead>
-        <tr ref={table}>
-          <th>Rank</th>
-          <th>Username</th>
-          <th>Level</th>
-        </tr>
-      </thead>
-      <tbody>
-        {[...Array(rowsToShow)].map(() => (
-          <TableRow key={uuid()} />
-        ))}
-      </tbody>
-    </table>
-  );
-};
-
-export default Table;
+export default TableLeaderboard;

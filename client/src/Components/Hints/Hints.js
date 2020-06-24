@@ -6,7 +6,7 @@ import "./styles.css";
 
 const Hints = () => {
   return (
-    <Flex className="hints" padding="20px" flexDirection="column">
+    <Flex className="hints" paddingTop="20px" flexDirection="column">
       <Flex className="hints-header" justifyContent="space-between">
         <Text className="hints-title">Hints</Text>
         <Flex className="hints-buttons">

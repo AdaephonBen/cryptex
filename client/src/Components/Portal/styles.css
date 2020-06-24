@@ -2,12 +2,13 @@
   padding: 10px;
   width: 100vw;
   background-color: #212837;
-  min-height: 100%;
+  max-height: inherit;
 }
 
 .portal-page {
   background-color: #212837;
   min-height: 100vh;
+  max-height: 100vh;
 }
 .portal-page {
   background-color: #212837;
@@ -15,7 +16,4 @@
 }
 .sidebar-toggle > * {
   margin-bottom: 10px;
-}
-.second-row {
-  margin-right: 10px;
 }

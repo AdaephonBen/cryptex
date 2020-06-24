@@ -8,7 +8,8 @@ const CountdownTimer = () => {
   return (
     <Flex
       className="countdown-timer"
-      padding="20px"
+      paddingY="20px"
+      paddingX="10px"
       flexDirection="column"
       backgroundColor="#212837"
     >

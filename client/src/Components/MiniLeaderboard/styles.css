@@ -1,16 +1,24 @@
 .mini-leaderboard {
   padding: 20px;
   padding-bottom: 0px !important;
+  padding-top: 0px;
+  padding-right: 10px;
 }
 .mini-leaderboard-table {
   margin-top: 20px;
   border-collapse: collapse;
   width: 100%;
 }
+
+.actual_table,
+.container_table:hover,
+.container_table:focus {
+  visibility: visible;
+}
 .mini-leaderboard-table th {
   padding-top: 10px;
   padding-bottom: 10px;
-  font-weight: 300;
+  font-weight: 500;
   text-align: left;
   border-bottom: 2px solid #9ae6b4;
   padding-left: 30px;
@@ -19,7 +27,7 @@
 .mini-leaderboard-table td {
   padding-top: 10px;
   padding-bottom: 10px;
-  font-weight: 300;
+  /* font-weight: 300; */
   text-align: left;
   padding-left: 30px;
   padding-right: 30px;
@@ -40,6 +48,24 @@
   padding-top: 5px;
 }
 
+th {
+  background-color: #1a202c;
+}
+
 tr:nth-child(even) {
   background-color: #1a202c;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #1a202c;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #1a202c;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #2f334d;
 }
