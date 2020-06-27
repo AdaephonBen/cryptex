@@ -7,6 +7,7 @@ import Register from "./Components/LoginAndRegistration/Register";
 import Leaderboard from "./Components/Leaderboard/Leaderboard"
 import Team from "./Components/Team/Team";
 import LandingPage from "./Components/LandingPage/Landing";
+import Levels from "./Components/Levels/Levels"
 import customTheme from "./theme";
 
 function App() {
@@ -16,6 +17,9 @@ function App() {
         <CSSReset />
         <Router>
           <Switch>
+          <Route path="/levels">
+           jk
+      </Route>
             <Route path="/portal">
               <Portal />
             </Route>

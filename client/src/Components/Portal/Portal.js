@@ -3,7 +3,7 @@ import { Flex, IconButton, Tooltip } from "@chakra-ui/core";
 import { FaTable, FaStopwatch, FaInfo, FaHistory } from "react-icons/fa";
 // import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../Navbar/Navbar";
-import Level from "../Levels/index";
+import Level from "../Question/index";
 import MiniLeaderboard from "../MiniLeaderboard/MiniLeaderboard";
 import CountdownTimer from "../CountdownTimer/Countdown";
 import Hints from "../Hints/Hints";
@@ -18,7 +18,7 @@ export default class Portal extends React.Component {
     this.state = {
       isCountdownTimerOpen: true,
       isLeaderboardOpen: true,
-      isHintsOpen: true,
+        isHintsOpen: true,
       isHistoryOpen: true,
       isSidebarOpen: false,
     };
@@ -75,7 +75,8 @@ export default class Portal extends React.Component {
             <Flex
               className="sidebar-toggle"
               flexDirection="column"
-              justify="center"
+              ml="10px"
+              mr="10px"
             >
               <Tooltip
                 label={
@@ -86,7 +87,7 @@ export default class Portal extends React.Component {
               >
                 <IconButton
                   variantColor={isLeaderboardOpen ? "blue" : "green"}
-                  size="md"
+                  size="sm"
                   icon={FaTable}
                   onClick={() => this.toggleLeaderboard()}
                 />
@@ -100,7 +101,7 @@ export default class Portal extends React.Component {
               >
                 <IconButton
                   variantColor={isCountdownTimerOpen ? "blue" : "green"}
-                  size="md"
+                  size="sm"
                   icon={FaStopwatch}
                   onClick={() => this.toggleTimer()}
                 />
@@ -108,7 +109,7 @@ export default class Portal extends React.Component {
               <Tooltip label={isHintsOpen ? "Hide Hints" : "Show Hints"}>
                 <IconButton
                   variantColor={isHintsOpen ? "blue" : "green"}
-                  size="md"
+                  size="sm"
                   icon={FaInfo}
                   onClick={() => this.toggleHints()}
                 />
@@ -116,7 +117,7 @@ export default class Portal extends React.Component {
               <Tooltip label={isHistoryOpen ? "Hide History" : "Show History"}>
                 <IconButton
                   variantColor={isHistoryOpen ? "blue" : "green"}
-                  size="md"
+                  size="sm"
                   icon={FaHistory}
                   onClick={() => this.toggleHistory()}
                 />

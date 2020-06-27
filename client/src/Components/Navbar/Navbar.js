@@ -49,7 +49,7 @@ export default class Navbar extends React.Component {
         wrap="wrap"
         marginTop="20px"
         paddingBottom="1rem"
-        ml="10px"
+        ml="20px"
         bg="#212837"
         color="white"
         flex="0 1 auto"
@@ -58,7 +58,7 @@ export default class Navbar extends React.Component {
           <Tooltip label={isSidebarOpen ? "Hide Sidebar" : "Show Sidebar"}>
             <IconButton
               variantColor={isSidebarOpen ? "blue" : "green"}
-              size="md"
+              size="sm"
               icon={isSidebarOpen ? FaTimes : FaBars}
               onClick={toggleSidebar}
             />
