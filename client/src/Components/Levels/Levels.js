@@ -1,7 +1,8 @@
 import React from "react";
+import { Flex } from "@chakra-ui/core";
 
 const Levels = () => {
-    return <div>Hello</div>
-}
+  return <Flex>ldkfjldskjfhl</Flex>;
+};
 
-export default Levels
+export default Levels;
