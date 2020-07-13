@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 # By default, patterns match files in any directory
 # See https://www.atlassian.com/git/tutorials/saving-changes/gitignore
@@ -166,3 +167,10 @@ GitHub.sublime-settings
 
 # Mac OS X files
 .DS_Store
+=======
+server/server
+config/config.json
+
+# Local Netlify folder
+.netlify
+>>>>>>> 5c3916f7dcc4c48d4be66054ebeb78af1789628e

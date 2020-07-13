@@ -1,0 +1,38 @@
+@font-face {
+  font-family: "GorgaGrotesque";
+  src: local("GorgaGrotesque"),
+    url(../../fonts/GorgaGrotesque-Regular.ttf) format("truetype");
+}
+
+.countdown-timer {
+  padding: 5px;
+}
+.countdown-title {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 400;
+}
+.icon-button {
+  color: rgba(255, 255, 255, 0.5);
+}
+.icon-button:hover {
+  color: rgba(255, 255, 255, 1);
+}
+.countdown-buttons > * {
+  margin-left: 20px;
+  padding-top: 5px;
+}
+.countdown {
+  font-family: GorgaGrotesque;
+  letter-spacing: 8px;
+  background-color: #1a202c;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 3.5rem;
+  padding: 15px;
+  padding-left: 41px;
+  padding-right: 41px;
+}
+.countdown-timer > * {
+  align-self: stretch;
+}

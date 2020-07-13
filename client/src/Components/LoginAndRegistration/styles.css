@@ -1,0 +1,26 @@
+.center-box {
+  margin-top: 5vh;
+}
+
+.center-box > * {
+  margin: 10px;
+}
+
+.title {
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  margin-right: -10px;
+}
+
+.form > * {
+  margin-bottom: 20px;
+}
+
+.password-authentication > * {
+  margin-right: 40px;
+  margin-left: 40px;
+}
+.form-subtitle {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}

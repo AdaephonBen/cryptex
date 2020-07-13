@@ -1,0 +1,11 @@
+.title {
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+.navbar-link {
+  color: rgba(255, 255, 255, 0.5);
+}
+.navbar-link:hover {
+  color: rgba(255, 255, 255, 1);
+  text-decoration: none !important;
+}

@@ -22,6 +22,7 @@ type ResponseSuccess struct {
 	Message string `json:"message"`
 }
 
+<<<<<<< HEAD
 type AnswerRequest struct{
 	Email_id string `json:"email_id"`
 	Answer   string `json:"answer"`
@@ -30,3 +31,8 @@ type AnswerRequest struct{
 type AnswerResponse struct{
 	Message  string `json:message`
 }
+=======
+type ResponseMessage struct {
+	Message string `json:"message"`
+}
+>>>>>>> 5c3916f7dcc4c48d4be66054ebeb78af1789628e
