@@ -1,0 +1,63 @@
+.log-book {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10vh;
+}
+
+.log-record {
+  width: 100%;
+}
+
+.log-record > * {
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.log-record-answer {
+  display: inline-block;
+  width: 23%;
+}
+.incorrect {
+  color: #c0392b;
+  font-weight: 700;
+}
+
+.log-record-teamname {
+  display: inline-block;
+  width: 23%;
+}
+
+.log-record-timestamp {
+  display: inline-block;
+  width: 16%;
+}
+
+.log-record-username {
+  display: inline-block;
+  width: 23%;
+}
+
+.log-record-level {
+  display: inline-block;
+  width: 15%;
+}
+
+.correct {
+  color: #27ae60;
+  font-weight: 700;
+  opacity: 70%;
+}
+
+.log-container {
+  height: 70vh;
+}
+
+.log-refresh-icon {
+  padding-left: 4px;
+  padding-right: 3px;
+  padding-bottom: 2px;
+  align-self: flex-end;
+  float: right;
+}
