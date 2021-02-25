@@ -1,12 +1,15 @@
-import { theme } from "@chakra-ui/core";
+import { extendTheme } from "@chakra-ui/react"
 
 // Let's say you want to add custom colors
-const customTheme = {
-  ...theme,
+const customTheme = extendTheme({
+config: {
+initialColorMode: "dark",
+	useSystemColorMode: false,
+	},
   fonts: {
-    heading: "'Lato', sans-serif",
-    body: "'Roboto', sans-serif",
+    heading: "Raleway",
+    body: "Roboto",
   },
-};
+});
 
 export default customTheme;

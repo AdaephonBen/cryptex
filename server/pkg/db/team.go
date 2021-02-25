@@ -3,11 +3,10 @@ package db
 import (
 	"context"
 	"github.com/npalladium/cryptex/server/pkg/logs"
-	"time"
 )
 
 func CreateTeam(ctx context.Context, team_name string, team_score int) {
-	_, err := DB.Exec(ctx, `insert into "Team" (name, score, latest_ans_mod) values ($1, $2, $3)`, team_name, team_score, time.Now())
+	_, err := DB.Exec(ctx, `insert into "Team" (name, score) values ($1, $2)`, team_name, team_score)
 	if err != nil {
 		logs.LogWarning(err, "Unable to create team")
 	}
@@ -41,7 +40,7 @@ func DeleteTeam(ctx context.Context, team_id int) {
 	}
 }
 
-func GetTeamID(ctx context.Context, team_name string) {
+func GetTeamID(ctx context.Context, team_name string) int {
 	var team_id int
 	err := DB.QueryRow(ctx, `select id from "team" where name=$1`, team_name).Scan(&team_id)
 	if err != nil {
@@ -51,10 +50,8 @@ func GetTeamID(ctx context.Context, team_name string) {
 }
 
 func UpdateTeamProgress(ctx context.Context, team_score int) {
-	_, err := DB.Exec(ctx, `update "Team" set score = $1, latest_ans_mod = $2`, team_score, time.Now())
+	_, err := DB.Exec(ctx, `update "Team" set score = $1, latest_ans_mod = NOW()`, team_score)
 	if err != nil {
 		logs.LogWarning(err, "Unable to update team progress")
 	}
 }
-
-func AddInviteToTeam(ctx context.Context)

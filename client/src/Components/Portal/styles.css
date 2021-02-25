@@ -1,17 +1,17 @@
 .portal {
   padding: 10px;
   width: 100vw;
-  background-color: #212837;
+  background-color: var(--background-color);
   max-height: inherit;
 }
 
 .portal-page {
-  background-color: #212837;
+  background-color: var(--background-color);
   min-height: 100vh;
   max-height: 100vh;
 }
 .portal-page {
-  background-color: #212837;
+  background-color: var(--background-color);
   height: 100%;
 }
 .sidebar-toggle > * {

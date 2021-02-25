@@ -23,7 +23,7 @@
 
 .history-feed {
   margin-top: 15px;
-  background-color: #1a202c;
+  background-color: var(--background-color-dark);
   width: 100%;
   height: 100%;
 }

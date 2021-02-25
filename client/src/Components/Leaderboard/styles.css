@@ -9,11 +9,11 @@ table.table {
 	width: 100%;
 	max-width: 100%;
 	border-width: 5px;
-	border-color: #1a202c;
+	border-color: var(--background-color-dark);
 }
 
 table.table > tr {
-	border-color: #212837;
+	border-color: var(--background-color);
 	border-left: 2px;
 	border-right: 2px;
 }
@@ -39,11 +39,11 @@ table.table > tr {
 	padding-bottom: 0.4rem;
 }
 .table tr:nth-child(even) {
-	background-color: #212837;
+	background-color: var(--background-color);
 }
 
 .table tr:nth-child(odd) {
-	background-color: #1a202c;
+	background-color: var(--background-color-dark);
 }
 .filters {
 	margin-top: 1rem;

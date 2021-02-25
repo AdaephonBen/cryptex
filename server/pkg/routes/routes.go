@@ -8,6 +8,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/cors"
 	"github.com/npalladium/cryptex/server/pkg/auth"
+	"github.com/npalladium/cryptex/server/pkg/controllers"
 	"github.com/spf13/viper"
 )
 
@@ -30,12 +31,13 @@ func Init() chi.Router {
 
 	r.Use(middleware.Timeout(60 * time.Second))
 
-	r.Mount("/auth", http.StripPrefix("/auth", auth.Ab.Config.Core.Router))
+	r.Mount("/api/auth", http.StripPrefix("/api/auth", auth.Ab.Config.Core.Router))
 
 	r.Route("/api", func(r chi.Router) {
-		r.Post("/add-user", AddUserHandler)
-		r.Post("/get-question", GetQuestionHandler)
-		r.Get("/get-current-user", GetCurrentUserHandler)
+		r.Route("/admin", func(r chi.Router) {
+			r.Use(controllers.AdminAuthMiddleware)
+			r.Post("/question", controllers.AddQuestionHandler)
+		})
 	})
 
 	return r

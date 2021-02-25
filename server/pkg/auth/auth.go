@@ -77,7 +77,7 @@ func Init() {
 			"register": {emailRule, passwordRule, usernameRule},
 		},
 		Whitelist: map[string][]string{ // for arbitrary values to not get filtered
-			"register": {"email", "name"},
+			"register": {"email", "username"},
 		},
 	}
 

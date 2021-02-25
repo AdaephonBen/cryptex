@@ -7,7 +7,7 @@ import {
   Input,
   FormHelperText,
   Button,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import "./styles.css";
 
 const LandingPage = () => {

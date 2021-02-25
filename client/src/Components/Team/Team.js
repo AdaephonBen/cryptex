@@ -7,7 +7,7 @@ import {
     Avatar,
     Progress,
     Divider,
-} from "@chakra-ui/core"
+} from "@chakra-ui/react"
 import Navbar from "../Navbar/Navbar";
 
 function Team () {

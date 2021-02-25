@@ -10,7 +10,7 @@ import {
   Tooltip,
   Link,
   useToast,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { FaGoogle } from "react-icons/fa";
 import { Redirect } from "react-router-dom";
 import { RegisterAPI, GetCurrentUserAPI } from "../../api/AuthAPI.ts";

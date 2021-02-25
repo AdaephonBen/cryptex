@@ -1,5 +1,6 @@
 import React from "react";
-import { List, ListItem, ListIcon } from "@chakra-ui/core";
+import { List, ListItem, ListIcon } from "@chakra-ui/react";
+import {MdCheckCircle} from "react-icons/md";
 import "./styles.css";
 
 const HintsList = () => {
@@ -7,12 +8,11 @@ const HintsList = () => {
 		<List
 			spacing={1}
 			className="hints-list"
-			style={{ backgroundColor: "#1a202c" }}
 			padding="15px"
 		>
 			<ListItem>
 				<ListIcon
-					icon="check-circle"
+					as={MdCheckCircle}
 					color="green.500"
 				/>
 				Lorem ipsum dolor sit amet, consectetur
@@ -21,7 +21,7 @@ const HintsList = () => {
 			</ListItem>
 			<ListItem>
 				<ListIcon
-					icon="check-circle"
+					as={MdCheckCircle}
 					color="green.500"
 				/>
 				Assumenda, quia temporibus eveniet a libero
@@ -29,7 +29,7 @@ const HintsList = () => {
 			</ListItem>
 			<ListItem>
 				<ListIcon
-					icon="check-circle"
+					as={MdCheckCircle}
 					color="green.500"
 				/>
 				Quidem, ipsam illum quis sed voluptatum quae eum
@@ -37,7 +37,7 @@ const HintsList = () => {
 			</ListItem>
 			<ListItem>
 				<ListIcon
-					icon="check-circle"
+					as={MdCheckCircle}
 					color="green.500"
 				/>
 				Quidem, ipsam illum quis sed voluptatum quae eum

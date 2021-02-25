@@ -1,14 +1,19 @@
 package auth
 
 import (
+	"fmt"
 	"time"
+
+	"github.com/volatiletech/authboss"
 )
 
 // User struct for Auth
 type User struct {
+	authboss.ArbitraryUser
 	ID int
 
 	Email    string
+	Username string
 	Password string
 
 	RecoverSelector    string
@@ -29,7 +34,10 @@ func (u *User) PutPID(pid string) { u.Email = pid }
 func (u *User) PutPassword(password string) { u.Password = password }
 
 // PutEmail into user
-func (u *User) PutEmail(email string) { u.Email = email }
+func (u *User) PutEmail(email string) {
+	fmt.Println(u)
+	u.Email = email
+}
 
 // PutRecoverSelector into user
 func (u *User) PutRecoverSelector(token string) { u.RecoverSelector = token }
@@ -54,6 +62,12 @@ func (u *User) PutOAuth2RefreshToken(refreshToken string) { u.OAuth2RefreshToken
 
 // PutOAuth2Expiry into user
 func (u *User) PutOAuth2Expiry(expiry time.Time) { u.OAuth2Expiry = expiry }
+
+func (u *User) PutArbitrary(arbitrary map[string]string) {
+	u.Username = arbitrary["username"]
+}
+
+func (u *User) GetArbitrary() map[string]string { return map[string]string{"username": u.Username} }
 
 // GetPID from user
 func (u User) GetPID() string { return u.Email }

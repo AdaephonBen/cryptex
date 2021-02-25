@@ -1,15 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
+	Box,
   Tooltip,
   IconButton,
   Flex,
   Text,
   Link,
   Heading,
-} from "@chakra-ui/core";
+	Image
+} from "@chakra-ui/react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./styles.css";
+import logo from "../../assets/512x512notext.png";
 
 const MenuItems = ({ children }) => (
   <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
@@ -47,29 +50,34 @@ export default class Navbar extends React.Component {
         align="center"
         justify="space-between"
         wrap="wrap"
-        marginTop="20px"
-        paddingBottom="1rem"
         ml="20px"
-        bg="#212837"
         color="white"
         flex="0 1 auto"
+		className="container"
       >
         <Flex flex="1 0 0">
           <Tooltip label={isSidebarOpen ? "Hide Sidebar" : "Show Sidebar"}>
             <IconButton
-              variantColor={isSidebarOpen ? "blue" : "green"}
+              colorScheme={isSidebarOpen ? "#d8be00" : "green"}
               size="sm"
-              icon={isSidebarOpen ? FaTimes : FaBars}
+              icon={isSidebarOpen ? <FaTimes /> : <FaBars />}
               onClick={toggleSidebar}
             />
           </Tooltip>
         </Flex>
 
         <Flex>
-          <Heading as="h1" size="lg" className="title">
+<Image src={logo} boxSize="100px" style={{
+				filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5))"
+			}}/>
+
+          <Heading as="h1" size="lg" className="title" style={{
+			  color: "#40e0d0"
+		  }}>
             CRYPTEX
           </Heading>
-        </Flex>
+ 
+			        </Flex>
 
         {/* <Box display={["block", "none"]} onClick={() => this.handleToggle()}>
           <svg

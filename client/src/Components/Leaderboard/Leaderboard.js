@@ -8,7 +8,7 @@ import {
   FormControl,
   IconButton,
   Heading,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
 import Table from "./table";
 import "./styles.css";

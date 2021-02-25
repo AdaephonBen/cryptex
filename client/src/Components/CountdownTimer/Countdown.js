@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Text } from "@chakra-ui/core";
+import { Flex, Text } from "@chakra-ui/react";
 import Countdown from "./CountdownTimer";
 import "../../fonts/GorgaGrotesque-Regular.ttf";
 import "./styles.css";
@@ -11,7 +11,6 @@ const CountdownTimer = () => {
       paddingY="20px"
       paddingX="10px"
       flexDirection="column"
-      backgroundColor="#212837"
     >
       <Flex className="countdown-header" justifyContent="space-between">
         <Text className="countdown-title">Countdown</Text>

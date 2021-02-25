@@ -6,6 +6,7 @@
 
 .countdown-timer {
   padding: 5px;
+  background-color: var(--background-color);
 }
 .countdown-title {
   text-transform: uppercase;
@@ -25,7 +26,7 @@
 .countdown {
   font-family: GorgaGrotesque;
   letter-spacing: 8px;
-  background-color: #1a202c;
+  background-color: var(--background-color-dark);
   text-align: center;
   margin-top: 20px;
   font-size: 3.5rem;

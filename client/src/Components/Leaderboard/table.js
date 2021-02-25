@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Text, Collapse, Button } from "@chakra-ui/core";
+import { Text, Collapse, Button } from "@chakra-ui/react";
 import "./styles.css";
 
 function Record(props) {

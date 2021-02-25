@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Text, Link, Tooltip } from "@chakra-ui/core";
+import { Flex, Text, Link, Tooltip } from "@chakra-ui/react";
 import { FaSyncAlt } from "react-icons/fa";
 import HintsList from "./HintsList";
 import "./styles.css";

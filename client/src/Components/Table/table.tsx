@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Box, PseudoBox, BoxProps, PseudoBoxProps } from "@chakra-ui/core";
+import { Box, BoxProps } from "@chakra-ui/react";
 import React, { MouseEvent } from "react";
 
 const BOX_SHADOW = "0 0px 0px 0 rgba(0, 0, 0, 0.1)";
@@ -68,19 +68,19 @@ export const Tfoot: React.FC<BoxProps> = ({ children, ...rest }) => {
 
 export const Tr: React.FC<BoxProps> = ({ children, ...rest }) => {
   return (
-    <PseudoBox as="tr" my={1} {...rest}>
+    <Box as="tr" my={1} {...rest}>
       {children}
-    </PseudoBox>
+    </Box>
   );
 };
 
-interface ThProps extends PseudoBoxProps {
+interface ThProps extends BoxProps {
   onClick?: (event: MouseEvent) => void;
 }
 
 export const Th: React.FC<ThProps> = ({ children, onClick, ...rest }) => {
   return (
-    <PseudoBox
+    <Box
       as="th"
       p={4}
       borderBottom="1px"
@@ -91,12 +91,12 @@ export const Th: React.FC<ThProps> = ({ children, onClick, ...rest }) => {
       {...rest}
     >
       {children}
-    </PseudoBox>
+    </Box>
   );
 };
 
 export const Td: React.FC<ThProps> = ({ children, onClick, ...rest }) => (
-  <PseudoBox
+  <Box
     as="td"
     p={4}
     // borderBottom="1px"
@@ -106,7 +106,7 @@ export const Td: React.FC<ThProps> = ({ children, onClick, ...rest }) => (
     {...rest}
   >
     {children}
-  </PseudoBox>
+  </Box>
 );
 
 export default {

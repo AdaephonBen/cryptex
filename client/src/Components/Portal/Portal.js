@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, IconButton, Tooltip } from "@chakra-ui/core";
+import { Flex, IconButton, Tooltip } from "@chakra-ui/react";
 import { FaTable, FaStopwatch, FaInfo, FaHistory } from "react-icons/fa";
 // import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../Navbar/Navbar";
@@ -86,10 +86,12 @@ export default class Portal extends React.Component {
                 }
               >
                 <IconButton
-                  variantColor={isLeaderboardOpen ? "blue" : "green"}
                   size="sm"
-                  icon={FaTable}
+                  icon={<FaTable />}
                   onClick={() => this.toggleLeaderboard()}
+					style={{
+						color: "#FFD500"
+					}}
                 />
               </Tooltip>
               <Tooltip
@@ -100,26 +102,36 @@ export default class Portal extends React.Component {
                 }
               >
                 <IconButton
-                  variantColor={isCountdownTimerOpen ? "blue" : "green"}
                   size="sm"
-                  icon={FaStopwatch}
+                  icon={<FaStopwatch />}
                   onClick={() => this.toggleTimer()}
+					style={{
+						color: "#FFD500"
+					}}
+    
                 />
               </Tooltip>
               <Tooltip label={isHintsOpen ? "Hide Hints" : "Show Hints"}>
                 <IconButton
-                  variantColor={isHintsOpen ? "blue" : "green"}
                   size="sm"
-                  icon={FaInfo}
+                  icon={<FaInfo />}
+					style={{
+						color: "#FFD500"
+					}}
+ 
                   onClick={() => this.toggleHints()}
                 />
               </Tooltip>
               <Tooltip label={isHistoryOpen ? "Hide History" : "Show History"}>
                 <IconButton
-                  variantColor={isHistoryOpen ? "blue" : "green"}
                   size="sm"
-                  icon={FaHistory}
+                  icon={<FaHistory />}
                   onClick={() => this.toggleHistory()}
+			  	style={{
+						color: "#FFD500"
+					}}
+ 
+
                 />
               </Tooltip>
             </Flex>
@@ -246,8 +258,8 @@ export default class Portal extends React.Component {
                   style={{
                     minHeight: "100%",
                     maxHeight: "100%",
-                    maxWidth: "25vw",
-                    minWidth: "25vw",
+                    maxWidth: "15vw",
+                    minWidth: "15vw",
                   }}
                   flexBasis="10%"
                   justifyContent="space-between"
