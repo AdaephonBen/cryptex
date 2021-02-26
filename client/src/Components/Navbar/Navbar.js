@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
-	Box,
+  Box,
   Tooltip,
   IconButton,
   Flex,
   Text,
   Link,
   Heading,
-	Image
+  Image,
 } from "@chakra-ui/react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./styles.css";
@@ -53,9 +53,13 @@ export default class Navbar extends React.Component {
         ml="20px"
         color="white"
         flex="0 1 auto"
-		className="container"
+        className="container"
       >
-        <Flex flex="1 0 0">
+        <Flex
+          flexGrow={{ base: "0", md: "1", lg: "1" }}
+          flexShrink="0"
+          flexBasis=" 0"
+        >
           <Tooltip label={isSidebarOpen ? "Hide Sidebar" : "Show Sidebar"}>
             <IconButton
               colorScheme={isSidebarOpen ? "#d8be00" : "green"}
@@ -67,17 +71,26 @@ export default class Navbar extends React.Component {
         </Flex>
 
         <Flex>
-<Image src={logo} boxSize="100px" style={{
-				filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5))"
-			}}/>
+          <Image
+            src={logo}
+            boxSize="100px"
+            style={{
+              filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5))",
+            }}
+          />
 
-          <Heading as="h1" size="lg" className="title" style={{
-			  color: "#40e0d0"
-		  }}>
+          <Heading
+            as="h1"
+            size="lg"
+            className="title"
+            style={{
+              color: "#40e0d0",
+            }}
+            paddingRight={{ base: "5px", md: "20px", lg: "25px" }}
+          >
             CRYPTEX
           </Heading>
- 
-			        </Flex>
+        </Flex>
 
         {/* <Box display={["block", "none"]} onClick={() => this.handleToggle()}>
           <svg

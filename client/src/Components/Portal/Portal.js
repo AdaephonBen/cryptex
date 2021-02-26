@@ -18,7 +18,7 @@ export default class Portal extends React.Component {
     this.state = {
       isCountdownTimerOpen: true,
       isLeaderboardOpen: true,
-        isHintsOpen: true,
+      isHintsOpen: true,
       isHistoryOpen: true,
       isSidebarOpen: false,
     };
@@ -60,9 +60,9 @@ export default class Portal extends React.Component {
     return (
       <Flex
         className="portal-page"
-        height="100vh"
+        height={{ base: "none", md: "100vh", lg: "100vh" }}
         flexDir="column"
-        maxHeight="100vh"
+        maxHeight={{ base: "none", md: "100vh", lg: "100vh" }}
       >
         <Navbar
           toggleSidebar={() => {
@@ -89,9 +89,9 @@ export default class Portal extends React.Component {
                   size="sm"
                   icon={<FaTable />}
                   onClick={() => this.toggleLeaderboard()}
-					style={{
-						color: "#FFD500"
-					}}
+                  style={{
+                    color: "#FFD500",
+                  }}
                 />
               </Tooltip>
               <Tooltip
@@ -105,20 +105,18 @@ export default class Portal extends React.Component {
                   size="sm"
                   icon={<FaStopwatch />}
                   onClick={() => this.toggleTimer()}
-					style={{
-						color: "#FFD500"
-					}}
-    
+                  style={{
+                    color: "#FFD500",
+                  }}
                 />
               </Tooltip>
               <Tooltip label={isHintsOpen ? "Hide Hints" : "Show Hints"}>
                 <IconButton
                   size="sm"
                   icon={<FaInfo />}
-					style={{
-						color: "#FFD500"
-					}}
- 
+                  style={{
+                    color: "#FFD500",
+                  }}
                   onClick={() => this.toggleHints()}
                 />
               </Tooltip>
@@ -127,11 +125,9 @@ export default class Portal extends React.Component {
                   size="sm"
                   icon={<FaHistory />}
                   onClick={() => this.toggleHistory()}
-			  	style={{
-						color: "#FFD500"
-					}}
- 
-
+                  style={{
+                    color: "#FFD500",
+                  }}
                 />
               </Tooltip>
             </Flex>
@@ -146,13 +142,21 @@ export default class Portal extends React.Component {
             }}
             justifyContent="space-between"
           >
-            <Flex overflowY="auto" flexGrow="1">
+            <Flex
+              overflowY="auto"
+              flexGrow="1"
+              flexDirection={{ base: "column", md: "column", lg: "row" }}
+            >
               <Flex
                 flexDirection="column"
                 style={{
                   minHeight: "100%",
                   maxHeight: "100%",
-                  maxWidth: "100%",
+                }}
+                maxWidth={{
+                  base: "none",
+                  md: "none",
+                  lg: "100%",
                 }}
                 justifyContent="space-between"
                 flexGrow="1"
@@ -160,8 +164,12 @@ export default class Portal extends React.Component {
                 <Flex
                   className="first-row"
                   flexGrow="1"
-                  style={{
-                    overflowY: "auto",
+                  //overflowY= {{base:"visible",lg:"auto"}}
+
+                  flexDirection={{
+                    base: "column-reverse",
+                    md: "row",
+                    lg: "row",
                   }}
                 >
                   {/* <AnimatePresence> */}
@@ -193,7 +201,10 @@ export default class Portal extends React.Component {
                   {/* </AnimatePresence> */}
                   <Level />
                 </Flex>
-                <Flex className="second-row">
+                <Flex
+                  className="second-row"
+                  flexDirection={{ base: "column", md: "row", lg: "row" }}
+                >
                   {/* <AnimatePresence> */}
                   {isCountdownTimerOpen && (
                     // <MotionFlex
