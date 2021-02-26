@@ -12,8 +12,13 @@ function Record(props) {
     <tr className="record">
       <td>{rank}</td>
       <td>
-        <Collapse isOpen={show} startingHeight={25}>
-          <Button variant="link" onClick={handleToggle} marginBottom="8px" marginTop="2px">
+        <Collapse in={show} startingHeight={25}>
+          <Button
+            variant="link"
+            onClick={handleToggle}
+            marginBottom="8px"
+            marginTop="2px"
+          >
             {team}
           </Button>
           {members}
