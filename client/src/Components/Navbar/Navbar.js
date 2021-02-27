@@ -11,6 +11,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./styles.css";
 import logo from "../../assets/512x512notext.png";
 
@@ -33,7 +34,37 @@ function Navbar(props) {
   const handleToggle = () => {
     setshowNavbar(!showNavbar);
   };
+  const domain = "YOUR_DOMAIN_HERE"
   const { isSidebarOpen, toggleSidebar } = props;
+  const {
+    user,
+    isAuthenticated,
+    loginWithRedirect,
+    logout,
+    getAccessTokenSilently
+  } = useAuth0();
+  const logoutWithRedirect = () =>
+  logout({
+    returnTo: window.location.origin,
+  });
+  const getUserMetadata = async () => {
+    const domain = "YOUR_DOMAIN_HERE";
+
+    try {
+
+      const accessToken = await getAccessTokenSilently({
+        audience: `https://${domain}/api/v2/`,
+        scope: "read:current_user",
+      });
+      accessToken.then(console.log(accessToken));
+      
+    } catch (error) {
+     console.log(error); 
+    }
+  }/*
+  if(isAuthenticated){
+    console.log(user);
+  }*/
   return (
     <Flex
       as="nav"
@@ -108,7 +139,7 @@ function Navbar(props) {
           </Link>
         </MenuItems>
         <MenuItems>
-          <Link href="google.com" className="navbar-link">
+          <Link onClick={()=>getUserMetadata()} className="navbar-link">
             Leaderboard
           </Link>
         </MenuItems>
@@ -117,16 +148,21 @@ function Navbar(props) {
             Rules
           </Link>
         </MenuItems>
-        <MenuItems>
+        {isAuthenticated && (<MenuItems>
           <Link href="google.com" className="navbar-link">
             Levels
           </Link>
-        </MenuItems>
-        <MenuItems>
-          <Link href="google.com" className="navbar-link">
-            Sign Out
+        </MenuItems>)}
+        {isAuthenticated && (<MenuItems>
+            <Link href={"/google.com"} className="navbar-link">
+              Sign Out
+            </Link>
+          </MenuItems>)}
+        {!isAuthenticated && (<MenuItems>
+          <Link href={() => loginWithRedirect()} className="navbar-link">
+            Sign In
           </Link>
-        </MenuItems>
+        </MenuItems>)}
       </Flex>
     </Flex>
   );

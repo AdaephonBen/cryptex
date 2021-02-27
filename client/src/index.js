@@ -3,11 +3,20 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
+  <Auth0Provider 
+  domain="YOUR_DOMAIN_HERE"
+  clientId="YOUR_CLIENT_ID"
+  audience="YOUR_AUD"
+  scope="read:current_user update:current_user_metadata"
+  redirectUri={window.location.origin+"/portal"}
+  >
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+  </Auth0Provider>,
   document.getElementById("root")
 );
 

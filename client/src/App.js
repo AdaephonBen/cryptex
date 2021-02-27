@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
+import { useAuth0 } from "@auth0/auth0-react";
 import Portal from "./Components/Portal/Portal";
 import Login from "./Components/LoginAndRegistration/Login";
 import Register from "./Components/LoginAndRegistration/Register";
@@ -1227,6 +1228,13 @@ const Fonts = () => (
 );
 
 function App() {
+  const { isLoading, error } = useAuth0();
+  if(isLoading){
+    return <div>Loading...Please Wait.</div>
+  }
+  if(error) {
+    return <div>Oops... {error.message}</div>;
+  }
   return (
     <ChakraProvider theme={customTheme}>
 	  <Fonts />

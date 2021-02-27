@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Redirect } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
+import { useAuth0 } from "@auth0/auth0-react";
 import { LoginAPI, GetCurrentUserAPI } from "../../api/AuthAPI.ts";
 import "./styles.css";
 
@@ -20,7 +21,17 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(null);
   const toast = useToast();
-
+  const {
+    user,
+    isAuthenticated,
+    loginWithRedirect,
+    logout,
+  } = useAuth0();
+  const logoutWithRedirect = () =>
+  logout({
+    returnTo: window.location.origin,
+  });
+  
   const login = async (e) => {
     e.preventDefault();
     const response = await LoginAPI(emailID, password);
@@ -66,7 +77,8 @@ const Register = () => {
         >
           <Tooltip label="Sign in with your Google Account">
             <Link
-              href={`${process.env.REACT_APP_BACKEND_URL}/auth/oauth2/google`}
+              //href={`${process.env.REACT_APP_BACKEND_URL}/auth/oauth2/google`}
+              onClick = {loginWithRedirect}
             >
               <Button
                 variantColor="green"

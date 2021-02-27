@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Flex, IconButton, Tooltip } from "@chakra-ui/react";
+import { Flex, IconButton, Tooltip, Text } from "@chakra-ui/react";
 import { FaTable, FaStopwatch, FaInfo, FaHistory } from "react-icons/fa";
 // import { motion, AnimatePresence } from "framer-motion";
+import { useAuth0 } from "@auth0/auth0-react";
 import Navbar from "../Navbar/Navbar";
 import Level from "../Question/index";
 import MiniLeaderboard from "../MiniLeaderboard/MiniLeaderboard";
@@ -13,6 +14,12 @@ import "./styles.css";
 // const MotionFlex = motion.custom(Flex);
 
 function Portal(props) {
+  const {
+    user,
+    isAuthenticated,
+    loginWithRedirect,
+    logout,
+  } = useAuth0();
   const [isCountdownTimerOpen, setisCountdownTimerOpen] = useState(true);
   const [isLeaderboardOpen, setisLeaderboardOpen] = useState(true);
   const [isHintsOpen, setisHintsOpen] = useState(true);
@@ -37,6 +44,9 @@ function Portal(props) {
   const toggleSidebar = () => {
     setisSidebarOpen(!isSidebarOpen);
   };
+  if(isAuthenticated){
+    console.log(JSON.stringify(user,null,2));
+  }
   return (
     <Flex
       className="portal-page"
@@ -254,8 +264,10 @@ function Portal(props) {
                 }}
                 flexBasis="10%"
                 justifyContent="space-between"
-              >
+              >.
                 <History />
+                {isAuthenticated && <Text>{user.name}</Text>}
+                {isAuthenticated && <Text>{JSON.stringify(user,null,2)}</Text>}
               </Flex>
             )}
           </Flex>
