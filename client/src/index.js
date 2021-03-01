@@ -7,9 +7,9 @@ import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
   <Auth0Provider 
-  domain="YOUR_DOMAIN_HERE"
-  clientId="YOUR_CLIENT_ID"
-  audience="YOUR_AUD"
+  domain={process.env.REACT_APP_DOMAIN}
+  clientId={process.env.REACT_APP_CLIENT_ID}
+  audience={process.env.REACT_APP_AUDIENCE}
   scope="read:current_user update:current_user_metadata"
   redirectUri={window.location.origin+"/portal"}
   >

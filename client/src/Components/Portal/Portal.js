@@ -108,7 +108,7 @@ function Portal(props) {
                   color: "#FFD500",
                 }}
                 onClick={() => toggleHints()}
-              />
+              />;
             </Tooltip>
             <Tooltip label={isHistoryOpen ? "Hide History" : "Show History"}>
               <IconButton

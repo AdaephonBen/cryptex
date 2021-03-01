@@ -34,7 +34,6 @@ function Navbar(props) {
   const handleToggle = () => {
     setshowNavbar(!showNavbar);
   };
-  const domain = "YOUR_DOMAIN_HERE"
   const { isSidebarOpen, toggleSidebar } = props;
   const {
     user,
@@ -48,7 +47,7 @@ function Navbar(props) {
     returnTo: window.location.origin,
   });
   const getUserMetadata = async () => {
-    const domain = "YOUR_DOMAIN_HERE";
+    const domain = process.env.REACT_APP_DOMAIN;
 
     try {
 
