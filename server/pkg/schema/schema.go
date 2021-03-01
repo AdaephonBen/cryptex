@@ -30,11 +30,3 @@ type AdminCredentials struct {
 	Admin_Username string `json:"username"`
 	Admin_Password string `json:"password"`
 }
-
-type NewQuestion struct {
-	QuestionNumber int    `json:"question_number"`
-	Question       string `json:"question"`
-	QuestionType   int    `json:"question_type"`
-	Answer         string `json:"answer"`
-	ReqScore       int    `json:"req_score"`
-}

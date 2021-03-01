@@ -5,9 +5,45 @@ import (
 	"github.com/npalladium/cryptex/server/pkg/logs"
 )
 
-func SetTeamID(ctx context.Context, team_id int, user_id int) {
-	_, err := DB.Exec(ctx, `update "User" set team_id=$1, latest_team_mod=NOW() where id=$2`, team_id, user_id)
+type LeaderboardUser struct {
+	Username       string `json:"username"`
+	QuestionNumber string `json:"question_number"`
+}
+
+var Leaderboard []LeaderboardUser
+
+func CreateNewUser(ctx context.Context, username string, email string) error {
+	_, err := DB.Exec(ctx, `INSERT INTO "User" (email_id, username) VALUES ($1, $2)`, email, username)
 	if err != nil {
-		logs.LogWarning(err, "Unable to set Team ID for user")
+		logs.LogWarning(err, "Unable to create new user")
+	}
+	return err
+}
+
+func IncrementUserLevel(ctx context.Context, email string) error {
+	_, err := DB.Exec(ctx, `UPDATE "User" SET question_number = question_number + 1 WHERE email_id=$1`, email)
+	if err != nil {
+		logs.LogWarning(err, "Unable to increment user level")
+	}
+	return err
+}
+
+func UpdateLeaderboard() {
+	Leaderboard = nil
+	rows, err := DB.Query(context.Background(), `SELECT username, question_number from "User" ORDER BY question_number DESC, last_modified ASC`)
+	if err != nil {
+		logs.LogError(err, "Unable to update leaderboard")
+	}
+	defer rows.Close()
+	for rows.Next() {
+		current := new(LeaderboardUser)
+		err = rows.Scan(&current)
+		if err != nil {
+			logs.LogError(err, "Unable to update leaderboard")
+		}
+		Leaderboard = append(Leaderboard, *current)
+	}
+	if rows.Err() != nil {
+		logs.LogError(err, "Unable to update leaderboard")
 	}
 }

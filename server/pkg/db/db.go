@@ -18,13 +18,5 @@ func Init() {
 	if err != nil {
 		logs.LogError(err, "Unable to connect to DB")
 	}
-	if viper.GetBool("create_tables") {
-		logs.LogStatus("Creating tables...")
-		_, errCreateDB := DB.Exec(context.Background(), Schema)
-		if errCreateDB != nil {
-			logs.LogError(errCreateDB, "Unable to create tables")
-		}
-		logs.LogStatus("Created tables. ")
-	}
 	logs.LogStatus("Successfully connected to DB. ")
 }
