@@ -6,7 +6,6 @@ body {
   margin: 0;
   min-height: 100vh;
   min-width: 100vh;
-  background-image: url('./Components/fiber.jpg');
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
