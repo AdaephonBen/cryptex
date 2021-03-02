@@ -8,7 +8,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/cors"
 	"github.com/npalladium/cryptex/server/pkg/controllers"
-	"github.com/spf13/viper"
+	// "github.com/spf13/viper"
 )
 
 func Init(authmiddleware *jwtmiddleware.JWTMiddleware) chi.Router {
@@ -20,8 +20,9 @@ func Init(authmiddleware *jwtmiddleware.JWTMiddleware) chi.Router {
 	r.Use(middleware.Recoverer)
 
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{viper.GetString("root_url")},
-		AllowedMethods:   []string{"GET", "POST", "DELETE"},
+		AllowedOrigins:   []string{"http://localhost:3000"},
+		AllowedMethods:   []string{"GET", "POST", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"X-PINGOTHER", "Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 		AllowCredentials: true,
 	})
 

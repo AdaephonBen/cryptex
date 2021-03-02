@@ -1,34 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { Flex, IconButton, Tooltip, Text } from "@chakra-ui/react";
 import { FaTable, FaStopwatch, FaInfo, FaHistory } from "react-icons/fa";
 // import { motion, AnimatePresence } from "framer-motion";
-import { useAuth0 } from "@auth0/auth0-react";
-import Navbar from "../Navbar/Navbar";
 import Level from "../Question/index";
 import MiniLeaderboard from "../MiniLeaderboard/MiniLeaderboard";
 import CountdownTimer from "../CountdownTimer/Countdown";
 import Hints from "../Hints/Hints";
-import History from "../History/History";
+import { callApi } from "../../api/auth";
 import "./styles.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import Loading from "../LoadingPage/Loading";
+import History from "../History/History";
 
 // const MotionFlex = motion.custom(Flex);
+const API_URL = process.env.REACT_APP_API_URL;
 
-function Portal(props) {
-  const {
-    user,
-    isAuthenticated,
-    loginWithRedirect,
-    logout,
-  } = useAuth0();
+const Portal = () => {
+  const history = useHistory();
   const [isCountdownTimerOpen, setisCountdownTimerOpen] = useState(true);
   const [isLeaderboardOpen, setisLeaderboardOpen] = useState(true);
   const [isHintsOpen, setisHintsOpen] = useState(true);
   const [isHistoryOpen, setisHistoryOpen] = useState(true);
-  const [isSidebarOpen, setisSidebarOpen] = useState(false);
 
   const toggleLeaderboard = () => {
     setisLeaderboardOpen(!isLeaderboardOpen);
   };
+
+  const { getAccessTokenSilently } = useAuth0();
 
   const toggleTimer = () => {
     setisCountdownTimerOpen(!isCountdownTimerOpen);
@@ -41,12 +40,23 @@ function Portal(props) {
     setisHistoryOpen(!isHistoryOpen);
   };
 
-  const toggleSidebar = () => {
-    setisSidebarOpen(!isSidebarOpen);
-  };
-  if(isAuthenticated){
-    console.log(JSON.stringify(user,null,2));
-  }
+  useEffect(() => {
+    const getUser = async () => {
+      const accessToken = await getAccessTokenSilently({
+        audience: process.env.REACT_APP_AUDIENCE,
+      });
+      const res = await callApi(accessToken, `${API_URL}question`, {
+        fetchOptions: {
+          method: "POST",
+        },
+      });
+      if (res !== null) {
+        history.push("/portal");
+      }
+    };
+    getUser();
+  }, []);
+
   return (
     <Flex
       className="portal-page"
@@ -54,74 +64,70 @@ function Portal(props) {
       flexDir="column"
       maxHeight={{ base: "none", md: "100vh", lg: "100vh" }}
     >
-      <Navbar
-        toggleSidebar={() => {
-          toggleSidebar();
-        }}
-        isSidebarOpen={isSidebarOpen}
-      />
       <Flex className="portal" flexGrow={1} overflowY="auto">
-        {isSidebarOpen && (
-          <Flex
-            className="sidebar-toggle"
-            flexDirection="column"
-            ml="10px"
-            mr="10px"
+        <Flex
+          className="sidebar-toggle"
+          flexDirection="column"
+          ml="5px"
+          mr="5px"
+        >
+          <Tooltip
+            label={
+              isLeaderboardOpen
+                ? "Hide the Leaderboard"
+                : "Show the Leaderboard"
+            }
           >
-            <Tooltip
-              label={
-                isLeaderboardOpen
-                  ? "Hide the Leaderboard"
-                  : "Show the Leaderboard"
-              }
-            >
-              <IconButton
-                size="sm"
-                icon={<FaTable />}
-                onClick={() => toggleLeaderboard()}
-                style={{
-                  color: "#FFD500",
-                }}
-              />
-            </Tooltip>
-            <Tooltip
-              label={
-                isCountdownTimerOpen
-                  ? "Hide the Countdown Timer"
-                  : "Show the Countdown Timer"
-              }
-            >
-              <IconButton
-                size="sm"
-                icon={<FaStopwatch />}
-                onClick={() => toggleTimer()}
-                style={{
-                  color: "#FFD500",
-                }}
-              />
-            </Tooltip>
-            <Tooltip label={isHintsOpen ? "Hide Hints" : "Show Hints"}>
-              <IconButton
-                size="sm"
-                icon={<FaInfo />}
-                style={{
-                  color: "#FFD500",
-                }}
-                onClick={() => toggleHints()}
-              />;
-            </Tooltip>
-            <Tooltip label={isHistoryOpen ? "Hide History" : "Show History"}>
-              <IconButton
-                size="sm"
-                icon={<FaHistory />}
-                onClick={() => toggleHistory()}
-                style={{
-                  color: "#FFD500",
-                }}
-              />
-            </Tooltip>
-          </Flex>
-        )}
+            <IconButton
+              colorScheme={isLeaderboardOpen ? "gray" : ""}
+              size="sm"
+              icon={<FaTable />}
+              onClick={() => toggleLeaderboard()}
+              style={{
+                color: "#FFD500",
+              }}
+            />
+          </Tooltip>
+          <Tooltip
+            label={
+              isCountdownTimerOpen
+                ? "Hide the Countdown Timer"
+                : "Show the Countdown Timer"
+            }
+          >
+            <IconButton
+              size="sm"
+              colorScheme={isCountdownTimerOpen ? "gray" : ""}
+              icon={<FaStopwatch />}
+              onClick={() => toggleTimer()}
+              style={{
+                color: "#FFD500",
+              }}
+            />
+          </Tooltip>
+          <Tooltip label={isHintsOpen ? "Hide Hints" : "Show Hints"}>
+            <IconButton
+              size="sm"
+              icon={<FaInfo />}
+              colorScheme={isHintsOpen ? "gray" : ""}
+              style={{
+                color: "#FFD500",
+              }}
+              onClick={() => toggleHints()}
+            />
+          </Tooltip>
+          <Tooltip label={isHistoryOpen ? "Hide History" : "Show History"}>
+            <IconButton
+              size="sm"
+              colorScheme={isHistoryOpen ? "gray" : ""}
+              icon={<FaHistory />}
+              onClick={() => toggleHistory()}
+              style={{
+                color: "#FFD500",
+              }}
+            />
+          </Tooltip>
+        </Flex>
         <Flex
           flexDirection="column"
           flexGrow="1"
@@ -264,10 +270,8 @@ function Portal(props) {
                 }}
                 flexBasis="10%"
                 justifyContent="space-between"
-              >.
+              >
                 <History />
-                {isAuthenticated && <Text>{user.name}</Text>}
-                {isAuthenticated && <Text>{JSON.stringify(user,null,2)}</Text>}
               </Flex>
             )}
           </Flex>
@@ -275,6 +279,6 @@ function Portal(props) {
       </Flex>
     </Flex>
   );
-}
+};
 
 export default Portal;

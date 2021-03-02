@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/joho/godotenv"
 	"github.com/npalladium/cryptex/server/pkg/auth"
 	"github.com/npalladium/cryptex/server/pkg/config"
 	"github.com/npalladium/cryptex/server/pkg/cronjobs"
@@ -14,6 +15,10 @@ import (
 )
 
 func Init() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Println("No .env")
+	}
 	logs.Init()
 	config.Init()
 	fmt.Println(viper.GetString("auth0_iss"))

@@ -7,7 +7,7 @@ import (
 
 type LeaderboardUser struct {
 	Username       string `json:"username"`
-	QuestionNumber string `json:"question_number"`
+	QuestionNumber int    `json:"question_number"`
 }
 
 var Leaderboard []LeaderboardUser
@@ -37,7 +37,7 @@ func UpdateLeaderboard() {
 	defer rows.Close()
 	for rows.Next() {
 		current := new(LeaderboardUser)
-		err = rows.Scan(&current)
+		err = rows.Scan(&current.Username, &current.QuestionNumber)
 		if err != nil {
 			logs.LogError(err, "Unable to update leaderboard")
 		}

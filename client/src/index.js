@@ -4,18 +4,19 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
-  <Auth0Provider 
-  domain={process.env.REACT_APP_DOMAIN}
-  clientId={process.env.REACT_APP_CLIENT_ID}
-  audience={process.env.REACT_APP_AUDIENCE}
-  scope="read:current_user update:current_user_metadata"
-  redirectUri={window.location.origin+"/portal"}
+  <Auth0Provider
+    domain={process.env.REACT_APP_DOMAIN}
+    clientId={process.env.REACT_APP_CLIENT_ID}
+    redirectUri={window.location.origin + "/portal"}
   >
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
   </Auth0Provider>,
   document.getElementById("root")
 );

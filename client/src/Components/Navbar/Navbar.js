@@ -1,17 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import {
-  Box,
-  Tooltip,
-  IconButton,
-  Flex,
-  Text,
-  Link,
-  Heading,
-  Image,
-} from "@chakra-ui/react";
-import { FaBars, FaTimes } from "react-icons/fa";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Flex, Text, Link, Heading, Image } from "@chakra-ui/react";
 import "./styles.css";
 import logo from "../../assets/512x512notext.png";
 
@@ -30,40 +19,10 @@ MenuItems.defaultProps = {
 };
 
 function Navbar(props) {
-  const [showNavbar, setshowNavbar] = useState(false);
-  const handleToggle = () => {
-    setshowNavbar(!showNavbar);
-  };
-  const { isSidebarOpen, toggleSidebar } = props;
-  const {
-    user,
-    isAuthenticated,
-    loginWithRedirect,
-    logout,
-    getAccessTokenSilently
-  } = useAuth0();
-  const logoutWithRedirect = () =>
-  logout({
-    returnTo: window.location.origin,
-  });
-  const getUserMetadata = async () => {
-    const domain = process.env.REACT_APP_DOMAIN;
+  const [showNavbar, setShowNavbar] = useState(false);
 
-    try {
+  const { isAuthenticated, loginWithRedirect, logout } = props;
 
-      const accessToken = await getAccessTokenSilently({
-        audience: `https://${domain}/api/v2/`,
-        scope: "read:current_user",
-      });
-      accessToken.then(console.log(accessToken));
-      
-    } catch (error) {
-     console.log(error); 
-    }
-  }/*
-  if(isAuthenticated){
-    console.log(user);
-  }*/
   return (
     <Flex
       as="nav"
@@ -75,22 +34,6 @@ function Navbar(props) {
       flex="0 1 auto"
       className="container"
     >
-      <Flex
-        flexGrow={{ base: "0", md: "1", lg: "1" }}
-        flexShrink="0"
-        flexBasis=" 0"
-      >
-        <Tooltip label={isSidebarOpen ? "Hide Sidebar" : "Show Sidebar"}>
-          <IconButton
-            colorScheme={isSidebarOpen ? "#d8be00" : "green"}
-            size="sm"
-            icon={isSidebarOpen ? <FaTimes /> : <FaBars />}
-            onClick={toggleSidebar}
-            color={isSidebarOpen ? "#FFD500" : "#001C27"}
-          />
-        </Tooltip>
-      </Flex>
-
       <Flex>
         <Image
           src={logo}
@@ -138,30 +81,34 @@ function Navbar(props) {
           </Link>
         </MenuItems>
         <MenuItems>
-          <Link onClick={()=>getUserMetadata()} className="navbar-link">
-            Leaderboard
-          </Link>
+          <Link className="navbar-link">Leaderboard</Link>
         </MenuItems>
         <MenuItems>
           <Link href="google.com" className="navbar-link">
             Rules
           </Link>
         </MenuItems>
-        {isAuthenticated && (<MenuItems>
-          <Link href="google.com" className="navbar-link">
-            Levels
-          </Link>
-        </MenuItems>)}
-        {isAuthenticated && (<MenuItems>
-            <Link href={"/google.com"} className="navbar-link">
+        {isAuthenticated && (
+          <MenuItems>
+            <Link href="google.com" className="navbar-link">
+              Levels
+            </Link>
+          </MenuItems>
+        )}
+        {isAuthenticated && (
+          <MenuItems>
+            <Link onClick={() => logout()} className="navbar-link">
               Sign Out
             </Link>
-          </MenuItems>)}
-        {!isAuthenticated && (<MenuItems>
-          <Link href={() => loginWithRedirect()} className="navbar-link">
-            Sign In
-          </Link>
-        </MenuItems>)}
+          </MenuItems>
+        )}
+        {!isAuthenticated && (
+          <MenuItems>
+            <Link className="navbar-link" onClick={() => loginWithRedirect()}>
+              Sign In
+            </Link>
+          </MenuItems>
+        )}
       </Flex>
     </Flex>
   );

@@ -9,15 +9,12 @@ import {
   IconButton,
   Heading,
 } from "@chakra-ui/react";
-import Navbar from "../Navbar/Navbar";
 import Table from "./table";
 import "./styles.css";
-// import { icons } from "react-icons/lib/cjs";
 
 function Leaderboard() {
   return (
     <Box className="page">
-      <Navbar />
       <Flex
         align="center"
         justify="space-between"

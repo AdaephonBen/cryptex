@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/auth0/go-jwt-middleware"
@@ -49,10 +50,17 @@ func Init() *jwtmiddleware.JWTMiddleware {
 	jwtMiddleware := jwtmiddleware.New(jwtmiddleware.Options{
 		ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
 			// Verify 'aud' claim
-			aud := viper.GetString("auth0_identifier")
-			checkAud := token.Claims.(jwt.MapClaims).VerifyAudience(aud, false)
+			aud := token.Claims.(jwt.MapClaims)["aud"].([]interface{})
+
+			s := make([]string, len(aud))
+			for i, v := range aud {
+				s[i] = fmt.Sprint(v)
+			}
+			token.Claims.(jwt.MapClaims)["aud"] = s
+
+			checkAud := token.Claims.(jwt.MapClaims).VerifyAudience(viper.GetString("AUTH0_IDENTIFIER"), false)
 			if !checkAud {
-				return token, errors.New("Invalid audience.")
+				return token, errors.New("Invalid audience")
 			}
 			// Verify 'iss' claim
 			iss := viper.GetString("auth0_iss")
@@ -91,13 +99,7 @@ func getPemCert(token *jwt.Token) (string, error) {
 }
 
 func GetEmail(ctx context.Context) string {
-	// user := ctx.Value("user")
-	// claims := jwt.MapClaims{}
-
-	// jwt.ParseWithClaims(token, claims, func(token *jwt.Token) (interface{}, error) {
-	// 	x, err := getPemCert(token)
-	// 	return []byte(x), err
-	// })
-
-	return "hello"
+	user := ctx.Value("user")
+	email := user.(*jwt.Token).Claims.(jwt.MapClaims)["https://cryptex.elan.org.in/email"].(string)
+	return email
 }
