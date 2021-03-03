@@ -16,8 +16,8 @@ services:
         ports: 
             - "8080:8080"
         environment:
-            POSTGRES_CONNECTION_URL: "postgresql://postgres:p123@db:5432/cryptex"
-            ROOT_URL: "https://dev-d39.cryptex.elan.org.in"
+            POSTGRESQL_CONNECTION_URL: "postgresql://postgres:p123@db:5432/cryptex"
+            ROOT_URL: "https://dev7098709.cryptex.elan.org.in"
             ADMIN_USERNAME: "cryptex2021"
             ADMIN_PASSWORD: "helloworld"
             AUTH0_IDENTIFIER: "https://cryptex2020.com"
@@ -34,7 +34,7 @@ services:
             REACT_APP_DOMAIN: "cryptex20.auth0.com"
             REACT_APP_CLIENT_ID: "rsw2Kw5oQQEXZspBB677slhj80d9IqzL"
             REACT_APP_AUDIENCE: "https://cryptex2020.com"
-            REACT_APP_API_URL: "https://dev-d39.cryptex.elan.org.in/api/"
+            REACT_APP_API_URL: "https://dev7098709.cryptex.elan.org.in/api/"
             REACT_APP_END_TIME: "06 Mar 2021 12:30:00 GMT"
         depends_on: 
             - server

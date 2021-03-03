@@ -21,7 +21,7 @@ func Init() {
 	}
 	logs.Init()
 	config.Init()
-	fmt.Println(viper.GetString("auth0_iss"))
+	fmt.Println(viper.GetString("postgres_connection_url"))
 	db.Init()
 	jwtmiddleware := auth.Init()
 	var r = routes.Init(jwtmiddleware)
