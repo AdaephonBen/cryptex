@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router";
 import {
   Flex,
   FormErrorMessage,
@@ -9,19 +10,16 @@ import {
   FormHelperText,
   Button,
 } from "@chakra-ui/react";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useHistory } from "react-router-dom";
 import "./styles.css";
 
 import { callApi } from "../../api/auth";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const Register = () => {
-  const History = useHistory();
+const Register = (props) => {
+  const { history, getAccessTokenSilently } = props;
   const [username, setUsername] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
-  const { getAccessTokenSilently } = useAuth0();
   const handleSubmit = (e) => {
     e.preventDefault();
     PostUsername();
@@ -29,6 +27,7 @@ const Register = () => {
   const PostUsername = async () => {
     const accessToken = await getAccessTokenSilently({
       audience: process.env.REACT_APP_AUDIENCE,
+      scope: "read:current_user update:current_user_metadata",
     });
     const res = await callApi(accessToken, `${API_URL}user`, {
       fetchOptions: {
@@ -41,7 +40,8 @@ const Register = () => {
     if (res === null) {
       setIsInvalid(true);
     } else {
-      History.push("/portal");
+      console.log("res is null");
+      history.push("/portal");
     }
   };
   return (
@@ -93,4 +93,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default withRouter(Register);

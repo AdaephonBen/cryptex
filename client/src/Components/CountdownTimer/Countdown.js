@@ -11,6 +11,8 @@ const CountdownTimer = () => {
       paddingY="20px"
       paddingX="10px"
       flexDirection="column"
+      minWidth="400px"
+      maxWidth="400px"
     >
       <Flex className="countdown-header" justifyContent="space-between">
         <Text className="countdown-title">Countdown</Text>

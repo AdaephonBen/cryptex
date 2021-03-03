@@ -1,10 +1,11 @@
 import React from "react";
 import { Flex, Text, Link, Tooltip } from "@chakra-ui/react";
-import { FaSyncAlt } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import HistoryFeed from "./HistoryFeed";
 import "./styles.css";
 
-const History = () => {
+const History = (props) => {
+  const { answers, setAnswers } = props;
   return (
     <Flex
       className="history"
@@ -14,14 +15,17 @@ const History = () => {
       <Flex className="history-header" justifyContent="space-between">
         <Text className="history-title">Answer History</Text>
         <Flex className="history-buttons">
-          <Tooltip label="Refresh history">
-            <Link href="http://google.com" className="icon-button">
-              <FaSyncAlt />
+          <Tooltip label="Reset History">
+            <Link
+              onClick={() => setAnswers((old) => [])}
+              className="icon-button"
+            >
+              <FaTimes />
             </Link>
           </Tooltip>
         </Flex>
       </Flex>
-      <HistoryFeed />
+      <HistoryFeed answers={answers} />
     </Flex>
   );
 };

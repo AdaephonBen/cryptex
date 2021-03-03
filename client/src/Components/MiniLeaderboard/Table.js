@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Table from "../Table/table.tsx";
 import "./styles.css";
 
-const TableLeaderboard = () => {
+const API_URL = process.env.REACT_APP_API_URL;
+
+const TableLeaderboard = (props) => {
+  const [mini, setMini] = useState([]);
+
+  useEffect(() => {
+    const getLeaderboard = async () => {
+      console.log("refreshing lb");
+      const res = await fetch(`${API_URL}leaderboard`);
+      const json = await res.json();
+      setMini(json.slice(0, 8));
+    };
+    getLeaderboard();
+    const refresh = setInterval(getLeaderboard, 5000);
+    return () => clearInterval(refresh);
+  }, [props.reload]);
+
   return (
     <Table.Container
       my={4}
@@ -20,51 +36,14 @@ const TableLeaderboard = () => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          <Table.Tr>
-            <Table.Td>2</Table.Td>
-            <Table.Td>blahblahblahblah</Table.Td>
-            <Table.Td>2</Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Td>2</Table.Td>
-            <Table.Td>blahblahblahblah</Table.Td>
-            <Table.Td>2</Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Td>2</Table.Td>
-            <Table.Td>blahblahblahblah</Table.Td>
-            <Table.Td>2</Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Td>2</Table.Td>
-            <Table.Td>blahblahblahblah</Table.Td>
-            <Table.Td>2</Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Td>2</Table.Td>
-            <Table.Td>blahblahblahblah</Table.Td>
-            <Table.Td>2</Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Td>2</Table.Td>
-            <Table.Td>blahblahblahblah</Table.Td>
-            <Table.Td>2</Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Td>2</Table.Td>
-            <Table.Td>blahblahblahblah</Table.Td>
-            <Table.Td>2</Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Td>2</Table.Td>
-            <Table.Td>blahblahblahblah</Table.Td>
-            <Table.Td>2</Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Td>2</Table.Td>
-            <Table.Td>blahblahblahblah</Table.Td>
-            <Table.Td>2</Table.Td>
-          </Table.Tr>
+          {mini.length > 0 &&
+            mini.map((user) => (
+              <Table.Tr>
+                <Table.Td>{user.rank}</Table.Td>
+                <Table.Td>{user.username}</Table.Td>
+                <Table.Td>{user.question_number}</Table.Td>
+              </Table.Tr>
+            ))}
         </Table.Tbody>
       </Table.Table>
     </Table.Container>

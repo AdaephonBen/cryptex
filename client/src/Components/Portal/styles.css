@@ -7,12 +7,8 @@
 
 .portal-page {
   background-color: var(--background-color);
-  min-height: 100vh;
   max-height: 100vh;
-}
-.portal-page {
-  background-color: var(--background-color);
-  height: 100%;
+  min-height: calc(100vh - 100px);
 }
 .sidebar-toggle > * {
   margin-bottom: 10px;

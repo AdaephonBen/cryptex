@@ -39,12 +39,21 @@ func Init(authmiddleware *jwtmiddleware.JWTMiddleware) chi.Router {
 		r.Route("/question", func(r chi.Router) {
 			r.Use(authmiddleware.Handler)
 			r.Get("/", controllers.GetQuestionHandler)
+			r.Post("/", controllers.CheckAnswerHandler)
+			r.Get("/bonus", controllers.GetBonusQuestionHandler)
+			r.Post("/bonus", controllers.CheckBonusAnswerHandler)
 		})
 		r.Route("/user", func(r chi.Router) {
 			r.Use(authmiddleware.Handler)
 			r.Post("/", controllers.NewUserHandler)
 		})
+		r.Route("/lifeline", func(r chi.Router) {
+			r.Use(authmiddleware.Handler)
+			r.Get("/", controllers.GetAvailableLifelinesHandler)
+			r.Post("/", controllers.UseLifelineHandler)
+		})
 		r.Get("/leaderboard", controllers.GetLeaderboardHandler)
+		r.Post("/hint", controllers.GetHintsHandler)
 	})
 
 	return r

@@ -1,38 +1,19 @@
 import React from "react";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Badge } from "@chakra-ui/react";
 import "./styles.css";
 
-// const HistoryItem = (item) => {
-//   return (
-//     <Flex wrap="nowrap" py={1}>
-//       <Badge ml="1" variantColor="green" textTransform="lowercase">
-//         {item.timestamp}
-//       </Badge>
-//       <Badge ml="1" variantColor="blue" textTransform="lowercase">
-//         {item.username}
-//       </Badge>
-//       {/* <Text wrap="nowrap">{item.answer}</Text> */}
-//       <Badge ml="1" variantColor="red" textTransform="lowercase">
-//         {item.answer}
-//       </Badge>
-//     </Flex>
-//   );
-// };
+const HistoryItem = (item) => {
+  return (
+    <Flex wrap="nowrap" py={1}>
+      <Badge ml="1" colorScheme="red" fontSize="20px" textTransform="lowercase">
+        {item}
+      </Badge>
+    </Flex>
+  );
+};
 
-const HistoryFeed = () => {
-  // const [history, setHistory] = useState([]);
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     setHistory((history) => [
-  //       ...history,
-  //       {
-  //         username: "adaephonben",
-  //         answer: "largeranswer",
-  //         timestamp: "12:34:56",
-  //       },
-  //     ]);
-  //   }, 1000);
-  // }, []);
+const HistoryFeed = (props) => {
+  const { answers } = props;
   return (
     <Flex
       className="history-feed"
@@ -40,8 +21,9 @@ const HistoryFeed = () => {
       paddingY="10px"
       paddingX="10px"
       flexDirection="column"
+      maxHeight="calc(100vh - 200px)"
     >
-      {/* {history.map((item) => HistoryItem(item))} */}
+      {answers.map((item) => HistoryItem(item))}
     </Flex>
   );
 };

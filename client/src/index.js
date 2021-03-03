@@ -10,7 +10,9 @@ ReactDOM.render(
   <Auth0Provider
     domain={process.env.REACT_APP_DOMAIN}
     clientId={process.env.REACT_APP_CLIENT_ID}
+    audience={process.env.REACT_APP_AUDIENCE}
     redirectUri={window.location.origin + "/portal"}
+    scope="read:current_user"
   >
     <React.StrictMode>
       <BrowserRouter>

@@ -8,6 +8,9 @@ body {
   min-width: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("./assets/background.jpg");
+  background-position: "center";
+  background-size: "cover";
 }
 
 code {

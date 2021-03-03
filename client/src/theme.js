@@ -6,7 +6,7 @@ const customTheme = extendTheme({
   styles: {
     global: (props) => ({
       body: {
-        bg: mode("white", "#001C27")(props),
+        bg: mode("white", "rgba(0, 28, 39, 0.6)")(props),
         color: mode("black", "white")(props),
       },
     }),

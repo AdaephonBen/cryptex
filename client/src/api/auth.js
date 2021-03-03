@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export const useApi = (url, options = {}) => {
+  console.log("hi" + url);
   const { getAccessTokenSilently } = useAuth0();
   const [state, setState] = useState({
     error: null,
@@ -17,7 +18,9 @@ export const useApi = (url, options = {}) => {
         const { ...fetchOptions } = options;
         const accessToken = await getAccessTokenSilently({
           audience: process.env.REACT_APP_AUDIENCE,
+          scope: "read:current_user update:current_user_metadata",
         });
+        console.log(fetchOptions);
         const res = await fetch(url, {
           ...fetchOptions,
           headers: {
