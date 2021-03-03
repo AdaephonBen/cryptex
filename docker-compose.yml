@@ -29,7 +29,7 @@ services:
     client:
         image: lambdaiith/cryptex-client:latest
         ports:
-            - "3000:80"
+            - "3000:3000"
         environment: 
             REACT_APP_DOMAIN: "cryptex20.auth0.com"
             REACT_APP_CLIENT_ID: "rsw2Kw5oQQEXZspBB677slhj80d9IqzL"

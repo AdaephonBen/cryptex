@@ -6,5 +6,5 @@ route /api {
 }
 
 route / {
-	reverse_proxy client:80
+	reverse_proxy client:3000
 }
