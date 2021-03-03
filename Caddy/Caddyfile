@@ -1,7 +1,7 @@
 dev7098709.elan.org.in
 encode gzip
 
-route /api {
+route /api/* {
 	reverse_proxy server:8080
 }
 
