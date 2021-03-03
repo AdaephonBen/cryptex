@@ -50,7 +50,7 @@ function App() {
         <Route path="/leaderboard">
           <Leaderboard />
         </Route>
-        <Route path="/">
+        <Route path="/" >
           <LandingPage />
         </Route>
       </Switch>
