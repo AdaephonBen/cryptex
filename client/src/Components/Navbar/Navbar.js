@@ -81,10 +81,10 @@ function Navbar(props) {
           </Link>
         </MenuItems>
         <MenuItems>
-          <Link className="navbar-link">Leaderboard</Link>
+          <Link href="leaderboard" className="navbar-link">Leaderboard</Link>
         </MenuItems>
         <MenuItems>
-          <Link href="google.com" className="navbar-link">
+          <Link href="rules" className="navbar-link">
             Rules
           </Link>
         </MenuItems>

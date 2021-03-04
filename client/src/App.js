@@ -11,6 +11,7 @@ import { Global } from "@emotion/react";
 import "./theme.css";
 import Navbar from "./Components/Navbar/Navbar";
 import Register from "./Components/Register/register";
+import Rules from "./Components/Rules/Rules";
 import background from "./assets/background.jpg";
 import BonusQuestions from "./Components/BonusQuestion/BonusQuestions";
 
@@ -153,6 +154,7 @@ function App() {
       <Fonts />
       <Box
         maxHeight="100vh"
+        height="100vh"
         backgroundImage={`url(${background})`}
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
@@ -174,6 +176,9 @@ function App() {
           </Route>
           <Route path="/leaderboard">
             <Leaderboard />
+          </Route>
+          <Route path="/rules">
+            <Rules />
           </Route>
           <Route path="/">
             <LandingPage />
