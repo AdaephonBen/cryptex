@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Table from "../Table/table.tsx";
 import "./styles.css";
+import { m } from "framer-motion";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -19,12 +20,27 @@ const TableLeaderboard = (props) => {
     return () => clearInterval(refresh);
   }, [props.reload]);
 
+  useEffect(() => {
+    if (mini.length < 7) {
+      setMini((mini) => [
+        ...mini,
+        {
+          rank: "...",
+          username: "...",
+          question_number: "...",
+        },
+      ]);
+    }
+  }, [mini]);
+
+  console.log(mini);
+
   return (
     <Table.Container
       my={4}
       overflowX="hidden"
-      overflowY="auto"
       visibility="hidden"
+      flex="1"
       className="container_table"
     >
       <Table.Table className="actual_table">

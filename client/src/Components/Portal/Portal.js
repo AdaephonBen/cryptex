@@ -67,12 +67,7 @@ const Portal = (props) => {
   return (
     <Flex className="portal-page" flexDir="column">
       <Flex className="portal" flexGrow={1} overflowY="auto">
-        <Flex
-          className="sidebar-toggle"
-          flexDirection="column"
-          ml="5px"
-          mr="5px"
-        >
+        <Flex className="sidebar-toggle" flexDirection="column" mr="5px">
           <Tooltip
             label={
               isLeaderboardOpen
@@ -149,7 +144,7 @@ const Portal = (props) => {
               flexDirection="column"
               style={{
                 minHeight: "100%",
-                maxHeight: "100%",
+                maxHeight: "calc(100vh - 200px)",
               }}
               maxWidth={{
                 base: "none",
@@ -161,7 +156,9 @@ const Portal = (props) => {
             >
               <Flex
                 className="first-row"
-                flexGrow="1"
+                minHeight="0px"
+                flex="1"
+                flexBasis="40%"
                 flexDirection={{
                   base: "column-reverse",
                   md: "row",
@@ -177,6 +174,8 @@ const Portal = (props) => {
               </Flex>
               <Flex
                 className="second-row"
+                minHeight="0px"
+                flex="none"
                 flexDirection={{ base: "column", md: "row", lg: "row" }}
               >
                 {isCountdownTimerOpen && <CountdownTimer />}

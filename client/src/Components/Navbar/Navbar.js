@@ -29,7 +29,7 @@ function Navbar(props) {
       align="center"
       justify="space-between"
       wrap="wrap"
-      ml="20px"
+      pl="20px"
       color="white"
       flex="0 1 auto"
       className="container"

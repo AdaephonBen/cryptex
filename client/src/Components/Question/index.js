@@ -81,7 +81,7 @@ const Level = (props) => {
 
   return (
     <Flex direction="column" className="level" padding="20px">
-      <Text>
+      <Text marginBottom="10px">
         Available Lifelines:
         {lifelines.map((lifeline) => (
           <Button

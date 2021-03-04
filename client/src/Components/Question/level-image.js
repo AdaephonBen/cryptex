@@ -48,34 +48,39 @@ const LevelImage = (props) => {
       height="100%"
       alignItems="center"
       justifyContent="center"
+      minHeight="0px"
     >
-      <Image src={url} maxH="400px" />
-      <form
-        style={{
-          marginTop: "30px",
-        }}
-        onSubmit={handleSubmit}
-      >
-        <FormControl id="answer" isInvalid={isIncorrect}>
-          <Input
-            type="text"
-            placeholder="Answer"
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-          <FormErrorMessage>Incorrect Answer :(</FormErrorMessage>
-        </FormControl>
-        <Button
-          mt={4}
-          colorScheme="teal"
-          type="submit"
-          width="100%"
-          isLoading={isLoading}
-          isDisabled={isLoading}
+      <Flex justifyContent="center" flex="1" minHeight="200px">
+        <Image src={url} minHeight="200px" />
+      </Flex>
+      <Flex flex="1" minHeight="0px">
+        <form
+          style={{
+            marginTop: "30px",
+          }}
+          onSubmit={handleSubmit}
         >
-          Submit
-        </Button>
-      </form>
+          <FormControl id="answer" isInvalid={isIncorrect}>
+            <Input
+              type="text"
+              placeholder="Answer"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            <FormErrorMessage>Incorrect Answer :(</FormErrorMessage>
+          </FormControl>
+          <Button
+            mt={4}
+            colorScheme="teal"
+            type="submit"
+            width="100%"
+            isLoading={isLoading}
+            isDisabled={isLoading}
+          >
+            Submit
+          </Button>
+        </form>
+      </Flex>
     </Flex>
   );
 };
