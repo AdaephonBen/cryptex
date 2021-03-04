@@ -125,7 +125,7 @@ div.l.te
 {
      display: flex;
      /* margin-left: 20%; */
-    overflow-x: auto ;
+    overflow-x: hidden ;
 
 }
 img.te 
@@ -3600,11 +3600,15 @@ body.is-touch #banner {
     display: none;
 }
 
+body {
+    overflow-x:hidden;
+}
+
 @media screen and (max-width: 736px) {
     /* Basic */
     html,
     body {
-        overflow-x: auto;
+        overflow-x: hidden;
     }
     body,
     input,
