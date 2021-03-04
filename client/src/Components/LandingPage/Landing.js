@@ -1,6 +1,6 @@
 import React from "react";
-// import { Flex, Heading, Button } from "@chakra-ui/react";
-// import "./styles.css";
+import { Flex, Heading, Button } from "@chakra-ui/react";
+import "./styles.css";
 import "./assets/css/main.css";
 import "./assets/css/fontawesome-all.min.css";
 import DaVinci from "./assets/DaVinci.jpg"
@@ -41,10 +41,10 @@ const LandingPage = () => {
         <section id="banner">
             <div class="lcontent">
                 <header>
-                    <span className="te"><img className="te" src={ElanLogo} style={{height:"3.5em"}}/></span>
+                    <div className="l te"><img className="te" src={ElanLogo} style={{height:"3.5em"}}/></div>
 
-                    <h2><code className="l">Cryptex 2021</code></h2>
-                    <p>
+                    <h2 className="l"><code className="l">Cryptex 2021</code></h2>
+                    <p className="l">
                         Welcome to Cryptex 2021!<br /> Coming soon on 5th March 2021 at 6:00 PM IST.
                     </p>
                     <a href="https://forms.gle/SSsb9tQZbB2W6jdw8" class="button primary landing"  id="countdown">

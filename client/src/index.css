@@ -5,7 +5,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  min-width: 100vh;
+  min-width: 100vw;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url("./assets/background.jpg");
@@ -20,5 +20,5 @@ code {
 
 #root {
   min-height: 100vh;
-  min-width: 100vh;
+  min-width: 100vw;
 }
