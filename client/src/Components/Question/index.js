@@ -15,6 +15,7 @@ import {
   ModalBody,
 } from "@chakra-ui/react";
 import { callApi } from "../../api/auth";
+import LevelGrid from "./level-sound";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -27,6 +28,14 @@ const Level = (props) => {
   if (question.question_type === 1) {
     currentLevel = (
       <LevelImage
+        question={question}
+        getAccessTokenSilently={getAccessTokenSilently}
+        setAnswers={setAnswers}
+      />
+    );
+  } else if (question.question_type === 2) {
+    currentLevel = (
+      <LevelGrid
         question={question}
         getAccessTokenSilently={getAccessTokenSilently}
         setAnswers={setAnswers}

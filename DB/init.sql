@@ -209,7 +209,7 @@ COPY public."Hint" (id, number, question_number, hint, is_released) FROM stdin;
 
 COPY public."Lifeline" (id, lifeline, initial_question, final_question) FROM stdin;
 1	Skip Question	1	3
-2	Get Hint	2	5
+2	Get Hint	2	6
 \.
 
 
@@ -224,6 +224,7 @@ COPY public."Question" (id, question_number, question, question_type, answer) FR
 15	3	{"url": "https://res.cloudinary.com/do3uy82tk/image/upload/v1614770436/RGlayBCcm9kaWU.jpg"}	1	936a185caaa266bb9cbe981e9e05cb78cd732b0b3280eb944412bb6f8f8f07af
 16	4	{"url": "https://res.cloudinary.com/do3uy82tk/image/upload/v1614770436/Maybe.png"}	1	936a185caaa266bb9cbe981e9e05cb78cd732b0b3280eb944412bb6f8f8f07af
 17	5	{"url": "https://res.cloudinary.com/do3uy82tk/image/upload/v1614770436/Matricesanddeterminants.png"}	1	936a185caaa266bb9cbe981e9e05cb78cd732b0b3280eb944412bb6f8f8f07af
+18	6	{"quote": "I wonder who created this"}	2	936a185caaa266bb9cbe981e9e05cb78cd732b0b3280eb944412bb6f8f8f07af
 \.
 
 
@@ -232,6 +233,8 @@ COPY public."Question" (id, question_number, question, question_type, answer) FR
 --
 
 COPY public."User" (email_id, username, id, lifelines, question_number, last_modified, bonus_questions) FROM stdin;
+ma18btech11011@iith.ac.in		37	{}	6	2021-03-04 13:59:51.427191+05:30	{}
+vsvishnu2550486@gmail.com	PryceTx	36	{}	2	2021-03-04 00:47:52.739579+05:30	{}
 \.
 
 
@@ -260,14 +263,14 @@ SELECT pg_catalog.setval('public."Lifeline_id_seq"', 2, true);
 -- Name: Question_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Question_id_seq"', 17, true);
+SELECT pg_catalog.setval('public."Question_id_seq"', 18, true);
 
 
 --
 -- Name: User_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."User_id_seq"', 35, true);
+SELECT pg_catalog.setval('public."User_id_seq"', 37, true);
 
 
 --

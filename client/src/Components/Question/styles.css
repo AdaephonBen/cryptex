@@ -5,3 +5,13 @@
   margin-left: 10px;
   flex-grow: 1;
 }
+
+table,
+td {
+  border: 1px solid white;
+}
+
+td {
+  width: 15px;
+  height: 15px;
+}
