@@ -14,7 +14,7 @@ import "./styles.css";
 
 function Leaderboard() {
   return (
-    <Box className="page">
+    <Box className="container">
       <Flex
         align="center"
         justify="space-between"
@@ -45,6 +45,11 @@ function Leaderboard() {
           />
         </Flex>
         <Table />
+        <Box className="paginator">
+          <IconButton icon={<FaAngleLeft />} size="sm" />
+          &nbsp;Page 1 of 20&nbsp;
+          <IconButton icon={<FaAngleRight />} size="sm" />
+        </Box>
       </Flex>
     </Box>
   );
