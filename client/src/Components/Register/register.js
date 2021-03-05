@@ -48,9 +48,10 @@ const Register = (props) => {
     <div className="landing">
       <Flex
         align="center"
-        justifyContent="space-between"
+        
         className="center-box"
         flexDirection="column"
+        height="100vh"
       >
         <Heading className="title">REGISTER</Heading>
         <Flex className="form" flexDirection="column">
