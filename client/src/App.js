@@ -159,8 +159,8 @@ function App() {
         height="100vh"
         backgroundImage={`url(${background})`}
         backgroundSize="cover"
-        backgroundRepeat="no-repeat"
         backgroundAttachment="fixed"
+        backgroundRepeat="repeat-y"
       >
         <Navbar
           isAuthenticated={isAuthenticated}
@@ -176,8 +176,9 @@ function App() {
             <Register getAccessTokenSilently={getAccessTokenSilently} />
           </Route>
           <Route path="/portal">
-            <Portal getAccessTokenSilently={getAccessTokenSilently}
-                  setisAscii={setisAscii}
+            <Portal
+              getAccessTokenSilently={getAccessTokenSilently}
+              setisAscii={setisAscii}
             />
           </Route>
           <Route path="/previous">

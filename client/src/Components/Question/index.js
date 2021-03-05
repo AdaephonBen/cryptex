@@ -17,6 +17,7 @@ import {
 import { callApi } from "../../api/auth";
 import LevelGrid from "./level-sound";
 import LevelCards from "./level-cards";
+import LevelLink from "./level-link";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -55,6 +56,14 @@ const Level = (props) => {
   } else if (question.question_type === 4) {
     currentLevel = (
       <LevelCards
+        question={question}
+        getAccessTokenSilently={getAccessTokenSilently}
+        setAnswers={setAnswers}
+      />
+    );
+  } else if (question.question_type === 5) {
+    currentLevel = (
+      <LevelLink
         question={question}
         getAccessTokenSilently={getAccessTokenSilently}
         setAnswers={setAnswers}

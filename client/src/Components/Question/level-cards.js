@@ -189,24 +189,38 @@ const LevelCards = (props) => {
           onSubmit={handleSubmit}
         >
           <FormControl id="answer" isInvalid={isIncorrect}>
-            <Input
-              type="text"
-              placeholder="Answer"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-            />
-            <FormErrorMessage>Incorrect Answer :(</FormErrorMessage>
+            <InputGroup
+              alignSelf="center"
+              display="flex"
+              margin="auto"
+              padding="auto"
+            >
+              <Input
+                type="text"
+                size="sm"
+                placeholder="Answer"
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+              />
+              <InputRightElement>
+                <IconButton
+                  mt={4}
+                  colorScheme="gray"
+                  type="submit"
+                  size="md"
+                  aria-label="Submit"
+                  isLoading={isLoading}
+                  isDisabled={isLoading}
+                  icon={<FaAngleRight />}
+                  marginBottom="15px"
+                />
+              </InputRightElement>
+            </InputGroup>
+
+            <FormErrorMessage>
+              Incorrect Answer. Please try again.
+            </FormErrorMessage>
           </FormControl>
-          <Button
-            mt={4}
-            colorScheme="teal"
-            type="submit"
-            width="100%"
-            isLoading={isLoading}
-            isDisabled={isLoading}
-          >
-            Submit
-          </Button>
         </form>
       </Flex>
     </Flex>

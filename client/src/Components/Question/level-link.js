@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Flex,
-  Image,
   FormControl,
   Input,
   FormErrorMessage,
@@ -14,9 +13,8 @@ import { FaAngleRight } from "react-icons/fa";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const LevelImage = (props) => {
+const LevelLink = (props) => {
   const { question, getAccessTokenSilently, setAnswers } = props;
-  const { url } = question.question;
   const [answer, setAnswer] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isIncorrect, setIsIncorrect] = useState(false);
@@ -53,7 +51,28 @@ const LevelImage = (props) => {
       minHeight="0px"
     >
       <Flex justifyContent="center" flex="1" minHeight="200px">
-        <Image src={url} minHeight="200px" />
+        <div style={{ position: "relative", width: "600px", height: "400px" }}>
+          <img
+            style={{
+              position: "absolute",
+              width: "600px",
+              height: "400px",
+            }}
+            src={question.question.url}
+          />
+          <a
+            target="_blank"
+            href={question.question.link}
+            style={{
+              top: "78%",
+              left: "79%",
+              width: "3%",
+              height: "3%",
+              display: "block",
+              position: "absolute",
+            }}
+          ></a>
+        </div>
       </Flex>
       <Flex
         minHeight="0px"
@@ -111,4 +130,4 @@ const LevelImage = (props) => {
   );
 };
 
-export default LevelImage;
+export default LevelLink;

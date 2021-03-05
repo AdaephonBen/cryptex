@@ -13,6 +13,50 @@ import ace from "../Question/cards/ace.png";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
+const LevelLink = (props) => {
+  const { question } = props;
+  return (
+    <Flex
+      direction="column"
+      width="100%"
+      height="100%"
+      alignItems="center"
+      justifyContent="center"
+      minHeight="0px"
+    >
+      <Text marginBlock="10px">
+        {" "}
+        Question Number: {question.question_number}{" "}
+      </Text>
+
+      <Flex justifyContent="center" flex="1" minHeight="200px">
+        <div style={{ position: "relative", width: "600px", height: "400px" }}>
+          <img
+            style={{
+              position: "absolute",
+              width: "600px",
+              height: "400px",
+            }}
+            src={question.question.url}
+          />
+          <a
+            target="_blank"
+            href={question.question.link}
+            style={{
+              top: "78%",
+              left: "79%",
+              width: "3%",
+              height: "3%",
+              display: "block",
+              position: "absolute",
+            }}
+          ></a>
+        </div>
+      </Flex>
+    </Flex>
+  );
+};
+
 const LevelCards = (props) => {
   const { question } = props;
   const { code } = question.question;
@@ -982,6 +1026,8 @@ const PreviousQuestion = (question) => {
     currentLevel = <LevelImage question={question} />;
   } else if (question.question_type === 4) {
     currentLevel = <LevelCards question={question} />;
+  } else if (question.question_type === 5) {
+    currentLevel = <LevelLink question={question} />;
   }
 
   return (

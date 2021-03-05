@@ -10,6 +10,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url("./assets/background.jpg");
   background-position: "center";
+  background-repeat: repeat-y;
   background-size: "cover";
 }
 

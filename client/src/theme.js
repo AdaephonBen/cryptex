@@ -13,7 +13,7 @@ const customTheme = extendTheme({
   styles: {
     global: (props) => ({
       body: {
-        bg: mode("white", "rgba(0, 28, 39, 0.6)")(props),
+        bg: mode("white", "rgba(0, 28, 39, 0.7)")(props),
         color: mode("black", "white")(props),
       },
     }),

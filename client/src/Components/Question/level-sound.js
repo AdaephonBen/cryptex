@@ -817,7 +817,7 @@ const LevelGrid = (props) => {
         </table>
       </Flex>
       <Flex flex="1" minHeight="0px" marginTop="10px">
-      <form
+        <form
           style={{
             display: "flex",
             width: "75%",
@@ -855,19 +855,11 @@ const LevelGrid = (props) => {
                 />
               </InputRightElement>
             </InputGroup>
-        
-            <FormErrorMessage>Incorrect Answer. Please try again.</FormErrorMessage>
+
+            <FormErrorMessage>
+              Incorrect Answer. Please try again.
+            </FormErrorMessage>
           </FormControl>
-          <Button
-            mt={4}
-            colorScheme="teal"
-            type="submit"
-            width="100%"
-            isLoading={isLoading}
-            isDisabled={isLoading}
-          >
-            Submit
-          </Button>
         </form>
       </Flex>
     </Flex>
