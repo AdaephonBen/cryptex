@@ -137,7 +137,7 @@ const LandingPage = (props) => {
             <p></p>
           </header>
           <div className="box alt">
-            <Box className="lrow gtr-uniform">
+            <div className="lrow gtr-uniform">
               <section className="lcol-4 lcol-6-medium lcol-12-xsmall">
                 <span className="icon solid alt major fa-chart-area"></span>
                 <h3 className="l">5 years</h3>
@@ -188,7 +188,7 @@ const LandingPage = (props) => {
                   conquer.
                 </p>
               </section>
-            </Box>
+            </div>
           </div>
         </div>
       </section>
