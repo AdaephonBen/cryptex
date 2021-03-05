@@ -52,7 +52,7 @@ const LevelImage = (props) => {
       justifyContent="center"
       minHeight="0px"
     >
-      <Flex justifyContent="center" flex="1" minHeight="200px">
+      <Flex justifyContent="center" minHeight="200px">
         <Image src={url} minHeight="200px" />
       </Flex>
       <Flex
