@@ -65,10 +65,11 @@ const LevelImage = (props) => {
       direction="column"
       width="100%"
       height="100%"
+      maxWidth={{base:"90vw",md:"90vw",lg:"80vw"}}
       alignItems="center"
       justifyContent="center"
     >
-      <AspectRatio width="600px" ratio={16 / 9}>
+      <AspectRatio width={{base:"70vw",md:"600px",lg:"600px"}} ratio={16 / 9}>
         <Image src={url} />
       </AspectRatio>
       <form
