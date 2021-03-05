@@ -14,7 +14,8 @@ import "./styles.css";
 
 function Leaderboard() {
   return (
-    <Box className="container">
+    <Box className="container"
+      minHeight="100vh">
       <Flex
         align="center"
         justify="space-between"

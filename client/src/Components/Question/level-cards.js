@@ -7,10 +7,14 @@ import {
   InputRightElement,
   IconButton,
   Input,
+  InputGroup,
+  InputRightElement,
+  IconButton,
   Button,
   FormErrorMessage,
 } from "@chakra-ui/react";
 import { callApi } from "../../api/auth";
+import { FaAngleRight } from "react-icons/fa";
 
 import king from "./cards/king.png";
 import queen from "./cards/queen.png";
@@ -128,16 +132,16 @@ const LevelCards = (props) => {
       if (count == 0) {
         currImg = tenImg;
         count++;
-      } else if (count == 1) {
+      } else if (count === 1) {
         currImg = jackImg;
         count++;
-      } else if (count == 2) {
+      } else if (count === 2) {
         currImg = queenImg;
         count++;
-      } else if (count == 3) {
+      } else if (count === 3) {
         currImg = kingImg;
         count++;
-      } else if (count == 4) {
+      } else if (count === 4) {
         currImg = aceImg;
         count++;
       } else {
@@ -186,9 +190,13 @@ const LevelCards = (props) => {
       <canvas ref={canvasRef}></canvas>
       <Text>{code}</Text>
       <Flex flex="1" minHeight="0px">
-        <form
+      <form
           style={{
-            marginTop: "30px",
+            display: "flex",
+            width: "75%",
+            justifyContent: "space-between",
+            alignSelf: "center",
+            margin: "auto",
           }}
           onSubmit={handleSubmit}
         >
@@ -220,7 +228,6 @@ const LevelCards = (props) => {
                 />
               </InputRightElement>
             </InputGroup>
-
             <FormErrorMessage>
               Incorrect Answer. Please try again.
             </FormErrorMessage>
