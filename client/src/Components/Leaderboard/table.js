@@ -45,7 +45,7 @@ function Table(props) {
       console.log("Started Refreshing the leaderboard");
       const res = await fetch(`${API_URL}leaderboard`);
       const json = await res.json();
-      setData(json.slice(0, 20));
+      setData(json);
     };
     getLeaderboard();
     const refresh = setInterval(getLeaderboard, 5000);
@@ -68,30 +68,6 @@ function Table(props) {
               level={user.question_number}
             />
           ))}
-        <Record
-          rank="2"
-          team="adaephonben"
-          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
-          level="20"
-        />
-        <Record
-          rank="2"
-          team="adaephonben"
-          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
-          level="20"
-        />
-        <Record
-          rank="2"
-          team="adaephonben"
-          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
-          level="20"
-        />
-        <Record
-          rank="2"
-          team="adaephonben"
-          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
-          level="20"
-        />
       </tbody>
     </table>
   );
