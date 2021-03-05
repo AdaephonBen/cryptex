@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { callApi } from "../../api/auth";
 import LevelGrid from "./level-sound";
+import LevelCards from "./level-cards";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -36,6 +37,14 @@ const Level = (props) => {
   } else if (question.question_type === 2) {
     currentLevel = (
       <LevelGrid
+        question={question}
+        getAccessTokenSilently={getAccessTokenSilently}
+        setAnswers={setAnswers}
+      />
+    );
+  } else if (question.question_type === 4) {
+    currentLevel = (
+      <LevelCards
         question={question}
         getAccessTokenSilently={getAccessTokenSilently}
         setAnswers={setAnswers}

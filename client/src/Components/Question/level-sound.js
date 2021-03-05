@@ -85,294 +85,712 @@ const LevelGrid = (props) => {
             marginBottom: "10px",
             display: isVisible ? "block" : "none",
           }}
+          className="borders"
         >
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr className="borders">
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+          </tr>
+          <tr className="borders">
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td></td>
-            <td></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["A4", "C#4", "E4"])}
+            ></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td onMouseOver={() => playNote(["A4", "C#4", "E4"])}></td>
-            <td></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td></td>
-            <td></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["G4", "B4", "D4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td onMouseOver={() => playNote(["G4", "B4", "D4"])}></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td onMouseOver={() => playNote(["F#4", "A#4", "C#4"])}></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td></td>
-            <td></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["F4", "A4", "C4"])}
+            ></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td onMouseOver={() => playNote(["F4", "A4", "C4"])}></td>
-            <td></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["D4", "F#4", "A4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td onMouseOver={() => playNote(["D4", "F#4", "A4"])}></td>
-            <td></td>
-            <td></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td onMouseOver={() => playNote(["C4", "E4", "G4"])}></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td className="borders"></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td
+              className="borders"
+              onMouseOver={() => playNote(["C4", "E4", "G4"])}
+            ></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
+            <td className="borders"></td>
           </tr>
           <tr>
             <td />

@@ -7,8 +7,8 @@ import {
   OrderedList,
   ListItem,
   UnorderedList,
-  Text,
 } from "@chakra-ui/react";
+import "./styles.css";
 
 function Rules() {
   return (
