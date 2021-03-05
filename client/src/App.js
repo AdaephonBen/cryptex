@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
-import { ChakraProvider, Box } from "@chakra-ui/react";
+import { ChakraProvider, Box, Flex } from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Portal from "./Components/Portal/Portal";
 import Leaderboard from "./Components/Leaderboard/Leaderboard";
@@ -154,9 +154,9 @@ function App() {
   return (
     <ChakraProvider theme={customTheme}>
       <Fonts />
-      <Box
-        maxHeight="100vh"
-        height="100vh"
+      <Flex
+        minHeight="100vh"
+        flexDir="column"
         backgroundImage={`url(${background})`}
         backgroundSize="cover"
         backgroundAttachment="fixed"
@@ -197,7 +197,7 @@ function App() {
             <LandingPage loginWithRedirect={loginWithRedirect} />
           </Route>
         </Switch>
-      </Box>
+      </Flex>
     </ChakraProvider>
   );
 }
