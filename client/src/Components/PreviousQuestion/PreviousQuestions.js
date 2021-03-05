@@ -978,6 +978,8 @@ const PreviousQuestion = (question) => {
     currentLevel = <LevelImage question={question} />;
   } else if (question.question_type === 2) {
     currentLevel = <LevelGrid question={question} />;
+  } else if (question.question_type === 3) {
+    currentLevel = <LevelImage question={question} />;
   } else if (question.question_type === 4) {
     currentLevel = <LevelCards question={question} />;
   }
