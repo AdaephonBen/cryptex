@@ -7,7 +7,9 @@ import "./styles.css";
 const MiniLeaderboard = () => {
   const [reload, setReload] = useState(false);
   return (
-    <Flex className="mini-leaderboard" flexDirection="column"
+    <Flex
+      className="mini-leaderboard"
+      flexDirection="column"
       display={{ base: "none", md: "flex", lg: "flex" }}
     >
       <Flex className="leaderboard-header" justifyContent="space-between">
@@ -19,7 +21,7 @@ const MiniLeaderboard = () => {
             </Link>
           </Tooltip>
           <Tooltip label="View complete leaderboard">
-            <Link href="http://google.com" className="icon-button">
+            <Link href="/leaderboard" className="icon-button">
               <FaExternalLinkAlt />
             </Link>
           </Tooltip>
