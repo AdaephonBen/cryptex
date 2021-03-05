@@ -159,6 +159,7 @@ function App() {
         backgroundImage={`url(${background})`}
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
+        backgroundAttachment="fixed"
       >
         <Navbar
           isAuthenticated={isAuthenticated}
