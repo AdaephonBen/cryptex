@@ -86,6 +86,7 @@ const Portal = (props) => {
             />
           </Tooltip>
           <Tooltip
+            display={{ base: "none", md: "flex", lg: "flex" }}
             label={
               isCountdownTimerOpen
                 ? "Hide the Countdown Timer"
@@ -93,6 +94,7 @@ const Portal = (props) => {
             }
           >
             <IconButton
+              display={{ base: "none", md: "none", lg: "flex" }}
               size="sm"
               colorScheme={isCountdownTimerOpen ? "gray" : ""}
               icon={<FaStopwatch />}
@@ -116,6 +118,7 @@ const Portal = (props) => {
           <Tooltip label={isHistoryOpen ? "Hide History" : "Show History"}>
             <IconButton
               size="sm"
+              display={{ base: "none", md: "flex", lg: "flex" }}
               colorScheme={isHistoryOpen ? "gray" : ""}
               icon={<FaHistory />}
               onClick={() => toggleHistory()}
@@ -195,6 +198,7 @@ const Portal = (props) => {
                 }}
                 flexBasis="10%"
                 justifyContent="space-between"
+                display={{ base: "none", md: "none", lg: "flex" }}
               >
                 <History answers={answers} setAnswers={setAnswers} />
               </Flex>
