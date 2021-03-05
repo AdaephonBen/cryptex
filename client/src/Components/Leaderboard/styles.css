@@ -1,57 +1,57 @@
 .leaderboard {
-	max-width: 80%;
-	margin-top: 2rem;
-	margin: auto;
+  max-width: 80%;
+  margin-top: 2rem;
+  margin: auto;
 }
 table.table {
-	margin: 1rem;
-	padding: 2rem;
-	width: 100%;
-	max-width: 100%;
-	border-width: 5px;
-	border-color: var(--background-color-dark);
+  margin: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 100%;
+  border-width: 5px;
+  border-color: var(--background-color-dark);
 }
 
 table.table > tr {
-	border-color: var(--background-color);
-	border-left: 2px;
-	border-right: 2px;
+  border-color: var(--background-color);
+  border-left: 2px;
+  border-right: 2px;
 }
 
 .heading {
-	text-transform: uppercase;
-	text-overflow: ellipsis;
-	letter-spacing: 8px;
-	margin-right: -8px;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  letter-spacing: 8px;
+  margin-right: -8px;
 }
 .table th {
-	padding-top: 0rem;
-	padding-bottom: 0.75rem;
-	text-align: center;
-	font-weight: 580;
-	border-bottom: 2px solid #9ae6b4;
+  padding-top: 0rem;
+  padding-bottom: 0.75rem;
+  text-align: center;
+  font-weight: 580;
+  border-bottom: 2px solid #9ae6b4;
 }
 
 .table td {
-	text-align: center;
-	padding-top: 0.4rem;
-	padding-bottom: 0.4rem;
+  text-align: center;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
 }
 .table tr:nth-child(even) {
-	background-color: var(--background-color);
+  background-color: var(--background-color);
 }
 
 .table tr:nth-child(odd) {
-	background-color: var(--background-color-dark);
+  background-color: var(--background-color-dark);
 }
 .filters {
-	margin-top: 1rem;
-	align-self: flex-end;
+  margin-top: 1rem;
+  align-self: flex-end;
 }
 .paginator {
-	align-self: flex-end;
+  align-self: flex-end;
 }
 
 .search {
-	margin-left: 8px;
+  margin-left: 8px;
 }
