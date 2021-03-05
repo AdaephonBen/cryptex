@@ -91,7 +91,7 @@ function Rules() {
             <ListItem>
             We STRONGLY recommend using a laptop for solving Cryptex. 
             Some of the questions may not be properly formatted on a mobile device, and you may miss key elements of a question.
-            </ListItem>
+            </ListItem>   
             <ListItem>
               Google is your friend. Usually. You’re expected to use Google and
               other online tools in your quest to crack Cryptex 2021. Do keep in
@@ -132,7 +132,9 @@ function Rules() {
               of the question may not have any apparent meaning until you figure
               out the answer and/or receive another part of the clue.
             </ListItem>
-
+            <ListItem>
+            The questions numbered 5, 7, 11, and 17 are starred, they contain information which may not make sense until a later point in the hunt.
+            </ListItem>
             <ListItem>
               The forum is the quickest way to reach the moderators of Cryptex.
               You may ask for hints on the forum.
