@@ -8,6 +8,7 @@ import {
   InputRightElement,
   Input,
   Button,
+  Heading,
   FormErrorMessage,
 } from "@chakra-ui/react";
 import { callApi } from "../../api/auth";
@@ -83,6 +84,13 @@ const LevelGrid = (props) => {
         >
           Show Question
         </Button>
+        <Heading
+          size="md"
+          style={{ display: isVisible ? "none" : "block" }}
+
+        >
+          {quote}
+        </Heading>
         <table
           style={{
             marginTop: "10px",
