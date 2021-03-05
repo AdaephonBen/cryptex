@@ -12,7 +12,7 @@ import {
 
 function Rules() {
   return (
-    <Box>
+    <Box className="container">
       <Flex flexDirection="column" justify="space-between" align="center">
         <Heading letterSpacing={[3, 7, 8]} fontWeight={[520, 600, 600]}>
           RULES AND GUIDELINES
