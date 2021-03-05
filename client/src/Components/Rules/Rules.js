@@ -14,10 +14,12 @@ function Rules() {
   return (
     <Box className="container">
       <Flex flexDirection="column" justify="space-between" align="center">
+        <Flex flexDir="column">
         <Heading letterSpacing={[3, 7, 8]} fontWeight={[520, 600, 600]}>
           RULES AND GUIDELINES
         </Heading>
         <Divider />
+          </Flex>
         <Flex
           flexDirection="column"
           align="center"
@@ -85,7 +87,7 @@ function Rules() {
           maxWidth="80%"
         >
           <Heading paddingBottom="10px">Guidelines</Heading>
-          <UnorderedList spacing={2}>
+          <OrderedList spacing={2}>
             <ListItem>
               Google is your friend. Usually. You’re expected to use Google and
               other online tools in your quest to crack Cryptex 2021. Do keep in
@@ -136,7 +138,7 @@ function Rules() {
               reasonable amount of time with access to just the internet and
               pen+paper.
             </ListItem>
-          </UnorderedList>
+          </OrderedList>
         </Flex>
       </Flex>
     </Box>

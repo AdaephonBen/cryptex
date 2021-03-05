@@ -37,7 +37,9 @@ const Header = (props) => {
     >
       <Flex align="center" mr={5}>
         <Image boxSize="50px" src={logo} />
-        <Heading letterSpacing="5px">{isAscii ? "67 82 89 80 84 69 88" : "CRYPTEX"}</Heading>
+        <Heading as="h2" size="lg" letterSpacing="5px">
+          {isAscii ? "67 82 89 80 84 69 88" : "CRYPTEX"}
+        </Heading>
       </Flex>
 
       <Box display={{ base: "block", md: "none" }} onClick={handleToggle}>
@@ -80,7 +82,7 @@ const Header = (props) => {
         </MenuItems>
 
         <MenuItems>
-          <Link href="https://forum.com>">Forum</Link>
+          <Link href="https://discord.gg/y2DZeMA7hj">Forum</Link>
         </MenuItems>
       </Box>
 
