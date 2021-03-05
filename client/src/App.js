@@ -14,6 +14,7 @@ import Register from "./Components/Register/register";
 import Rules from "./Components/Rules/Rules";
 import background from "./assets/background.jpg";
 import BonusQuestions from "./Components/BonusQuestion/BonusQuestions";
+import PreviousQuestions from "./Components/PreviousQuestion/PreviousQuestions";
 
 const Fonts = () => (
   <Global
@@ -158,6 +159,7 @@ function App() {
         backgroundImage={`url(${background})`}
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
+        backgroundAttachment="fixed"
       >
         <Navbar
           isAuthenticated={isAuthenticated}
@@ -174,6 +176,12 @@ function App() {
           <Route path="/portal">
             <Portal getAccessTokenSilently={getAccessTokenSilently} />
           </Route>
+          <Route path="/previous">
+            <PreviousQuestions
+              getAccessTokenSilently={getAccessTokenSilently}
+            />
+          </Route>
+
           <Route path="/leaderboard">
             <Leaderboard />
           </Route>
@@ -181,7 +189,7 @@ function App() {
             <Rules />
           </Route>
           <Route path="/">
-            <LandingPage />
+            <LandingPage loginWithRedirect={loginWithRedirect} />
           </Route>
         </Switch>
       </Box>

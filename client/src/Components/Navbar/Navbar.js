@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Flex, Text, Link, Heading, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Text,
+  Link,
+  Heading,
+  Image,
+} from "@chakra-ui/react";
 import "./styles.css";
 import logo from "../../assets/512x512notext.png";
 
@@ -10,18 +17,12 @@ const MenuItems = ({ children }) => (
   </Text>
 );
 
-MenuItems.propTypes = {
-  children: PropTypes.string,
-};
-
-MenuItems.defaultProps = {
-  children: "Link",
-};
-
-function Navbar(props) {
-  const [showNavbar, setShowNavbar] = useState(false);
-
-  const { isAuthenticated, loginWithRedirect, logout } = props;
+// Note: This code could be better, so I'd recommend you to understand how I solved and you could write yours better :)
+const Header = (props) => {
+  const [show, setShow] = useState(false);
+  const handleToggle = () => setShow(!show);
+  const { isAuthenticated } = props;
+  console.log("Show", show);
 
   return (
     <Flex
@@ -29,94 +30,80 @@ function Navbar(props) {
       align="center"
       justify="space-between"
       wrap="wrap"
-      pl="20px"
-      color="white"
-      flex="0 1 auto"
+      padding="1.5rem"
       className="container"
+      color="white"
+      {...props}
     >
-      <Flex>
-        <Image
-          src={logo}
-          boxSize="100px"
-          style={{
-            filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5))",
-          }}
-        />
+      <Flex align="center" mr={5}>
+        <Image boxSize="50px" src={logo} />
+        <Heading letterSpacing="5px">CRYPTEX</Heading>
+      </Flex>
 
-        <Heading
-          as="h1"
-          size="lg"
-          className="title"
-          style={{
-            color: "#40e0d0",
-          }}
-          paddingRight={{ base: "5px", md: "20px", lg: "25px" }}
+      <Box display={{ base: "block", md: "none" }} onClick={handleToggle}>
+        <svg
+          fill="white"
+          width="12px"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          CRYPTEX
-        </Heading>
-      </Flex>
+          <title>Menu</title>
+          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+        </svg>
+      </Box>
 
-      {/* <Box display={["block", "none"]} onClick={handleToggle()}>
-          <svg
-            fill="white"
-            width="12px"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <title>Menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-          </svg>
-        </Box> */}
-
-      <Flex
-        display={[showNavbar ? "block" : "none", "flex"]}
-        // width={["full", "full"]}
-        // alignItems="center"
-        flex="1 0 0"
-        justifyContent="flex-end"
+      <Box
+        display={{ sm: show ? "block" : "none", md: "flex" }}
+        width={{ sm: "full", md: "auto" }}
+        alignItems="center"
+        flexGrow={1}
       >
-        <MenuItems>
-          <Link href="google.com" isExternal className="navbar-link">
-            Forum
-          </Link>
-        </MenuItems>
-        <MenuItems>
-          <Link href="leaderboard" className="navbar-link">Leaderboard</Link>
-        </MenuItems>
-        <MenuItems>
-          <Link href="rules" className="navbar-link">
-            Rules
-          </Link>
-        </MenuItems>
         {isAuthenticated && (
-          <MenuItems>
-            <Link href="google.com" className="navbar-link">
-              Levels
-            </Link>
-          </MenuItems>
+          <>
+            <MenuItems>
+              <Link href="/bonus">Bonus Questions</Link>
+            </MenuItems>
+            <MenuItems>
+              <Link href="/previous">Previous Questions</Link>
+            </MenuItems>
+            <MenuItems>
+              <Link href="/portal">Current Question</Link>
+            </MenuItems>
+          </>
         )}
-        {isAuthenticated && (
-          <MenuItems>
-            <Link onClick={() => logout()} className="navbar-link">
-              Sign Out
-            </Link>
-          </MenuItems>
-        )}
-        {!isAuthenticated && (
-          <MenuItems>
-            <Link className="navbar-link" onClick={() => loginWithRedirect()}>
-              Sign In
-            </Link>
-          </MenuItems>
-        )}
-      </Flex>
+        <MenuItems>
+          <Link href="/rules">Rules and Guidelines</Link>
+        </MenuItems>
+
+        <MenuItems>
+          <Link href="/leaderboard>">Leaderboard</Link>
+        </MenuItems>
+
+        <MenuItems>
+          <Link href="https://forum.com>">Forum</Link>
+        </MenuItems>
+      </Box>
+
+      <Box
+        display={{ sm: show ? "block" : "none", md: "block" }}
+        mt={{ base: 4, md: 0 }}
+      >
+        <Button
+          bg="transparent"
+          border="1px"
+          onClick={() => {
+            if (isAuthenticated) {
+              props.logout({ returnTo: process.env.REACT_APP_LOGOUT_URL });
+            } else {
+              props.loginWithRedirect();
+            }
+          }}
+        >
+          {isAuthenticated ? "Sign out" : "Sign in"}
+        </Button>
+      </Box>
     </Flex>
   );
-}
-
-Navbar.propTypes = {
-  isSidebarOpen: PropTypes.bool.isRequired,
-  toggleSidebar: PropTypes.func.isRequired,
 };
 
-export default Navbar;
+export default Header;

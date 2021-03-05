@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 import {
   Flex,
   FormErrorMessage,
@@ -13,6 +13,8 @@ import {
 import "./styles.css";
 
 import { callApi } from "../../api/auth";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
+import Loading from "../LoadingPage/Loading";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -48,9 +50,10 @@ const Register = (props) => {
     <div className="landing">
       <Flex
         align="center"
-        justifyContent="space-between"
+        
         className="center-box"
         flexDirection="column"
+        height="100vh"
       >
         <Heading className="title">REGISTER</Heading>
         <Flex className="form" flexDirection="column">
@@ -93,4 +96,8 @@ const Register = (props) => {
   );
 };
 
-export default withRouter(Register);
+export default withRouter(
+  withAuthenticationRequired(Register, {
+    onRedirecting: () => <Loading />,
+  })
+);

@@ -6,8 +6,12 @@ import {
   Input,
   Button,
   FormErrorMessage,
+  InputRightElement,
+  InputGroup,
+  IconButton,
 } from "@chakra-ui/react";
 import { callApi } from "../../api/auth";
+import { FaAngleRight } from "react-icons/fa";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -52,32 +56,56 @@ const LevelImage = (props) => {
       <Flex justifyContent="center" flex="1" minHeight="200px">
         <Image src={url} minHeight="200px" />
       </Flex>
-      <Flex flex="1" minHeight="0px">
+      <Flex
+        minHeight="0px"
+        width="80%"
+        justifyContent="space-between"
+        marginTop="30px"
+        alignItems="center"
+        alignSelf="center"
+      >
         <form
           style={{
-            marginTop: "30px",
+            display: "flex",
+            width: "75%",
+            justifyContent: "space-between",
+            alignSelf: "center",
+            margin: "auto",
           }}
           onSubmit={handleSubmit}
         >
           <FormControl id="answer" isInvalid={isIncorrect}>
-            <Input
-              type="text"
-              placeholder="Answer"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-            />
-            <FormErrorMessage>Incorrect Answer :(</FormErrorMessage>
+            <InputGroup
+              alignSelf="center"
+              display="flex"
+              margin="auto"
+              padding="auto"
+            >
+              <Input
+                type="text"
+                size="sm"
+                placeholder="Answer"
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+              />
+              <InputRightElement>
+                <IconButton
+                  mt={4}
+                  colorScheme="gray"
+                  type="submit"
+                  size="md/"
+                  aria-label="Submit"
+                  isLoading={isLoading}
+                  isDisabled={isLoading}
+                  icon={<FaAngleRight />}
+                  marginBottom="15px"
+                />
+              </InputRightElement>
+            </InputGroup>
+            <FormErrorMessage>
+              Incorrect Answer. Please try again
+            </FormErrorMessage>
           </FormControl>
-          <Button
-            mt={4}
-            colorScheme="teal"
-            type="submit"
-            width="100%"
-            isLoading={isLoading}
-            isDisabled={isLoading}
-          >
-            Submit
-          </Button>
         </form>
       </Flex>
     </Flex>

@@ -116,6 +116,38 @@ body {
 
 .te {
     text-align: center;
+    /* float: right; */
+    display: flex;
+    padding-top: 3 em;
+}
+
+div.l.te
+{
+     display: flex;
+     /* margin-left: 20%; */
+    overflow-x: hidden ;
+
+}
+img.te 
+{
+    position: relative;
+    /* margin-left: 30%; */
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+
+}
+
+
+@media screen and (min-width: 980px)
+{
+    div.l.te
+    {
+        /* display: flex; */
+        
+        float: right;
+    }
 }
 
 .x {
@@ -140,7 +172,7 @@ q:after {
     content: none;
 }
 
-table {
+table.h {
     border-collapse: collapse;
     border-spacing: 0;
 }
@@ -240,6 +272,10 @@ i {
 p.l {
     margin: 0 0 2em 0;
 }
+h2 p.l
+{
+    display: inline-block;
+}
 
 h1.l,
 h2.l,
@@ -325,6 +361,7 @@ code.l {
     font-size: 0.9em;
     margin: 0 0.25em;
     padding: 0.25em 0.65em;
+    display: inline-block;
 }
 
 pre {
@@ -2357,7 +2394,7 @@ input[type="radio"]+label:before {
 .image.fit {
     display: block;
     margin: 0 0 2em 0;
-    width: 100%;
+    width: 105%;
 }
 
 .image.fit img {
@@ -2554,26 +2591,26 @@ ul.actions.fit.stacked {
     overflow-x: auto;
 }
 
-table {
+table.l {
     margin: 0 0 2em 0;
     width: 100%;
 }
 
-table tbody tr {
+table.l tbody tr {
     border: solid 1px rgba(255, 255, 255, 0.3);
     border-left: 0;
     border-right: 0;
 }
 
-table tbody tr:nth-child(2n+1) {
+table.l tbody tr:nth-child(2n+1) {
     background-color: rgba(255, 255, 255, 0.075);
 }
 
-table td {
+table.h td {
     padding: 0.75em 0.75em;
 }
 
-table th {
+table.h th {
     color: #ffffff;
     font-size: 0.9em;
     font-weight: 300;
@@ -2581,11 +2618,11 @@ table th {
     text-align: left;
 }
 
-table thead {
+table.h thead {
     border-bottom: solid 1px rgba(255, 255, 255, 0.3);
 }
 
-table tfoot {
+table.h tfoot {
     border-top: solid 1px rgba(255, 255, 255, 0.3);
 }
 
@@ -3327,11 +3364,13 @@ body.landing #lheader {
     text-align: right;
     vertical-align: middle;
     z-index: 1;
+    overflow-x: hidden;
 }
 
 #banner .lcontent header {
     display: inline-block;
     vertical-align: middle;
+    overflow-x: hidden;
 }
 
 #banner .lcontent header h2 {
@@ -3495,7 +3534,7 @@ body.is-touch #banner {
         display: block;
         margin: 0;
         max-height: 40vh;
-        overflow: hidden;
+        /* overflow: hidden; */
     }
     .lspotlight .lcontent {
         background-color: #1c1d26;
@@ -3559,6 +3598,10 @@ body.is-touch #banner {
 #navPanel,
 #titleBar {
     display: none;
+}
+
+body {
+    overflow-x:hidden;
 }
 
 @media screen and (max-width: 736px) {
@@ -3819,6 +3862,15 @@ body.is-touch #banner {
     body {
         min-width: 320px;
     }
+    div.lcontent
+    {
+        width: 90%;
+        /* padding: 10%; */
+    }
+    section 
+    {
+        width: 100vw;
+    }
     body,
     input,
     select,
@@ -3838,6 +3890,7 @@ body.is-touch #banner {
     }
     .lspotlight .lcontent {
         padding: 3em 1.25em 1em 1.25em !important;
+        
     }
     /* Wrapper */
     .wrapper {

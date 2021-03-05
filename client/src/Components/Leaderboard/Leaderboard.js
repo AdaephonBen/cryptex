@@ -14,7 +14,7 @@ import "./styles.css";
 
 function Leaderboard() {
   return (
-    <Box className="page">
+    <Box className="container">
       <Flex
         align="center"
         justify="space-between"
