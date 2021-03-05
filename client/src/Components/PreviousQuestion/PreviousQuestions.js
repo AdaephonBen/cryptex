@@ -13,6 +13,27 @@ import ace from "../Question/cards/ace.png";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
+const LevelDownload = (props) => {
+  const { question } = props;
+  const { url } = question.question;
+  return (
+    <Flex
+      direction="column"
+      width="100%"
+      height="100%"
+      alignItems="center"
+      justifyContent="center"
+      minHeight="0px"
+    >
+      <Flex justifyContent="center" minHeight="200px">
+        <Link href={url} download>
+          Click me!
+        </Link>
+      </Flex>
+    </Flex>
+  );
+};
+
 const LevelLink = (props) => {
   const { question } = props;
   return (
@@ -1028,6 +1049,8 @@ const PreviousQuestion = (question) => {
     currentLevel = <LevelCards question={question} />;
   } else if (question.question_type === 5) {
     currentLevel = <LevelLink question={question} />;
+  } else if (question.question_type === 6) {
+    currentLevel = <LevelDownload question={question} />;
   }
 
   return (

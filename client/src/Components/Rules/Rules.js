@@ -15,11 +15,11 @@ function Rules() {
     <Box className="container">
       <Flex flexDirection="column" justify="space-between" align="center">
         <Flex flexDir="column">
-        <Heading letterSpacing={[3, 7, 8]} fontWeight={[520, 600, 600]}>
-          RULES AND GUIDELINES
-        </Heading>
-        <Divider />
-          </Flex>
+          <Heading letterSpacing={[3, 7, 8]} fontWeight={[520, 600, 600]}>
+            RULES AND GUIDELINES
+          </Heading>
+          <Divider />
+        </Flex>
         <Flex
           flexDirection="column"
           align="center"
@@ -89,9 +89,10 @@ function Rules() {
           <Heading paddingBottom="10px">Guidelines</Heading>
           <OrderedList spacing={2}>
             <ListItem>
-            We STRONGLY recommend using a laptop for solving Cryptex. 
-            Some of the questions may not be properly formatted on a mobile device, and you may miss key elements of a question.
-            </ListItem>   
+              We STRONGLY recommend using a laptop for solving Cryptex. Some of
+              the questions may not be properly formatted on a mobile device,
+              and you may miss key elements of a question.
+            </ListItem>
             <ListItem>
               Google is your friend. Usually. You’re expected to use Google and
               other online tools in your quest to crack Cryptex 2021. Do keep in
@@ -115,8 +116,8 @@ function Rules() {
               and other such variations.
             </ListItem>
             <ListItem>
-            Some questions are audio based.If a question doesn’t make sense right away, 
-            try unmuting your device and loading the page again.
+              Some questions are audio based.If a question doesn’t make sense
+              right away, try unmuting your device and loading the page again.
             </ListItem>
             <ListItem>
               Clues might be hidden (especially in the first few questions) to
@@ -133,7 +134,9 @@ function Rules() {
               out the answer and/or receive another part of the clue.
             </ListItem>
             <ListItem>
-            The questions numbered 5, 7, 11, and 17 are starred, they contain information which may not make sense until a later point in the hunt.
+              The questions numbered 5, 6, 11, and 17 are starred, they contain
+              information which may not make sense until a later point in the
+              hunt.
             </ListItem>
             <ListItem>
               The forum is the quickest way to reach the moderators of Cryptex.
