@@ -181,7 +181,7 @@ function App() {
             <Rules />
           </Route>
           <Route path="/">
-            <LandingPage />
+            <LandingPage loginWithRedirect={loginWithRedirect} />
           </Route>
         </Switch>
       </Box>
