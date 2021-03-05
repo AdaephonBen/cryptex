@@ -54,10 +54,10 @@ const Header = (props) => {
         </svg>
       </Box>
 
-      <Box
+      <Flex
         display={{ sm: show ? "block" : "none", md: "flex" }}
         width={{ sm: "full", md: "auto" }}
-        alignItems="center"
+        marginRight="0px"
         flexGrow={1}
       >
         {isAuthenticated && (
@@ -84,17 +84,7 @@ const Header = (props) => {
         <MenuItems>
           <Link href="https://discord.gg/y2DZeMA7hj">Forum</Link>
         </MenuItems>
-      </Box>
-      {props.level != null && (
-        <Box
-          display={{ sm: show ? "block" : "none", md: "flex" }}
-          width={{ sm: "full", md: "auto" }}
-          alignItems="center"
-          flexGrow={1}
-        >
-          Current Level: {props.level}
-        </Box>
-      )}
+      </Flex>
 
       <Box
         display={{ sm: show ? "block" : "none", md: "block" }}

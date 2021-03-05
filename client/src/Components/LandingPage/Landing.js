@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Heading, Button } from "@chakra-ui/react";
+import { Flex, Heading, Button, Box } from "@chakra-ui/react";
 import "./styles.css";
 import "./assets/css/main.css";
 import "./assets/css/fontawesome-all.min.css";
@@ -11,38 +11,12 @@ import ElanLogo from "./assets/elan-row-white-flat.png";
 const LandingPage = (props) => {
   return (
     <div>
-      {/* <header className="l" id="lheader">
-            <div>
-                <h1 id="logo"><a className="l" href="index.html">C R Y P T E X</a></h1>
-            </div>
-            <nav id="nav">
-                <ul>
-                    <li>
-                        <a href="index.html">About</a>
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-
-                            <li><a href="Privacy.html">Privacy Policy</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="countdown.html">Leaderboard</a>
-                    </li>
-                    <li><a href="rules.html">Rules</a></li>
-                    <li>
-                        <a href="countdown.html" class="button primary">DIVE IN!</a>
-                    </li>
-                </ul>
-            </nav>
-        </header> */}
-
       <section id="banner">
         <div class="lcontent">
           <header>
             <div className="l te">
               <img className="te" src={ElanLogo} style={{ height: "3.5em" }} />
             </div>
-
             <h2 className="l">
               <code className="l">Cryptex 2021</code>
             </h2>
@@ -51,8 +25,7 @@ const LandingPage = (props) => {
               <br /> Coming soon on 5th March 2021 at 6:00 PM IST.
             </p>
             <a
-              class="button primary landing"
-              id="countdown"
+              className="button primary landing"
               onClick={props.loginWithRedirect}
             >
               {" "}
@@ -60,7 +33,7 @@ const LandingPage = (props) => {
             </a>
           </header>
           <span class="image">
-            <img src={LogInvert} alt="Infero Logo" />
+            <img src={LogInvert} alt="Cryptex Logo" />
           </span>
         </div>
         <a href="#one" class="goto-next scrolly">
@@ -86,7 +59,7 @@ const LandingPage = (props) => {
               </div>
               <div className="lcol-12 lcol-12-medium">
                 <header>
-                  <h3 className="l te">Title Sponsor</h3>
+                  {/*<Heading size="lg" className="l te">Title Sponsor</Heading>*/}
                 </header>
                 <p>&nbsp;</p>
               </div>
@@ -109,7 +82,7 @@ const LandingPage = (props) => {
                 <p className="l">Nikhil Pallamreddy</p>
               </div>
               <div className="lcol-3 lcol-4-medium lcol-6-small te x">
-                <p className="l">&nbsp;</p>
+                <p className="l">Spandan More</p>
               </div>
               <div className="lcol-3 lcol-4-medium lcol-6-small te x">
                 <p className="l">Vishnu VS</p>
@@ -118,7 +91,7 @@ const LandingPage = (props) => {
                 <p className="l">Rachit Keerti Das</p>
               </div>
               <div className="lcol-3 lcol-4-medium lcol-6-small te x">
-                <p className="l">&nbsp;</p>
+                <p className="l">Shreyas Havaldar</p>
               </div>
             </div>
           </div>
@@ -164,7 +137,7 @@ const LandingPage = (props) => {
             <p></p>
           </header>
           <div className="box alt">
-            <div className="lrow gtr-uniform">
+            <Box className="lrow gtr-uniform">
               <section className="lcol-4 lcol-6-medium lcol-12-xsmall">
                 <span className="icon solid alt major fa-chart-area"></span>
                 <h3 className="l">5 years</h3>
@@ -215,39 +188,8 @@ const LandingPage = (props) => {
                   conquer.
                 </p>
               </section>
-            </div>
+            </Box>
           </div>
-          <footer className="major"></footer>
-        </div>
-      </section>
-      <section id="four" className="wrapper style2 special fade">
-        <div className="lcontainer">
-          <header>
-            <h2 className="l">Love Cryptex?</h2>
-            <p>
-              Subscribe to the Elan & nVision newsletter and enjoy more exciting
-              events.
-            </p>
-          </header>
-          <form method="post" action="#" className="cta">
-            <div className="lrow gtr-uniform gtr-50">
-              <div className="lcol-8 lcol-12-xsmall">
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Your Email Address"
-                />
-              </div>
-              <div className="lcol-4 lcol-12-xsmall">
-                <input
-                  type="submit"
-                  value="Subscribe"
-                  className="fit primary"
-                />
-              </div>
-            </div>
-          </form>
         </div>
       </section>
     </div>

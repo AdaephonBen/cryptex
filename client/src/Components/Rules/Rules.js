@@ -89,6 +89,10 @@ function Rules() {
           <Heading paddingBottom="10px">Guidelines</Heading>
           <OrderedList spacing={2}>
             <ListItem>
+            We STRONGLY recommend using a laptop for solving Cryptex. 
+            Some of the questions may not be properly formatted on a mobile device, and you may miss key elements of a question.
+            </ListItem>
+            <ListItem>
               Google is your friend. Usually. You’re expected to use Google and
               other online tools in your quest to crack Cryptex 2021. Do keep in
               mind that Google may give you erroneous results in certain cases.
@@ -102,15 +106,18 @@ function Rules() {
               The questions are open-ended, may have red herrings, cheeky hints
               and may lead you on wild goose chases. If you are getting nowhere
               with a certain approach, do consider that you might be on the
-              wrong train of thought.{" "}
+              wrong train of thought.
             </ListItem>
 
             <ListItem>
               On the other hand, it could be that the answer is ‘colour’ when
               you have been trying ‘color’. Check for alternate spelling, names
-              and other such variations.{" "}
+              and other such variations.
             </ListItem>
-
+            <ListItem>
+            Some questions are audio based.If a question doesn’t make sense right away, 
+            try unmuting your device and loading the page again.
+            </ListItem>
             <ListItem>
               Clues might be hidden (especially in the first few questions) to
               reduce wrong trains of attack. Their absence, however, does not
