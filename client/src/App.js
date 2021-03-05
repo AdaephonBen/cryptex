@@ -132,6 +132,7 @@ const Fonts = () => (
 );
 
 function App() {
+  const [isAscii, setisAscii] = useState(false);
   const {
     isAuthenticated,
     loginWithRedirect,
@@ -165,6 +166,7 @@ function App() {
           isAuthenticated={isAuthenticated}
           loginWithRedirect={loginWithRedirect}
           logout={logout}
+          isAscii={isAscii}
         />
         <Switch>
           <Route path="/bonus">
@@ -174,7 +176,9 @@ function App() {
             <Register getAccessTokenSilently={getAccessTokenSilently} />
           </Route>
           <Route path="/portal">
-            <Portal getAccessTokenSilently={getAccessTokenSilently} />
+            <Portal getAccessTokenSilently={getAccessTokenSilently}
+                  setisAscii={setisAscii}
+            />
           </Route>
           <Route path="/previous">
             <PreviousQuestions

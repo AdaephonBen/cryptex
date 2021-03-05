@@ -4,7 +4,6 @@ import {
   Image,
   FormControl,
   Input,
-  Button,
   FormErrorMessage,
   InputRightElement,
   InputGroup,
@@ -16,7 +15,7 @@ import { FaAngleRight } from "react-icons/fa";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const LevelImage = (props) => {
-  const { question, getAccessTokenSilently, setAnswers } = props;
+  const { question, getAccessTokenSilently, setAnswers} = props;
   const { url } = question.question;
   const [answer, setAnswer] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -93,7 +92,7 @@ const LevelImage = (props) => {
                   mt={4}
                   colorScheme="gray"
                   type="submit"
-                  size="md/"
+                  size="md"
                   aria-label="Submit"
                   isLoading={isLoading}
                   isDisabled={isLoading}
@@ -103,7 +102,7 @@ const LevelImage = (props) => {
               </InputRightElement>
             </InputGroup>
             <FormErrorMessage>
-              Incorrect Answer. Please try again
+              Incorrect Answer. Please try again.
             </FormErrorMessage>
           </FormControl>
         </form>

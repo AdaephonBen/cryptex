@@ -23,10 +23,11 @@ const API_URL = process.env.REACT_APP_API_URL;
 const Level = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [hint, setHint] = useState("");
-  const { question, getAccessTokenSilently, setAnswers } = props;
+  const { question, getAccessTokenSilently, setAnswers, setisAscii } = props;
   const [lifelines, setLifelines] = useState([]);
   let currentLevel;
   if (question.question_type === 1) {
+    setisAscii(false);
     currentLevel = (
       <LevelImage
         question={question}
@@ -37,6 +38,15 @@ const Level = (props) => {
   } else if (question.question_type === 2) {
     currentLevel = (
       <LevelGrid
+        question={question}
+        getAccessTokenSilently={getAccessTokenSilently}
+        setAnswers={setAnswers}
+      />
+    );
+  } else if (question.question_type === 3) {
+    setisAscii(true);
+    currentLevel = (
+      <LevelImage
         question={question}
         getAccessTokenSilently={getAccessTokenSilently}
         setAnswers={setAnswers}

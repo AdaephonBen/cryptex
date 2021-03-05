@@ -7,7 +7,9 @@ import "./styles.css";
 const MiniLeaderboard = () => {
   const [reload, setReload] = useState(false);
   return (
-    <Flex className="mini-leaderboard" flexDirection="column">
+    <Flex className="mini-leaderboard" flexDirection="column"
+      display={{ base: "none", md: "flex", lg: "flex" }}
+    >
       <Flex className="leaderboard-header" justifyContent="space-between">
         <Text className="leaderboard-title">Leaderboard</Text>
         <Flex className="leaderboard-buttons">
