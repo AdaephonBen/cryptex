@@ -67,8 +67,8 @@ const LevelCards = (props) => {
 
     var id = 52;
 
-    var width = 96;
-    var height = 96;
+    var width = 120;
+    var height = 120;
 
     var cwidth = width * Math.round(dpr);
     var cheight = height * Math.round(dpr);
