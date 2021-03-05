@@ -45,11 +45,6 @@ function Leaderboard() {
           />
         </Flex>
         <Table />
-        <Box className="paginator">
-          <IconButton icon={<FaAngleLeft />} size="sm" />
-          &nbsp;Page 1 of 20&nbsp;
-          <IconButton icon={<FaAngleRight />} size="sm" />
-        </Box>
       </Flex>
     </Box>
   );

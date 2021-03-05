@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Text, Collapse, Button } from "@chakra-ui/react";
 import "./styles.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function Record(props) {
   const [show, setShow] = React.useState(false);
   const handleToggle = () => setShow(!show);
-  const { users, rank, team } = props;
+  const { users, rank, team, level } = props;
   const members = users.map((user) => <Text>{user}</Text>);
   return (
     <tr className="record">
@@ -24,7 +26,7 @@ function Record(props) {
           {members}
         </Collapse>
       </td>
-      <td>20</td>
+      <td>{level}</td>
     </tr>
   );
 }
@@ -35,7 +37,20 @@ Record.propTypes = {
   team: PropTypes.string.isRequired,
 };
 
-function Table() {
+function Table(props) {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const getLeaderboard = async () => {
+      console.log("Started Refreshing the leaderboard");
+      const res = await fetch(`${API_URL}leaderboard`);
+      const json = await res.json();
+      setData(json.slice(0, 20));
+    };
+    getLeaderboard();
+    const refresh = setInterval(getLeaderboard, 5000);
+    return () => clearInterval(refresh);
+  }, [props.reload]);
   return (
     <table className="table">
       <tr>
@@ -44,55 +59,38 @@ function Table() {
         <th>Level</th>
       </tr>
       <tbody>
+        {data.length > 0 &&
+          data.map((user) => (
+            <Record
+              rank={user.rank}
+              team={user.username}
+              users={[user.username]}
+              level={user.question_number}
+            />
+          ))}
         <Record
           rank="2"
           team="adaephonben"
           users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
+          level="20"
         />
         <Record
           rank="2"
           team="adaephonben"
           users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
+          level="20"
         />
         <Record
           rank="2"
           team="adaephonben"
           users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
+          level="20"
         />
         <Record
           rank="2"
           team="adaephonben"
           users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
-        />
-        <Record
-          rank="2"
-          team="adaephonben"
-          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
-        />
-        <Record
-          rank="2"
-          team="adaephonben"
-          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
-        />
-        <Record
-          rank="2"
-          team="adaephonben"
-          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
-        />
-        <Record
-          rank="2"
-          team="adaephonben"
-          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
-        />
-        <Record
-          rank="2"
-          team="adaephonben"
-          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
-        />
-        <Record
-          rank="2"
-          team="adaephonben"
-          users={["RonaldRoe", "JaneDoe", "RonaldRoe", "JaneDoe"]}
+          level="20"
         />
       </tbody>
     </table>
