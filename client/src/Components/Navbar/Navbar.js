@@ -85,7 +85,7 @@ const Header = (props) => {
           border="1px"
           onClick={() => {
             if (isAuthenticated) {
-              props.logout();
+              props.logout({ returnTo: process.env.REACT_APP_LOGOUT_URL });
             } else {
               props.loginWithRedirect();
             }
