@@ -85,6 +85,16 @@ const Header = (props) => {
           <Link href="https://discord.gg/y2DZeMA7hj">Forum</Link>
         </MenuItems>
       </Flex>
+      {props.level != null && (
+        <Box
+          display={{ sm: show ? "block" : "none", md: "flex" }}
+          width={{ sm: "full", md: "auto" }}
+          alignItems="center"
+          flexGrow={1}
+        >
+          Current Level: {props.level}
+        </Box>
+      )}
 
       <Box
         display={{ sm: show ? "block" : "none", md: "block" }}
