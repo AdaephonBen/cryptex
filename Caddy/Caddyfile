@@ -1,4 +1,4 @@
-dev7098709.elan.org.in
+cryptex.elan.org.in
 encode gzip
 
 route /api/* {
