@@ -15,7 +15,7 @@ import { withAuthenticationRequired } from "@auth0/auth0-react";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const Portal = (props) => {
-  const { history, getAccessTokenSilently , setisAscii } = props;
+  const { history, getAccessTokenSilently, setisAscii } = props;
   const [isCountdownTimerOpen, setisCountdownTimerOpen] = useState(true);
   const [isLeaderboardOpen, setisLeaderboardOpen] = useState(true);
   const [isHintsOpen, setisHintsOpen] = useState(true);
@@ -68,9 +68,12 @@ const Portal = (props) => {
   return (
     <Flex className="portal-page" flexDir="column">
       <Flex className="portal" flexGrow={1} overflowY="auto">
-        <Flex className="sidebar-toggle"
-        display={{ base: "none", md: "flex", lg: "flex" }} 
-        flexDirection="column" mr="5px">
+        <Flex
+          className="sidebar-toggle"
+          display={{ base: "none", md: "flex", lg: "flex" }}
+          flexDirection="column"
+          mr="5px"
+        >
           <Tooltip
             display={{ base: "none", md: "flex", lg: "flex" }}
             label={
@@ -179,6 +182,7 @@ const Portal = (props) => {
                   setisAscii={setisAscii}
                   getAccessTokenSilently={getAccessTokenSilently}
                   setAnswers={setAnswers}
+                  setLevel={props.setLevel}
                 />
               </Flex>
               <Flex

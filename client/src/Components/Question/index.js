@@ -27,6 +27,7 @@ const Level = (props) => {
   const { question, getAccessTokenSilently, setAnswers, setisAscii } = props;
   const [lifelines, setLifelines] = useState([]);
   let currentLevel;
+  props.setLevel(question.question_number);
   if (question.question_type === 1) {
     setisAscii(false);
     currentLevel = (

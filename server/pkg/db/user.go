@@ -23,7 +23,7 @@ func CreateNewUser(ctx context.Context, username string, email string) error {
 }
 
 func IncrementUserLevel(ctx context.Context, email string) error {
-	_, err := DB.Exec(ctx, `UPDATE "User" SET question_number = question_number + 1 WHERE email_id=$1`, email)
+	_, err := DB.Exec(ctx, `UPDATE "User" SET question_number = question_number + 1, last_modified = now() WHERE email_id=$1`, email)
 	if err != nil {
 		logs.LogWarning(err, "Unable to increment user level")
 	}

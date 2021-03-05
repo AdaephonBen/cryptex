@@ -133,6 +133,7 @@ const Fonts = () => (
 
 function App() {
   const [isAscii, setisAscii] = useState(false);
+  const [level, setLevel] = useState(null);
   const {
     isAuthenticated,
     loginWithRedirect,
@@ -167,6 +168,7 @@ function App() {
           loginWithRedirect={loginWithRedirect}
           logout={logout}
           isAscii={isAscii}
+          level={level}
         />
         <Switch>
           <Route path="/bonus">
@@ -179,6 +181,7 @@ function App() {
             <Portal
               getAccessTokenSilently={getAccessTokenSilently}
               setisAscii={setisAscii}
+              setLevel={setLevel}
             />
           </Route>
           <Route path="/previous">
