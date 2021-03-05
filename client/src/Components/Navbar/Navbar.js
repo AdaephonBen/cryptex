@@ -21,7 +21,7 @@ const MenuItems = ({ children }) => (
 const Header = (props) => {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
-  const { isAuthenticated } = props;
+  const { isAuthenticated, isAscii } = props;
   console.log("Show", show);
 
   return (
@@ -37,7 +37,7 @@ const Header = (props) => {
     >
       <Flex align="center" mr={5}>
         <Image boxSize="50px" src={logo} />
-        <Heading letterSpacing="5px">CRYPTEX</Heading>
+        <Heading letterSpacing="5px">{isAscii ? "67 82 89 80 84 69 88" : "CRYPTEX"}</Heading>
       </Flex>
 
       <Box display={{ base: "block", md: "none" }} onClick={handleToggle}>
@@ -72,11 +72,11 @@ const Header = (props) => {
           </>
         )}
         <MenuItems>
-          <Link href="/rules">Rules and Guidelines</Link>
+          <Link href="/rules">Rules</Link>
         </MenuItems>
 
         <MenuItems>
-          <Link href="/leaderboard>">Leaderboard</Link>
+          <Link href="/leaderboard">Leaderboard</Link>
         </MenuItems>
 
         <MenuItems>

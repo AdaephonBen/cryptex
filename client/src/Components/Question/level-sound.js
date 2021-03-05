@@ -3,11 +3,15 @@ import {
   Flex,
   Text,
   FormControl,
+  InputGroup,
+  IconButton,
+  InputRightElement,
   Input,
   Button,
   FormErrorMessage,
 } from "@chakra-ui/react";
 import { callApi } from "../../api/auth";
+import { FaAngleRight } from "react-icons/fa";
 import * as Tone from "tone";
 import "./styles.css";
 
@@ -395,21 +399,46 @@ const LevelGrid = (props) => {
         </table>
       </Flex>
       <Flex flex="1" minHeight="0px" marginTop="10px">
-        <form
+      <form
           style={{
-            marginTop: "30px",
+            display: "flex",
+            width: "75%",
+            justifyContent: "space-between",
+            alignSelf: "center",
+            margin: "auto",
           }}
           onSubmit={handleSubmit}
         >
-          <Text>{quote}</Text>
           <FormControl id="answer" isInvalid={isIncorrect}>
-            <Input
-              type="text"
-              placeholder="Answer"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-            />
-            <FormErrorMessage>Incorrect Answer :(</FormErrorMessage>
+            <InputGroup
+              alignSelf="center"
+              display="flex"
+              margin="auto"
+              padding="auto"
+            >
+              <Input
+                type="text"
+                size="sm"
+                placeholder="Answer"
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+              />
+              <InputRightElement>
+                <IconButton
+                  mt={4}
+                  colorScheme="gray"
+                  type="submit"
+                  size="md"
+                  aria-label="Submit"
+                  isLoading={isLoading}
+                  isDisabled={isLoading}
+                  icon={<FaAngleRight />}
+                  marginBottom="15px"
+                />
+              </InputRightElement>
+            </InputGroup>
+        
+            <FormErrorMessage>Incorrect Answer. Please try again.</FormErrorMessage>
           </FormControl>
           <Button
             mt={4}

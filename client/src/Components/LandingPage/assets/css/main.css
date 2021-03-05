@@ -239,7 +239,7 @@ p.l{
     color: rgba(255, 255, 255, 0.85);
     font-family: "Roboto", Helvetica, sans-serif;
     font-size: 15pt;
-    font-weight: 100;
+    /*font-weight: 100;*/
     line-height: 1.75em;
 }
 
@@ -261,7 +261,7 @@ a.l:hover {
 strong,
 b {
     color: #ffffff;
-    font-weight: 300;
+    /*font-weight: 300;*/
 }
 
 em,
@@ -284,7 +284,7 @@ h4,
 h5,
 h6 {
     color: #ffffff;
-    font-weight: 300;
+    /*font-weight: 300;*/
     line-height: 1em;
     margin: 0 0 1em 0;
 }
