@@ -42,6 +42,7 @@ func Init(authmiddleware *jwtmiddleware.JWTMiddleware) chi.Router {
 			r.Post("/", controllers.CheckAnswerHandler)
 			r.Get("/bonus", controllers.GetBonusQuestionHandler)
 			r.Post("/bonus", controllers.CheckBonusAnswerHandler)
+			r.Get("/previous", controllers.GetPreviousQuestionsHandler)
 		})
 		r.Route("/user", func(r chi.Router) {
 			r.Use(authmiddleware.Handler)

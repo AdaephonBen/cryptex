@@ -10,6 +10,7 @@ import { callApi } from "../../api/auth";
 import "./styles.css";
 import Loading from "../LoadingPage/Loading";
 import History from "../History/History";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -206,4 +207,8 @@ const Portal = (props) => {
   );
 };
 
-export default withRouter(Portal);
+export default withRouter(
+  withAuthenticationRequired(Portal, {
+    onRedirecting: () => <Loading />,
+  })
+);

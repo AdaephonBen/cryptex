@@ -59,9 +59,17 @@ const Header = (props) => {
         flexGrow={1}
       >
         {isAuthenticated && (
-          <MenuItems>
-            <Link href="/bonus">Bonus Questions</Link>
-          </MenuItems>
+          <>
+            <MenuItems>
+              <Link href="/bonus">Bonus Questions</Link>
+            </MenuItems>
+            <MenuItems>
+              <Link href="/previous">Previous Questions</Link>
+            </MenuItems>
+            <MenuItems>
+              <Link href="/portal">Current Question</Link>
+            </MenuItems>
+          </>
         )}
         <MenuItems>
           <Link href="/rules">Rules and Guidelines</Link>

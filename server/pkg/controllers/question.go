@@ -2,9 +2,11 @@ package controllers
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/npalladium/cryptex/server/pkg/auth"
 	"github.com/npalladium/cryptex/server/pkg/db"
+	"github.com/npalladium/cryptex/server/pkg/logs"
 )
 
 type CheckAnswerRequest struct {
@@ -74,6 +76,7 @@ func CheckBonusAnswerHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	email_id := auth.GetEmail(r.Context())
 	err = db.CheckBonusAnswer(r.Context(), check_answer.BonusQuestionId, check_answer.Answer)
+	logs.WriteToBonusFile(check_answer.BonusQuestionId, email_id, check_answer.Answer, err == nil, time.Now())
 	if err != nil {
 		if err.Error() == "Incorrect Answer" {
 			serveJSON(w, http.StatusOK, "incorrect-answer")
@@ -98,4 +101,14 @@ func CheckBonusAnswerHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	serveJSON(w, http.StatusOK, "correct-answer")
+}
+
+func GetPreviousQuestionsHandler(w http.ResponseWriter, r *http.Request) {
+	email_id := auth.GetEmail(r.Context())
+	questions, err := db.GetPreviousQuestions(r.Context(), email_id)
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
+	serveJSON(w, http.StatusOK, questions)
 }

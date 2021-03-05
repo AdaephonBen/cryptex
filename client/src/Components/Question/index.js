@@ -90,18 +90,20 @@ const Level = (props) => {
 
   return (
     <Flex direction="column" className="level" padding="20px">
-      <Text marginBottom="10px">
-        Available Lifelines:
-        {lifelines.map((lifeline) => (
-          <Button
-            colorScheme="blue"
-            ml="10px"
-            onClick={() => consumeLifeline(lifeline)}
-          >
-            {lifeline}
-          </Button>
-        ))}
-      </Text>
+      {lifelines.length > 0 && (
+        <Text marginBottom="10px">
+          Available Lifelines:
+          {lifelines.map((lifeline) => (
+            <Button
+              colorScheme="blue"
+              ml="10px"
+              onClick={() => consumeLifeline(lifeline)}
+            >
+              {lifeline}
+            </Button>
+          ))}
+        </Text>
+      )}
       {currentLevel}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

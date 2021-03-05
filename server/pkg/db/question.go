@@ -73,6 +73,36 @@ func GetBonusQuestions(ctx context.Context, email string) ([]BonusQuestion, erro
 	return bonus_questions, nil
 }
 
+func GetPreviousQuestions(ctx context.Context, email_id string) ([]Question, error) {
+	var current_question_number int
+	err := DB.QueryRow(ctx, `SELECT question_number from "User" WHERE email_id=$1`, email_id).Scan(&current_question_number)
+	if err != nil {
+		logs.LogWarning(err, "unable to select question")
+		return nil, err
+	}
+	rows, err := DB.Query(ctx, `SELECT id, question_number, question, question_type FROM "Question" WHERE question_number < $1`, current_question_number)
+	if err != nil {
+		logs.LogWarning(err, "Unable to retrieve all questions")
+		return nil, err
+	}
+	var questions []Question
+	defer rows.Close()
+	for rows.Next() {
+		var current_question Question
+		err = rows.Scan(&current_question.Id, &current_question.Question_number, &current_question.Question, &current_question.Question_type)
+		if err != nil {
+			logs.LogWarning(err, "Unable to parse question")
+			return nil, err
+		}
+		questions = append(questions, current_question)
+	}
+	if rows.Err() != nil {
+		logs.LogWarning(rows.Err(), "Unable to retrieve all questions")
+		return nil, rows.Err()
+	}
+	return questions, nil
+}
+
 func CheckBonusAnswer(ctx context.Context, id int, answer string) error {
 	answer_hash := getHash(answer)
 	var db_answer_hash string
@@ -137,7 +167,10 @@ func GetQuestion(ctx context.Context, email_id string) (Question, error) {
 func CheckAnswer(ctx context.Context, email_id string, answer string) error {
 	answer_hash := getHash(answer)
 	var db_answer_hash string
-	err := DB.QueryRow(ctx, `SELECT q.answer FROM "User" u JOIN "Question" q ON q.question_number = u.question_number WHERE u.email_id=$1`, email_id).Scan(&db_answer_hash)
+	var question_number int
+	var username string
+	err := DB.QueryRow(ctx, `SELECT q.answer, q.question_number, u.username FROM "User" u JOIN "Question" q ON q.question_number = u.question_number WHERE u.email_id=$1`, email_id).Scan(&db_answer_hash, &question_number, &username)
+	logs.WriteToFile(question_number, username, answer, answer_hash == db_answer_hash, time.Now())
 	if err != nil {
 		return err
 	}

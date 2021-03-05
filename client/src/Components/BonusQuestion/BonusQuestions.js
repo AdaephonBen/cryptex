@@ -16,6 +16,8 @@ import {
 import { callApi } from "../../api/auth";
 import "./styles.css";
 import { useHistory } from "react-router-dom";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
+import Loading from "../LoadingPage/Loading";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -159,4 +161,6 @@ const BonusQuestions = (props) => {
   );
 };
 
-export default BonusQuestions;
+export default withAuthenticationRequired(BonusQuestions, {
+  onRedirecting: () => <Loading />,
+});

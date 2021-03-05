@@ -14,6 +14,7 @@ import Register from "./Components/Register/register";
 import Rules from "./Components/Rules/Rules";
 import background from "./assets/background.jpg";
 import BonusQuestions from "./Components/BonusQuestion/BonusQuestions";
+import PreviousQuestions from "./Components/PreviousQuestion/PreviousQuestions";
 
 const Fonts = () => (
   <Global
@@ -174,6 +175,12 @@ function App() {
           <Route path="/portal">
             <Portal getAccessTokenSilently={getAccessTokenSilently} />
           </Route>
+          <Route path="/previous">
+            <PreviousQuestions
+              getAccessTokenSilently={getAccessTokenSilently}
+            />
+          </Route>
+
           <Route path="/leaderboard">
             <Leaderboard />
           </Route>
