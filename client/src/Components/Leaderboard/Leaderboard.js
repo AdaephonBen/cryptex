@@ -34,7 +34,7 @@ function Leaderboard() {
           <Divider />
         </Flex>
         <Flex className="filters">
-          <FormControl>
+          {/*<FormControl>
             <Input placeholder="Team/User Name" size="sm" />
           </FormControl>
           <IconButton
@@ -42,14 +42,15 @@ function Leaderboard() {
             icon={<FaSearch />}
             size="sm"
             className="search"
-          />
+          />*/}
         </Flex>
         <Table />
-        <Box className="paginator">
+        {/*<Box className="paginator">
           <IconButton icon={<FaAngleLeft />} size="sm" />
           &nbsp;Page 1 of 20&nbsp;
           <IconButton icon={<FaAngleRight />} size="sm" />
-        </Box>
+          </Box>
+          */}
       </Flex>
     </Box>
   );
