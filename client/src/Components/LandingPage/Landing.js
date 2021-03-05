@@ -51,7 +51,6 @@ const LandingPage = (props) => {
               <br /> Coming soon on 5th March 2021 at 6:00 PM IST.
             </p>
             <a
-              href="https://forms.gle/SSsb9tQZbB2W6jdw8"
               class="button primary landing"
               id="countdown"
               onClick={props.loginWithRedirect}
