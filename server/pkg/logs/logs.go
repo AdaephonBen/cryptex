@@ -50,7 +50,7 @@ func Init() {
 	if err != nil {
 		LogError(err, "Unable to open question files")
 	}
-	bonusFile, err = os.OpenFile("correct.csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	bonusFile, err = os.OpenFile("bonus.csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		LogError(err, "Unable to open question files")
 	}
