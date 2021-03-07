@@ -60,19 +60,6 @@ const Header = (props) => {
         marginRight="0px"
         flexGrow={1}
       >
-        {isAuthenticated && (
-          <>
-            <MenuItems>
-              <Link href="/bonus">Bonus Questions</Link>
-            </MenuItems>
-            <MenuItems>
-              <Link href="/previous">Previous Questions</Link>
-            </MenuItems>
-            <MenuItems>
-              <Link href="/portal">Current Question</Link>
-            </MenuItems>
-          </>
-        )}
         <MenuItems>
           <Link href="/rules">Rules</Link>
         </MenuItems>
@@ -95,25 +82,6 @@ const Header = (props) => {
           Current Level: {props.level}
         </Box>
       )}
-
-      <Box
-        display={{ sm: show ? "block" : "none", md: "block" }}
-        mt={{ base: 4, md: 0 }}
-      >
-        <Button
-          bg="transparent"
-          border="1px"
-          onClick={() => {
-            if (isAuthenticated) {
-              props.logout({ returnTo: process.env.REACT_APP_LOGOUT_URL });
-            } else {
-              props.loginWithRedirect();
-            }
-          }}
-        >
-          {isAuthenticated ? "Sign out" : "Sign in"}
-        </Button>
-      </Box>
     </Flex>
   );
 };
