@@ -177,13 +177,6 @@ const Portal = (props) => {
                 }}
               >
                 {isLeaderboardOpen && <MiniLeaderboard />}
-                <Level
-                  question={question}
-                  setisAscii={setisAscii}
-                  getAccessTokenSilently={getAccessTokenSilently}
-                  setAnswers={setAnswers}
-                  setLevel={props.setLevel}
-                />
               </Flex>
               <Flex
                 className="second-row"
