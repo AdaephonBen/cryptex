@@ -22,15 +22,8 @@ const LandingPage = (props) => {
             </h2>
             <p className="l">
               Welcome to Cryptex 2021!
-              <br /> Coming soon on 5th March 2021 at 6:00 PM IST.
+              <br /> The event has finished. Thank you for participating!
             </p>
-            <a
-              className="button primary landing"
-              onClick={props.loginWithRedirect}
-            >
-              {" "}
-              Dive In!
-            </a>
           </header>
           <span class="image">
             <img src={LogInvert} alt="Cryptex Logo" />
