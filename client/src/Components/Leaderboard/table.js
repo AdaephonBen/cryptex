@@ -43,7 +43,9 @@ function Table(props) {
   useEffect(() => {
     const getLeaderboard = async () => {
       console.log("Started Refreshing the leaderboard");
-      const res = await fetch(`${API_URL}leaderboard`);
+      const res = await fetch(
+        `https://uploads157187.elan.org.in/leaderboard.json`
+      );
       const json = await res.json();
       setData(json);
     };
