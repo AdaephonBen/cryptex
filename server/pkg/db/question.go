@@ -80,7 +80,7 @@ func GetPreviousQuestions(ctx context.Context, email_id string) ([]Question, err
 		logs.LogWarning(err, "unable to select question")
 		return nil, err
 	}
-	rows, err := DB.Query(ctx, `SELECT id, question_number, question, question_type FROM "Question" WHERE question_number < $1`, current_question_number)
+	rows, err := DB.Query(ctx, `SELECT id, question_number, question, question_type FROM "Question" WHERE question_number < $1 ORDER BY question_number`, current_question_number)
 	if err != nil {
 		logs.LogWarning(err, "Unable to retrieve all questions")
 		return nil, err
