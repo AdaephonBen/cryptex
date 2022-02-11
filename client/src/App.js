@@ -197,7 +197,7 @@ function App() {
           <Route path="/rules">
             <Rules />
           </Route>
-          <Route path="/abc">
+          <Route path="/breakout">
             <LevelBreakout/>
           </Route>
           <Route path="/">
