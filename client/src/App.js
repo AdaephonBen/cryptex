@@ -15,6 +15,7 @@ import Rules from "./Components/Rules/Rules";
 import background from "./assets/background.jpg";
 import BonusQuestions from "./Components/BonusQuestion/BonusQuestions";
 import PreviousQuestions from "./Components/PreviousQuestion/PreviousQuestions";
+import LevelBreakout from "./Components/Question/level-breakout";
 
 const Fonts = () => (
   <Global
@@ -196,9 +197,14 @@ function App() {
           <Route path="/rules">
             <Rules />
           </Route>
+          <Route path="/abc">
+            <LevelBreakout/>
+          </Route>
           <Route path="/">
             <LandingPage loginWithRedirect={loginWithRedirect} />
           </Route>
+          
+          
         </Switch>
       </Flex>
     </ChakraProvider>
