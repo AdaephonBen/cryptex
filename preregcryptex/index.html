@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cryptex 2022 Pre-registration</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+    <style>
+      html, body {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* flex: 1; */
+      /* flex-wrap: wrap; */
+      }
+      body, div, form, input, select, p ,button{ 
+      padding: 0;
+      margin: 10px;
+      outline: none;
+      font-family: 'DM Sans Serif ', serif;
+      font-size: 16px;
+      color: #eee;
+      }
+      body {
+      background: url("tex reg bg.png") no-repeat center;
+      background-size: 100% 100%;
+      background-attachment: fixed;
+      }
+      h1 {
+      /* text-transform: uppercase; */
+      font-family: 'DM Serif Display', serif;
+
+      font-weight: 400;
+      }
+      h2 {
+        font-family: 'Roboto Mono';
+      font-weight: 400;
+      margin: 0 0 0 0;
+      }
+      .main-block {
+      display: flex;
+      flex-direction: row;
+     /* flex-wrap: wrap; */
+      /* flex: 1; */
+      justify-content: center;
+      align-items: center;
+      margin: 25px;
+      background: #28282B;
+      border-radius: 20px; 
+      width: 60%;
+      height: 395px;
+      
+      /* border-style: dotted; */
+      }
+      .left-part, form {
+      padding: 25px;
+      /* flex: 1; */
+      height: auto;
+      /* border-radius: 20px; */
+      width: 60%;
+      
+      }
+      .left-part {
+      border-style: hidden solid hidden hidden ;
+      border-color: #dbb98f;
+      text-align: center;
+      }
+      form, input, select, button{
+        font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+      .fa-graduation-cap {
+      font-size: 72px;
+      }
+      .title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      }
+      .info {
+      display: flex;
+      flex-direction: column;
+      }
+      input, select {
+      padding: 5px;
+      margin-bottom: 30px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #eee;
+      }
+      input::placeholder {
+      color: #eee;
+      }
+      option:focus {
+      border: none;
+      }
+      option {
+      background: black; 
+      border: none;
+      }
+      .checkbox input {
+      margin: 0 10px 0 0;
+      vertical-align: middle;
+      }
+      .checkbox a {
+      color: #96351e  ;
+      }
+      .checkbox a:hover {
+      color: #85d6de;
+      }
+      .btn-item, button {
+      padding: 10px 5px;
+      height: 50px;
+      margin-top: 20px;
+      border-radius: 5px; 
+      border: none;
+      background: #dbb98f; 
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 400;
+      color: black;
+      
+      }
+    
+      .btn-item {
+      display: inline-block;
+      margin: 20px 5px 0;
+      }
+      button {
+      width: 100%;
+      font-size: large;
+      }
+      button:hover, .btn-item:hover {
+        
+      background: #96351e;
+      }
+      @media (max-width: 800px) {
+        html, body {
+      flex-direction: column;
+      height: auto;
+      min-height: 100%;
+      justify-content: center;
+      align-items: center;
+        }
+        .main-block{
+         
+          border-radius: 10px;
+          flex-direction: column;
+          margin: 20px;
+          width: auto;
+          height: auto;
+        }
+        .logo {
+          width: 100%;
+          height: auto;
+        }
+        .left-part{
+          border-style: hidden hidden solid hidden;
+        }
+        
+      }
+      
+    </style>
+  </head>
+  <body>
+      
+    <div class="main-block">
+      <div class="left-part">
+        <!-- <i class="fas fa-graduation-cap"></i> -->
+        <img class = "logo" src="redsandblack.png" width=50% height=50%/>
+        <h1>CRYPTEX 2022</h1>
+        <p>18:00 IST | April 1 | 2022</p>
+      </div>
+      <form action="insert.php" method="post">
+        <div class="title">
+          <!-- <i class="fas fa-pencil-alt"></i>  -->
+          <h2>  Pre-register for the event here!</h2>
+        </div>
+        <div class="info">
+          <input type="text" name="name" id="name" placeholder="Name" required>
+          <input type="email" name="email" id="email" placeholder="Email-id" required>         
+        </div>      
+        
+        <button type="submit"  >Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
