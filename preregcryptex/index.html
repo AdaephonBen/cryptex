@@ -80,6 +80,11 @@
       .fa-graduation-cap {
       font-size: 72px;
       }
+      a:link, a:visited{
+        color: white;
+        text-decoration: none;
+      }
+  
       .title {
       display: flex;
       align-items: center;
@@ -174,33 +179,49 @@
         
         
       }
-
-      
     </style>
   </head>
   <body>
-      
     <div class="main-block">
       <div class="left-part">
         <!-- <i class="fas fa-graduation-cap"></i> -->
         <img class = "logo" src="redsandblack.png" width=50% height=50% alt="cryptex logo"/>
         <h1>CRYPTEX 2022</h1>
         <p>18:00 IST | April 1 | 2022</p>
+        <p><a href = "mailto: cryptex@elan.org.in">Mail</a> | <a href="https://www.instagram.com/cryptex.iith/">Instagram</a></p>
       </div>
-      <form action="insert.php" method="post">
+      <form id="my-form" action="https://script.google.com/macros/s/AKfycbxeYEqV7cmJTBM4jEq5jKQTlNbo1EcQptOnohtfykeqe3xNwIyTFgINhpEl-CA04m0tKQ/exec" method="POST">
         <div class="title">
           <!-- <i class="fas fa-pencil-alt"></i>  -->
           <h2>  Pre-register for the event here!</h2>
         </div>
         <div class="info">
-          <input type="text" name="name" id="name" placeholder="Name" required>
-          <input type="email" name="email" id="email" placeholder="Email-id" required>         
+          <input type="text" name="Name" id="name" placeholder="Name" required>
+          <input type="email" name="Email" id="email" placeholder="Email-id" required>         
         </div>  
         <div class = 'data-text'>
           <p>The Cryptic Overlords will never sell your data. Or spam.<p>
         </div>
-        <button type="submit"  >Submit</button>
+        <a href = "thankyou.html"> <button type="submit">Submit</button></a>
       </form>
     </div>
+    <script>
+      window.addEventListener("load", function() {
+      const form = document.getElementById('my-form');
+      form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const data = new FormData(form);
+      const action = e.target.action;
+      fetch(action, {
+        method: 'POST',
+        body: data,
+      })
+      .then(() => {
+        location.assign("thankyou.html");
+      })
+    });
+  });
+
+    </script>
   </body>
 </html>
