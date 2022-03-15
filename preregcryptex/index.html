@@ -73,7 +73,7 @@
       border-color: #dbb98f;
       text-align: center;
       }
-      form, input, select, button{
+      form, input, select, button,label{
         font-family: 'Roboto Mono';
         /* font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
       }
@@ -94,12 +94,16 @@
       display: flex;
       flex-direction: column;
       }
-      input, select {
+      input, select{
       padding: 5px;
       margin-bottom: 30px;
       background: transparent;
       border: none;
       border-bottom: 1px solid #eee;
+      }
+      label{
+        padding: 5px;
+        margin-left: 6px;
       }
       input::placeholder {
       color: #eee;
@@ -147,6 +151,7 @@
         
       background: #96351e;
       }
+      
       .data-text > p {
         margin-bottom: 0px;
         font-family: 'Roboto Mono'; 
@@ -196,8 +201,14 @@
           <h2>  Pre-register for the event here!</h2>
         </div>
         <div class="info">
-          <input type="text" name="Name" id="name" placeholder="Name" required>
-          <input type="email" name="Email" id="email" placeholder="Email-id" required>         
+          <input type="text" name="Username" id="name" placeholder="Username" required>
+          <input type="email" name="Email" id="email" placeholder="Email-id" required>
+          <label for="publicity">From where did you learn about Cryptex?</label>   
+          <select name="publicity" id="publicity">
+          <option value="select" selected disabled>Select</option>
+          <option value="email">Email</option>
+          <option value="socials">Social Media</option>
+          <option value="friends">Friends</option>      
         </div>  
         <div class = 'data-text'>
           <p>The Cryptic Overlords will never sell your data. Or spam.<p>
