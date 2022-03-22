@@ -1,16 +1,21 @@
 import React, { useRef, useState } from "react";
 import logo from "./redsandblack.png";
 import "./App.css";
+import { withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
 
 function App() {
+  const [buttonValue, setButtonValue] = useState("Submit");
+  const { user, loginWithRedirect, logout, isAuthenticated } = useAuth0();
   const username = useRef(null);
   const publicity = useRef(null);
   const email = useRef(null);
   const submitForm = (e) => {
     e.preventDefault();
+    if (username.current.value === "") return;
+    setButtonValue("Loading..");
     console.log(email.current.value);
     fetch(
-      "https://script.google.com/macros/s/AKfycbxKZzN7baLK6HhN2epwkYCk2nkvIbIODsDIZYnTjJ4FAzX5gZ6JrchYWtv66pcBzV3W/exec",
+      "https://script.google.com/macros/s/AKfycbxubSkF_t2CVStLPmk7ZbgdJDlefVJtlDy99rG7-Gd3klrh0x1jsDnL9RIdlzgo8gLd-A/exec",
       {
         method: "POST",
         body: JSON.stringify({
@@ -22,21 +27,31 @@ function App() {
     )
       .then((res) => res.json())
       .then((response) => {
+
         if (response.result === "success") {
           console.log(response.result);
-          setIsValid(1);
-        } else {
-          alert("Registration Unsuccessful. Please use a different username");
+          setIsRegistered(1);
+          setIsValidUName(1);
+        } else if (response.result === "error") {
+          console.log(response);
+          if (response.error === "conflicting_uname") setIsValidUName(0);
+          else if (response.error === "conflicting_email") {
+            alert("Email is already registered!");
+            setButtonValue("Submit")
+            logout();
+          }
         }
-      });
+      })
+      
   };
 
-  const [isvalid, setIsValid] = useState(0);
+  const [isValidUName, setIsValidUName] = useState(1);
+  const [isRegistered, setIsRegistered] = useState(0);
   return (
-    <div class="main-block">
-      <div class="left-part">
+    <div className="main-block">
+      <div className="left-part">
         <img
-          class="logo"
+          className="logo"
           src={logo}
           width="50%"
           height="50%"
@@ -49,10 +64,26 @@ function App() {
           <a href="https://www.instagram.com/cryptex.iith/">Instagram</a>
         </p>
       </div>
-      {isvalid === 0 && (
+      {!isAuthenticated && (
+        <div
+          className="title"
+          style={{ display: "flex", flexDirection: "column" }}
+        >
+          <h2> Pre-register for the event here!</h2>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              loginWithRedirect();
+            }}
+          >
+            Register for the Event here!
+          </button>
+        </div>
+      )}
+      {isAuthenticated && isRegistered === 0 && (
         <form id="my-form">
           <div className="title">
-            <h2> Pre-register for the event here!</h2>
+            <h2> Enter your preferred username for the event!</h2>
           </div>
           <div className="info">
             <input
@@ -67,10 +98,14 @@ function App() {
               type="email"
               name="Email"
               id="email"
+              value={user.email}
               ref={email}
               placeholder="Email-id"
               required
+              disabled
+              readOnly
             />
+
             <label htmlFor="publicity">Where did you hear about Cryptex?</label>
             <select name="publicity" id="publicity" ref={publicity}>
               <option value="select" selected disabled>
@@ -85,22 +120,35 @@ function App() {
           <div className="data-text">
             <p>The Cryptic Overlords will never sell your data. Or spam.</p>
           </div>
-
           <button type="submit" onClick={submitForm}>
-            Submit
+            {buttonValue}
           </button>
+          {!isValidUName && (
+            <p>Registration Unsuccessful. Please use a different username</p>
+          )}
         </form>
       )}
-      {isvalid === 1 && (
+      {isRegistered === 1 && (
         <div class="right-part">
           <h1>Thank you! You'll be added to our leaderboard.</h1>
           <h3>
             We'll drop a reminder email before the event starts. Stay tuned.
           </h3>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              logout();
+            }}
+            style={{ maxWidth: "90%" }}
+          >
+            {" "}
+            Logout{" "}
+          </button>
         </div>
       )}
     </div>
   );
 }
 
+// export default withAuthenticationRequired(App);
 export default App;
