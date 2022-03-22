@@ -76,7 +76,7 @@ function App() {
               loginWithRedirect();
             }}
           >
-            Register for the Event here!
+            Sign In
           </button>
         </div>
       )}
