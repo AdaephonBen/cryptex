@@ -21,6 +21,8 @@ export default function LevelBreakout() {
         var y = canvas.height-paddleHeight-paddleY-ballRadius;
         var dx = 2;
         var dy = -2;
+
+        var mx, my;
         
         const mycolors = ["#D12229", "#F68A1E", "#FDE01A", "#007940", "#24408E", "#732982"];
 
@@ -98,7 +100,11 @@ export default function LevelBreakout() {
                     var b = bricks[c][r];
                     if(b.status == 1) {
                         if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
-                            dy = -dy;
+                            mx = Math.min(Math.abs(b.x-x), Math.abs(b.x + brickWidth - x));
+                            my = Math.min(Math.abs(b.y-y), Math.abs(b.y + brickHeight - y));
+
+                            if(mx <= my) dx = -dx;
+                            if(my <= mx) dy = -dy;
                             b.status = 0;
                             score++;
                             if(score == brickRowCount*brickColumnCount) {
