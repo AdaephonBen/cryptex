@@ -16,6 +16,7 @@ import background from "./assets/background.jpg";
 import BonusQuestions from "./Components/BonusQuestion/BonusQuestions";
 import PreviousQuestions from "./Components/PreviousQuestion/PreviousQuestions";
 import LevelBreakout from "./Components/Question/level-breakout";
+import LevelTarot from "./Components/Question/level-tarot";
 
 const Fonts = () => (
   <Global
@@ -199,6 +200,9 @@ function App() {
           </Route>
           <Route path="/breakout">
             <LevelBreakout/>
+          </Route>
+          <Route path="/tarot">
+            <LevelTarot/>
           </Route>
           <Route path="/">
             <LandingPage loginWithRedirect={loginWithRedirect} />
