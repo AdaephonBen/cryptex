@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+git update-index -g
+echo "Post-commit hook executed."
