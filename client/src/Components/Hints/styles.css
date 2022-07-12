@@ -1,0 +1,28 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap"); */
+.hints {
+  padding: 5px;
+  padding-left: 0;
+  padding-right: 0;
+  flex-grow: 1;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.hints-title {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 400;
+}
+.icon-button {
+  color: rgba(255, 255, 255, 0.5);
+}
+.icon-button:hover {
+  color: rgba(255, 255, 255, 1);
+}
+.hints-buttons > * {
+  margin-left: 20px;
+  padding-top: 5px;
+}
+.hints-list {
+  margin-top: 20px;
+  background-color: var(--background-color-dark);
+}

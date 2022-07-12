@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+    client:
+        image: lambdaiith/cryptex-client:latest
+        ports:
+            - "3000:3000"
+        environment: 
+        # Don't update this. 
+            REACT_APP_DOMAIN: "cryptex20.auth0.com"
+            REACT_APP_CLIENT_ID: "rsw2Kw5oQQEXZspBB677slhj80d9IqzL"
+            REACT_APP_AUDIENCE: "https://cryptex2020.com"
+            REACT_APP_API_URL: "https://cryptex.elan.org.in/api/"
+            REACT_APP_END_TIME: "06 Mar 2021 12:30:00 GMT"
+        depends_on: 
+            - server

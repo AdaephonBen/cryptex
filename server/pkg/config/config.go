@@ -6,16 +6,7 @@ import (
 )
 
 func Init() {
-	logs.LogStatus("Attempting to read config files...")
-	viper.SetConfigName("config")
-	viper.SetConfigType("json")
-	viper.AddConfigPath("config")
-	if err := viper.ReadInConfig(); err != nil {
-		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-			logs.LogError("Config file not found", err)
-		} else {
-			logs.LogError("Error while reading config file", err)
-		}
-	}
-	logs.LogStatus("Successfully read config files...")
+	logs.LogStatus("Attempting to read config envs...")
+	viper.AutomaticEnv()
+	logs.LogStatus("Successfully read config envs...")
 }

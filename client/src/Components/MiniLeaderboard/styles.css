@@ -1,0 +1,58 @@
+.mini-leaderboard {
+  padding-left: 10px;
+  padding-bottom: 0px !important;
+  padding-top: 0px;
+  padding-right: 10px;
+  background-color: var(--background-color)
+}
+.mini-leaderboard-table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.actual_table,
+.container_table:hover,
+.container_table:focus {
+  visibility: visible;
+}
+.mini-leaderboard-table th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 500;
+  text-align: left;
+  border-bottom: 2px solid #9ae6b4;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.mini-leaderboard-table td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /* font-weight: 300; */
+  text-align: left;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.leaderboard-title {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 400;
+}
+.icon-button {
+  color: rgba(255, 255, 255, 0.5);
+}
+.icon-button:hover {
+  color: rgba(255, 255, 255, 1);
+}
+.leaderboard-buttons > * {
+  margin-left: 20px;
+  padding-top: 5px;
+}
+
+th {
+  background-color: var(--background-color-dark);
+}
+
+tr:nth-child(even) {
+  background-color: var(--background-color-dark);
+}

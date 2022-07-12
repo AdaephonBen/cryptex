@@ -1,0 +1,21 @@
+.level {
+  padding: 5px;
+  background-color: var(--background-color-dark) !important;
+  margin-right: 10px;
+  margin-left: 10px;
+  flex-grow: 1;
+}
+
+table,
+td {
+  border: 1px solid white;
+}
+
+td {
+  width: 15px;
+  height: 15px;
+}
+
+.borders {
+  border: 1px solid white !important;
+}

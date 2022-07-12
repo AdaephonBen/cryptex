@@ -1,0 +1,15 @@
+.portal {
+  padding: 5px;
+  width: 100vw;
+  background-color: var(--background-color);
+  max-height: inherit;
+}
+
+.portal-page {
+  background-color: var(--background-color);
+  max-height: 100vh;
+  min-height: calc(100vh - 100px);
+}
+.sidebar-toggle > * {
+  margin-bottom: 10px;
+}

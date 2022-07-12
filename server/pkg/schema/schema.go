@@ -21,3 +21,12 @@ type ResponseError struct {
 type ResponseSuccess struct {
 	Message string `json:"message"`
 }
+
+type ResponseMessage struct {
+	Message string `json:"message"`
+}
+
+type AdminCredentials struct {
+	Admin_Username string `json:"username"`
+	Admin_Password string `json:"password"`
+}

@@ -3,11 +3,15 @@ package routes
 import (
 	"time"
 
+	"github.com/auth0/go-jwt-middleware"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/cors"
+	"github.com/npalladium/cryptex/server/pkg/controllers"
+	// "github.com/spf13/viper"
 )
 
-func Init() chi.Router {
+func Init(authmiddleware *jwtmiddleware.JWTMiddleware) chi.Router {
 	r := chi.NewRouter()
 
 	r.Use(middleware.RequestID)
@@ -15,11 +19,42 @@ func Init() chi.Router {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:3000"},
+		AllowedMethods:   []string{"GET", "POST", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"X-PINGOTHER", "Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		AllowCredentials: true,
+	})
+
+	r.Use(c.Handler)
+
 	r.Use(middleware.Timeout(60 * time.Second))
 
 	r.Route("/api", func(r chi.Router) {
-		r.Post("/add-user", AddUserHandler)
-		r.Post("/get-question", GetQuestionHandler)
+		r.Route("/admin", func(r chi.Router) {
+			r.Use(controllers.AdminAuthMiddleware)
+			r.Post("/question", controllers.AddQuestionHandler)
+			r.Get("/question", controllers.GetAllQuestionsHandler)
+		})
+		r.Route("/question", func(r chi.Router) {
+			r.Use(authmiddleware.Handler)
+			r.Get("/", controllers.GetQuestionHandler)
+			r.Post("/", controllers.CheckAnswerHandler)
+			r.Get("/bonus", controllers.GetBonusQuestionHandler)
+			r.Post("/bonus", controllers.CheckBonusAnswerHandler)
+			r.Get("/previous", controllers.GetPreviousQuestionsHandler)
+		})
+		r.Route("/user", func(r chi.Router) {
+			r.Use(authmiddleware.Handler)
+			r.Post("/", controllers.NewUserHandler)
+		})
+		r.Route("/lifeline", func(r chi.Router) {
+			r.Use(authmiddleware.Handler)
+			r.Get("/", controllers.GetAvailableLifelinesHandler)
+			r.Post("/", controllers.UseLifelineHandler)
+		})
+		r.Get("/leaderboard", controllers.GetLeaderboardHandler)
+		r.Post("/hint", controllers.GetHintsHandler)
 	})
 
 	return r

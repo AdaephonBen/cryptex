@@ -1,20 +1,30 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
+	"github.com/joho/godotenv"
+	"github.com/npalladium/cryptex/server/pkg/auth"
 	"github.com/npalladium/cryptex/server/pkg/config"
 	"github.com/npalladium/cryptex/server/pkg/cronjobs"
 	"github.com/npalladium/cryptex/server/pkg/db"
 	"github.com/npalladium/cryptex/server/pkg/logs"
 	"github.com/npalladium/cryptex/server/pkg/routes"
+	"github.com/spf13/viper"
 )
 
 func Init() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Println("No .env")
+	}
 	logs.Init()
 	config.Init()
+	fmt.Println(viper.GetString("postgres_connection_url"))
 	db.Init()
-	var r = routes.Init()
+	jwtmiddleware := auth.Init()
+	var r = routes.Init(jwtmiddleware)
 	cronjobs.Init()
 	http.ListenAndServe(":8080", r)
 }

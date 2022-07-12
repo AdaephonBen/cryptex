@@ -1,0 +1,10 @@
+cryptex.elan.org.in
+encode gzip
+
+route /api/* {
+	reverse_proxy server:8080
+}
+
+route /* {
+	reverse_proxy client:3000
+}
